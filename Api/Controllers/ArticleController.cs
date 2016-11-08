@@ -61,7 +61,7 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var results = await _articleRepository.GetPage(new ObjectId(id)) as Article;
+            var results = await _articleRepository.GetPage(new ObjectId(id)) as ArticlePage;
 			
             if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
