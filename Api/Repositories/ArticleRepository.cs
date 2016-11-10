@@ -1,15 +1,15 @@
 namespace api.Repositories
 {
-    using Microsoft.Extensions.Options;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     
+    using Microsoft.Extensions.Options;
+
     using MongoDB.Driver;
     using MongoDB.Bson;
-
+    
     using api.Models;
-    using api;
     
     public interface IArticleRepository
     {
@@ -35,7 +35,7 @@ namespace api.Repositories
 		
         public async Task<IEnumerable<Article>> Articles()
         {
-			var filter = Builders<Article>.Filter.Eq("Locale", _locale);
+			//var filter = Builders<Article>.Filter.Eq("Locale", _locale);
             var conn = _database.GetCollection<Article>("Article");
             var temp = await conn.Find(_=>true).ToListAsync();
             return temp.ToArray();
