@@ -15,7 +15,7 @@ namespace api.Models
         [BsonElement("ArticleId")]
         public ObjectId ArticleId { get; set; }
         [BsonElement("UserId")]
-        public int UserId { get; set; }
+        public ObjectId UserId { get; set; }
         [BsonElement("ParentId")]
         public ObjectId? ParentId { get; set; }
         [BsonElement("Level")]

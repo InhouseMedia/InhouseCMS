@@ -13,7 +13,7 @@ namespace api.Models
     {
         public ObjectId Id { get; set; }
         [BsonElement("UserId")]
-        public int UserId { get; set; }
+        public ObjectId UserId { get; set; }
         [BsonElement("CompanyId")]
         public int CompanyId { get; set; }
         [BsonElement("MetaTitle")]
@@ -61,7 +61,7 @@ namespace api.Models
 		public ObjectId Id { get; set; }
 		public ObjectId ArticleId { get; set; }
         [BsonElement("UserId")]
-		public int UserId { get; set; }
+		public ObjectId UserId { get; set; }
         [BsonElement("Title")]
 		public string Title { get; set; }
         [BsonElement("Text")]
@@ -88,7 +88,7 @@ namespace api.Models
     {
         public ObjectId Id { get; set; }
         [BsonElement("UserId")]
-        public int UserId { get; set; }
+        public ObjectId UserId { get; set; }
         [BsonElement("CompanyId")]
         public int CompanyId { get; set; }
         [BsonElement("MetaTitle")]
