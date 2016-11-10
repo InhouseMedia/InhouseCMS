@@ -35,6 +35,7 @@ namespace api
             //services.AddSingleton<ISettings, Settings>();
 			services.AddSingleton<IArticleRepository, ArticleRepository>();
             services.AddSingleton<INavigationRepository, NavigationRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
