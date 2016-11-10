@@ -12,11 +12,11 @@ namespace api.Controllers
 	using api.Repositories;
 
     [Route("[controller]")]
-    public class ArticleController : Controller
+    public class BoxController : Controller
     {
-        readonly IArticleRepository _repository;
+        readonly IBoxRepository _repository;
 
-        public ArticleController(IArticleRepository settings)
+        public BoxController(IBoxRepository settings)
         {   
             _repository = settings;
         }
@@ -29,7 +29,7 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-			var results = await _repository.Articles() as IEnumerable<Article>;
+			var results = await _repository.Boxes() as IEnumerable<Box>;
 
 			if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -45,28 +45,27 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var results = await _repository.GetById(new ObjectId(id)) as Article;
+            var results = await _repository.GetById(new ObjectId(id)) as Box;
 			
             if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
 
             return new ObjectResult(results);
         }
-		
-		[HttpGet("Page/{id:length(24)}")]
-		//[ValidateAntiForgeryToken]
-		//[Authorize]
-        public async Task<IActionResult> Page(string id)
-        {
+
+        [HttpGet("List")]
+        //[CacheWebApi(Duration = 3600)]
+		public async Task<IActionResult> List()	
+		{
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var results = await _repository.GetPage(new ObjectId(id)) as ArticlePage;
+            var result = await _repository.BoxList() as IEnumerable<Box>;
 			
-            if (results == null)
+            if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 
-            return new ObjectResult(results);
+            return new ObjectResult(result);
 		}
     }
 }

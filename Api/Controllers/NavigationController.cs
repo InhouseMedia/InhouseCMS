@@ -14,7 +14,7 @@ namespace api.Controllers
 	using api.Repositories;
 
     [Route("[controller]")]
-   public class NavigationController : Controller
+   	public class NavigationController : Controller
     {
         readonly INavigationRepository _repository;
 
