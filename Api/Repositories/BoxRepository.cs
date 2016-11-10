@@ -22,20 +22,17 @@ namespace api.Repositories
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-		private readonly string _locale;
 		readonly DateTime? _today;
 
         public BoxRepository(IOptions<Settings> settings)
         {
             _settings = settings.Value;
             _database = Connect();
-			_locale = "nl-NL";
 			_today = DateTime.UtcNow;
         }
 		
         public async Task<IEnumerable<Box>> Boxes()
         {
-			//var filter = Builders<Box>.Filter.Eq("Locale", _locale);
             var conn = _database.GetCollection<Box>("Box");
             var temp = await conn.Find(_=>true).ToListAsync();
             return temp.ToArray();
@@ -65,8 +62,6 @@ namespace api.Repositories
             var temp = await conn.Find(filter).Sort(sort).ToListAsync();
             return temp.ToArray();
         }
-
-//return await db.Box.Where(b => b.Active && (b.PublishDate <= _today || b.ExpireDate == null) && (b.ExpireDate >= _today || b.ExpireDate == null)).OrderBy(o => o.Placement).ThenBy(o => o.Level).ToListAsync();
 
         private IMongoDatabase Connect()
         {
