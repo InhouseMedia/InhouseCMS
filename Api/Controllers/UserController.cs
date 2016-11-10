@@ -16,18 +16,18 @@
     [Route("[controller]")]
     public class UserController : Controller
     {
-        readonly IUserRepository _userRepository;
+        readonly IUserRepository _repository;
 
         public UserController(IUserRepository settings)
         {
-            _userRepository = settings;
+            _repository = settings;
         }
    
         [HttpGet]
         //[Authorize]
         public async Task<IEnumerable<User>> Get()
         {
-            return await _userRepository.AllUsers(); 
+            return await _repository.AllUsers(); 
         }
    
         [HttpPost]
@@ -38,7 +38,7 @@
 Console.Write("Login ");
             if (ModelState.IsValid)
             {
-                var user = await _userRepository.Login(username, password) as User;
+                var user = await _repository.Login(username, password) as User;
 				
 				if(user == null || !user.Active || user.LockedDate >= DateTime.UtcNow){
 					return new StatusCodeResult(204); // 204 No Content

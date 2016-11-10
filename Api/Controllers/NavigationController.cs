@@ -16,11 +16,11 @@ namespace api.Controllers
     [Route("[controller]")]
    public class NavigationController : Controller
     {
-        readonly INavigationRepository _navigationRepository;
+        readonly INavigationRepository _repository;
 
         public NavigationController(INavigationRepository settings)
         {   
-            _navigationRepository = settings;
+            _repository = settings;
         }
      
         [HttpGet]
@@ -31,7 +31,7 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-			var results = await _navigationRepository.NavigationItems() as IEnumerable<NavigationItem>;
+			var results = await _repository.NavigationItems() as IEnumerable<NavigationItem>;
 
 			if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -47,7 +47,7 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var results = await _navigationRepository.GetById(new ObjectId(id)) as NavigationItem;
+            var results = await _repository.GetById(new ObjectId(id)) as NavigationItem;
 			
             if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -65,7 +65,7 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-			var result = await _navigationRepository.NavigationSitemap() as IEnumerable<NavigationSitemap>;
+			var result = await _repository.NavigationSitemap() as IEnumerable<NavigationSitemap>;
 
 			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -79,7 +79,7 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var result = await _navigationRepository.NavigationList() as IEnumerable<NavigationSitemap>;
+            var result = await _repository.NavigationList() as IEnumerable<NavigationSitemap>;
 			
             if (result == null)
 				return new StatusCodeResult(204); // 204 No Content

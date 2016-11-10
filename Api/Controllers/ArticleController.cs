@@ -14,11 +14,11 @@ namespace api.Controllers
     [Route("[controller]")]
    public class ArticleController : Controller
     {
-        readonly IArticleRepository _articleRepository;
+        readonly IArticleRepository _repository;
 
         public ArticleController(IArticleRepository settings)
         {   
-            _articleRepository = settings;
+            _repository = settings;
         }
      
         [HttpGet]
@@ -29,7 +29,7 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-			var results = await _articleRepository.Articles() as IEnumerable<Article>;
+			var results = await _repository.Articles() as IEnumerable<Article>;
 
 			if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -45,7 +45,7 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var results = await _articleRepository.GetById(new ObjectId(id)) as Article;
+            var results = await _repository.GetById(new ObjectId(id)) as Article;
 			
             if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -61,7 +61,7 @@ namespace api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var results = await _articleRepository.GetPage(new ObjectId(id)) as ArticlePage;
+            var results = await _repository.GetPage(new ObjectId(id)) as ArticlePage;
 			
             if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
