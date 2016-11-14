@@ -8,6 +8,7 @@ namespace api
 
     using api.Repositories;
     using api.Config;
+    using api.Models;
 
     public class Startup
     {
