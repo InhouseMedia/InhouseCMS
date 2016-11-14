@@ -7,6 +7,7 @@ namespace api
     using Microsoft.Extensions.Logging;
 
     using api.Repositories;
+    using api.Config;
 
     public class Startup
     {
@@ -17,6 +18,7 @@ namespace api
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddJsonFile("mongodb.json")
+                .AddJsonFile("config.json")
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -31,12 +33,13 @@ namespace api
 
 			// RKLANKE add MongoDB to site
 			services.Configure<Settings>(Configuration);
+            services.Configure<api.Config.Config>(Configuration);
 
-            //services.AddSingleton<ISettings, Settings>();
 			services.AddSingleton<IArticleRepository, ArticleRepository>();
             services.AddSingleton<INavigationRepository, NavigationRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IBoxRepository, BoxRepository>();
+            services.AddSingleton<IConfigRepository, ConfigRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

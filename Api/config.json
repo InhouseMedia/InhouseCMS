@@ -1,0 +1,91 @@
+{
+	"domain": "",
+	"name": "Binck",
+	"color": "#8CD600",
+	"path": "binck",
+  "language": {
+    "locale": [ "nl-NL" ]
+  },
+  "company": {
+    "name": "BinckBank N.V.",
+    "address": {
+      "street": "Barbara Strozzilaan",
+      "number": "310",
+      "extra": "",
+      "zipcode": "1083HN",
+      "city": "Amsterdam",
+      "county": "Nederland"
+    },
+    "contact": {
+      "name": "Informatiedesk",
+      "function":  "(als u nog geen klant bent)",  
+      "phonenumber": "020 - 522 03 30",
+      "mobilenumber": "",
+      "fax": "020 - 320 41 76",
+      "email": "info@binck.nl"
+    },
+    "service": {
+      "name": "Klantenservice",
+      "function": "(als u al wel klant bent)", 
+      "phonenumber": "0800 - 235 24 62",
+      "mobilenumber": "",
+      "fax": "",
+      "email": "klantenservice@binck.nl"
+    },
+    "geolocation": {
+      "latitude": "52.3357375",
+      "longitude": "4.8854777"
+    } 
+  },
+	"searchEngines": {
+		"googleverification": "",
+		"googleTranslation": false,
+		"websiteType": "company",
+		"author": "BinckBank N.V.",
+		"generator": "BinckHouston CMS",
+		"visibility": {
+			"PageVisibilityPublic": 1,
+			"PageVisibilityLimited": 2,
+			"PageVisibilityBlocked": 0
+		}
+	},
+	"socialMedia": {
+		"socialMediaTags": false,
+		"media": {
+			"facebook": "",
+			"twitter": "",
+			"googleplus": "",
+			"linkedin": "",
+			"youtube": "",
+			"pinterest": ""
+		}
+	},
+	"controllers": {
+		"standard": {
+			"active": true,
+			"admin": true,
+			"maintenance": false
+		},
+		"article": {
+			"active": true,
+			"admin": false,
+			"tools": [ "General", "Metadata", "PublishLogs", "Actions" ],
+			"actions": [ "text", "video", "image", "caroussel", "contact", "socialmedia", "socialshare" ],
+			"templates": [ "homepage", "landingpage", "cleanLayout" ]
+		},
+		"navigation": {
+			"active": true,
+			"admin": false,
+			"maxLength": 250,
+			"placement": {
+				"Disabled": 0,
+				"AllNavigations": 1,
+				"TopNavigationOnly": 2,
+				"LeftNavigationOnly": 3,
+				"BottomNavigationOnly": 4,
+				"AllExceptTopNavigation": 5,
+				"_301Redirect": 301
+			}
+		}
+	}
+}
