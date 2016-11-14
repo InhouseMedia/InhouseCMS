@@ -1,4 +1,4 @@
-namespace api.Repositories
+namespace Api.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace api.Repositories
     using MongoDB.Driver;
     using MongoDB.Bson;
     
-    using api.Models;
+    using Api.Models;
     
     public interface IBoxRepository
     {

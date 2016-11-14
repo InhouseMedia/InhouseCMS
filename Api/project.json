@@ -58,6 +58,6 @@
   },
 
   "tooling": {
-    "defaultNamespace": "api"
+    "defaultNamespace": "Api"
   }
 }

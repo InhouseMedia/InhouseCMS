@@ -1,4 +1,4 @@
-namespace api.Controllers
+namespace Api.Controllers
 {
 	using System;
 	using System.Collections.Generic;
@@ -8,9 +8,9 @@ namespace api.Controllers
 
  	using MongoDB.Bson;
 	
-	using api.Config;
-    using api.Models;
-	using api.Repositories;
+	using Api.Config;
+    using Api.Models;
+	using Api.Repositories;
 
     [Route("[controller]")]
     public class ConfigController : Controller

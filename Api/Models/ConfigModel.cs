@@ -1,4 +1,4 @@
-namespace api.Config
+namespace Api.Config
 {
 
 	using MongoDB.Bson;

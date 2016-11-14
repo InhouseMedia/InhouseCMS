@@ -1,4 +1,4 @@
-namespace api.Controllers
+namespace Api.Controllers
 {
     using System;
 	using System.Collections.Generic;

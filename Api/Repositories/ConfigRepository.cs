@@ -1,4 +1,4 @@
-namespace api.Repositories
+namespace Api.Repositories
 {
     using System;
     using System.Reflection;
@@ -11,8 +11,8 @@ namespace api.Repositories
     using MongoDB.Driver;
     using MongoDB.Bson;
     
-	using api.Config;
-    using api.Models;
+	using Api.Config;
+    using Api.Models;
     
     public interface IConfigRepository
     {

@@ -1,4 +1,4 @@
-﻿namespace api.Models
+﻿namespace Api.Models
 {
 	using System;
 	using System.Collections.Generic;

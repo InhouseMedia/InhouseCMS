@@ -1,4 +1,4 @@
-namespace api
+namespace Api
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -6,9 +6,9 @@ namespace api
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
-    using api.Repositories;
-    using api.Config;
-    using api.Models;
+    using Api.Repositories;
+    using Api.Config;
+    using Api.Models;
 
     public class Startup
     {
@@ -34,7 +34,7 @@ namespace api
 
 			// RKLANKE add MongoDB to site
 			services.Configure<Settings>(Configuration);
-            services.Configure<api.Config.Config>(Configuration);
+            services.Configure<Api.Config.Config>(Configuration);
 
 			services.AddSingleton<IArticleRepository, ArticleRepository>();
             services.AddSingleton<INavigationRepository, NavigationRepository>();

@@ -1,4 +1,4 @@
-﻿namespace api.Repositories
+﻿namespace Api.Repositories
 {
 	using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@
 
     using MongoDB.Driver;
 
-    using api.Models;
+    using Api.Models;
 
     public interface IUserRepository
     {
