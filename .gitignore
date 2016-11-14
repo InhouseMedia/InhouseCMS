@@ -3,6 +3,7 @@
 
 #INHOUSE
 api/mongodb.json
+*.DS_Store
 
 # User-specific files
 *.suo
