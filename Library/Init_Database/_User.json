@@ -1,0 +1,28 @@
+{
+	"_id": {
+		"$oid": "564c7e8fe381e49e50812538"
+	},
+	"UserName": "",
+	"Password": "",
+	"FirstName": "",
+	"LastName": "",
+	"Prefix": "",
+	"Email": "",
+	"EmailConfirmed": false,
+	"PhoneNumber": "",
+	"PhoneNumberConfirmed": false,
+	"Active": true,
+	"SessionId": "",
+	"LockedDate": {
+		"$date": "2015-11-10T21:10:00.201Z"
+	},
+	"LastLoginDate": {
+		"$date": "2015-11-18T21:18:00.201Z"
+	},
+	"CreatedDate": {
+		"$date": "1981-06-01T13:05:00.198Z"
+	},
+	"ChangedDate": {
+		"$date": "2015-11-18T20:18:00.201Z"
+	}
+}

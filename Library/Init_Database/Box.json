@@ -1,0 +1,150 @@
+{
+	"_id": {
+		"$oid": "58258d032cbebf64ef66bb12"
+	},
+	"UserId": {
+		"$oid": "564c7e8fe381e49e50812538"
+	},
+	"Controller": "Box",
+	"Action": "Homebutton",
+	"Placement": 1,
+	"Template": null,
+	"ArticleId": null,
+	"Level": 1,
+	"Active": true,
+	"PublishDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ExpireDate": null,
+	"CreatedDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ChangedDate": {
+		"$date": "2016-03-03T10:00:00.000Z"
+	}
+}
+{
+	"_id": {
+		"$oid": "58258dfa2cbebf64ef66bb13"
+	},
+	"UserId": {
+		"$oid": "564c7e8fe381e49e50812538"
+	},
+	"Controller": "Navigation",
+	"Action": "Index",
+	"Placement": 1,
+	"Template": null,
+	"ArticleId": null,
+	"Level": 2,
+	"Active": true,
+	"PublishDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ExpireDate": null,
+	"CreatedDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ChangedDate": {
+		"$date": "2016-03-03T10:00:00.000Z"
+	}
+}
+{
+	"_id": {
+		"$oid": "58258e122cbebf64ef66bb14"
+	},
+	"UserId": {
+		"$oid": "564c7e8fe381e49e50812538"
+	},
+	"Controller": "Box",
+	"Action": "Contact",
+	"Placement": 1,
+	"Template": null,
+	"ArticleId": null,
+	"Level": 3,
+	"Active": false,
+	"PublishDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ExpireDate": null,
+	"CreatedDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ChangedDate": {
+		"$date": "2016-03-03T10:00:00.000Z"
+	}
+}
+{
+	"_id": {
+		"$oid": "58258e462cbebf64ef66bb15"
+	},
+	"UserId": {
+		"$oid": "564c7e8fe381e49e50812538"
+	},
+	"Controller": "Box",
+	"Action": "BackToTop",
+	"Placement": 2,
+	"Template": null,
+	"ArticleId": null,
+	"Level": 1,
+	"Active": true,
+	"PublishDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ExpireDate": null,
+	"CreatedDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ChangedDate": {
+		"$date": "2016-03-03T10:00:00.000Z"
+	}
+}
+{
+	"_id": {
+		"$oid": "58258e5c2cbebf64ef66bb16"
+	},
+	"UserId": {
+		"$oid": "564c7e8fe381e49e50812538"
+	},
+	"Controller": "Box",
+	"Action": "Footer",
+	"Placement": 2,
+	"Template": null,
+	"ArticleId": null,
+	"Level": 2,
+	"Active": true,
+	"PublishDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ExpireDate": null,
+	"CreatedDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ChangedDate": {
+		"$date": "2016-03-03T10:00:00.000Z"
+	}
+}
+{
+	"_id": {
+		"$oid": "58258e732cbebf64ef66bb17"
+	},
+	"UserId": {
+		"$oid": "564c7e8fe381e49e50812538"
+	},
+	"Controller": "Box",
+	"Action": "Maps",
+	"Placement": 6,
+	"Template": null,
+	"ArticleId": null,
+	"Level": 1,
+	"Active": true,
+	"PublishDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ExpireDate": null,
+	"CreatedDate": {
+		"$date": "2016-03-03T16:29:12.000Z"
+	},
+	"ChangedDate": {
+		"$date": "2016-03-03T10:00:00.000Z"
+	}
+}
