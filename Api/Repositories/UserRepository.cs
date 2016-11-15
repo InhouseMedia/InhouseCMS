@@ -22,14 +22,12 @@
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-		//private readonly string _locale;
 		readonly DateTime? _today;
 		
         public UserRepository(IOptions<Settings> settings)
         {
             _settings = settings.Value;
             _database = Connect();
-			//_locale = "nl-NL";
 			_today = DateTime.UtcNow;
         }
 
@@ -42,7 +40,6 @@
 		
         public async Task<IEnumerable<User>> AllUsers()
         {
-            //var filter = Builders<Speaker>.Filter.Eq("Username", "Developer Guy");
             var test = _database.GetCollection<User>("User");
             var temp = await test.Find(_=>true).ToListAsync();
             return temp.ToArray();

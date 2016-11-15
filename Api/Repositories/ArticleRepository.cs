@@ -29,7 +29,7 @@ namespace Api.Repositories
         {
             _settings = settings.Value;
             _database = Connect();
-			_locale = "nl-NL";
+            _locale = "nl-NL"; //TODO: Should be session selected
 			_today = DateTime.UtcNow;
         }
 		
