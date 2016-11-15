@@ -39,24 +39,8 @@ namespace Api.Models
         [BsonElement("ChangedDate")]
         public DateTime? ChangedDate { get; set; }
     }
-/*
-    public interface IArticleContent
-	{
-		ObjectId Id { get; set; }
-		ObjectId ArticleId { get; set; }
-		int UserId { get; set; }
-		string Title { get; set; }
-		string Text { get; set; }
-		string Code { get; set; }
-        string Action { get; set; }
-		int Level { get; set; }
-		bool Active { get; set; }
-		DateTime PublishDate { get; set; }
-		DateTime? ExpireDate { get; set; }
-		DateTime CreatedDate { get; set; }
-	}
-*/
-    public class ArticleContent//: IArticleContent
+
+    public class ArticleContent
 	{
 		public ObjectId Id { get; set; }
 		public ObjectId ArticleId { get; set; }
