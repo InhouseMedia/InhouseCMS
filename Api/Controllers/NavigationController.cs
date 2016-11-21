@@ -7,20 +7,24 @@ namespace Ai.Controllers
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
+	using Microsoft.Extensions.Localization;
 
  	using MongoDB.Bson;
 
     using Api.Models;
 	using Api.Repositories;
 
+	//[ServiceFilter(typeof(LanguageActionFilter))]
     [Route("[controller]")]
    	public class NavigationController : Controller
     {
-        readonly INavigationRepository _repository;
+        private readonly INavigationRepository _repository;
+		private readonly IStringLocalizer<NavigationController> _localizer;
 
-        public NavigationController(INavigationRepository settings)
+        public NavigationController(INavigationRepository settings, IStringLocalizer<NavigationController> localizer)
         {   
             _repository = settings;
+			_localizer = localizer;
         }
      
         [HttpGet]
