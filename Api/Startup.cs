@@ -5,6 +5,10 @@ namespace Api
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using Microsoft.AspNetCore.Localization;
+    using Microsoft.AspNetCore.Mvc.Localization;
+    using Microsoft.AspNetCore.Mvc.Razor;
+    using System.Globalization;
 
     using Api.Repositories;
     using Api.Config;
@@ -29,18 +33,42 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
+
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()            
+                .AddViewLocalization(
+                LanguageViewLocationExpanderFormat.Suffix,
+                opts => { opts.ResourcesPath = "Resources"; })
+                .AddDataAnnotationsLocalization();
 
 			// RKLANKE add MongoDB to site
 			services.Configure<Settings>(Configuration);
             services.Configure<Api.Config.Config>(Configuration);
+            services.Configure<RequestLocalizationOptions>(
+                opts =>
+                {
+                    var supportedCultures = new[]
+                    {
+                        new CultureInfo("en-US"),
+                        new CultureInfo("en"),
+                        new CultureInfo("nl-NL"),
+                        new CultureInfo("nl"),
+                    };
+
+                    opts.DefaultRequestCulture = new RequestCulture("en-US");
+                    // Formatting numbers, dates, etc.
+                    opts.SupportedCultures = supportedCultures;
+                    // UI strings that we have localized.
+                    opts.SupportedUICultures = supportedCultures;
+                }
+            );
 
 			services.AddSingleton<IArticleRepository, ArticleRepository>();
             services.AddSingleton<INavigationRepository, NavigationRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IBoxRepository, BoxRepository>();
-            services.AddSingleton<IConfigRepository, ConfigRepository>();
+            services.AddSingleton<IConfigRepository, ConfigRepository>();   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

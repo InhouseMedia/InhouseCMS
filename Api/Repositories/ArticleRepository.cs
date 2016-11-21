@@ -22,20 +22,17 @@ namespace Api.Repositories
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-		private readonly string _locale;
 		readonly DateTime? _today;
 
         public ArticleRepository(IOptions<Settings> settings)
         {
             _settings = settings.Value;
             _database = Connect();
-            _locale = "nl-NL"; //TODO: Should be session selected
 			_today = DateTime.UtcNow;
         }
 		
         public async Task<IEnumerable<Article>> Articles()
         {
-			//var filter = Builders<Article>.Filter.Eq("Locale", _locale);
             var conn = _database.GetCollection<Article>("Article");
             var temp = await conn.Find(_=>true).ToListAsync();
             return temp.ToArray();
@@ -44,8 +41,7 @@ namespace Api.Repositories
         public async Task<Article> GetById(ObjectId id)
         {
 			var builder = Builders<Article>.Filter; 
-            var filter = builder.Eq("Id", id) &
-						builder.Eq("Locale", _locale);
+            var filter = builder.Eq("Id", id);
 			var conn = _database.GetCollection<Article>("Article");
 			var temp = await conn.Find(filter).FirstOrDefaultAsync();
 			return temp;	
@@ -61,8 +57,7 @@ namespace Api.Repositories
 						builderFilter.Eq("Active", true) &
 						builderFilter.Lte("PublishDate", _today) &
 						(builderFilter.Gt("ExpireDate", _today) | 
-						builderFilter.Eq(e => e.ExpireDate, null) ) &
-						builderFilter.Eq("Locale", _locale);
+						builderFilter.Eq(e => e.ExpireDate, null) );
 			var conn = _database.GetCollection<Article>("Article");
 			var temp = await conn.Find(filter).Sort(sort).FirstOrDefaultAsync();
 
