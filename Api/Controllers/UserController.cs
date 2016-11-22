@@ -2,21 +2,17 @@
 {
     using System;
 	using System.Collections.Generic;
-	using System.Linq;
 	using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Options;
-
- 	using MongoDB.Bson;
-
+	
     using Api.Models;
 	using Api.Repositories;
 
     [Route("[controller]")]
     public class UserController : Controller
     {
-        readonly IUserRepository _repository;
+	    private readonly IUserRepository _repository;
 
         public UserController(IUserRepository settings)
         {
@@ -35,7 +31,7 @@
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string username, string password, bool rememberMe, string returnUrl = "") {
 
-Console.Write("Login ");
+			Console.Write("Login ");
             if (ModelState.IsValid)
             {
                 var user = await _repository.Login(username, password) as User;
@@ -89,15 +85,13 @@ Console.Write("Login ");
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+	        if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+	        return RedirectToAction("Index", "Home");
         }
+
 /*
         private IAuthenticationManager AuthenticationManager
         {

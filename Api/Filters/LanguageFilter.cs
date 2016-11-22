@@ -1,38 +1,42 @@
-
-public sealed class LanguageActionFilter : ActionFilterAttribute
+namespace Api.Filters
 {
-    private readonly ILogger logger;
-    private readonly IOptions<RequestLocalizationOptions> localizationOptions;
+	using System;
+	using System.Globalization;
+	using Microsoft.AspNetCore.Builder;
+	using Microsoft.AspNetCore.Mvc.Filters;
+	using Microsoft.Extensions.Logging;
+	using Microsoft.Extensions.Options;
 
-    public LanguageActionFilter(ILoggerFactory loggerFactory, IOptions<RequestLocalizationOptions> options)
-    {
-        if (loggerFactory == null)
-            throw new ArgumentNullException(nameof(loggerFactory));
+	public sealed class LanguageActionFilter : ActionFilterAttribute
+	{
+		private readonly ILogger _logger;
+		private readonly IOptions<RequestLocalizationOptions> _localizationOptions;
 
-        if (options == null)
-            throw new ArgumentNullException(nameof(options));
+		public LanguageActionFilter(ILoggerFactory loggerFactory, IOptions<RequestLocalizationOptions> options)
+		{
+			if (loggerFactory == null)
+				throw new ArgumentNullException(nameof(loggerFactory));
 
-        logger = loggerFactory.CreateLogger(nameof(LanguageActionFilter));
-        localizationOptions = options;
-    }
+			if (options == null)
+				throw new ArgumentNullException(nameof(options));
 
-    public override void OnActionExecuting(ActionExecutingContext context)
-    {
-        string culture = context.RouteData.Values["culture"]?.ToString();
+			_logger = loggerFactory.CreateLogger(nameof(LanguageActionFilter));
+			_localizationOptions = options;
+		}
 
-        if (!string.IsNullOrWhiteSpace(culture))
-        {
-            logger.LogInformation($"Setting the culture from the URL: {culture}");
+		public override void OnActionExecuting(ActionExecutingContext context)
+		{
+			var culture = context.RouteData.Values["culture"]?.ToString();
 
-#if DNX46
-            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-#else
-            CultureInfo.CurrentCulture = new CultureInfo(culture);
-            CultureInfo.CurrentUICulture = new CultureInfo(culture);
-#endif
-        }
+			if (!string.IsNullOrWhiteSpace(culture))
+			{
+				_logger.LogInformation($"Setting the culture from the URL: {culture}");
+				
+				CultureInfo.CurrentCulture = new CultureInfo(culture);
+				CultureInfo.CurrentUICulture = new CultureInfo(culture);
+			}
 
-        base.OnActionExecuting(context);
-    }
+			base.OnActionExecuting(context);
+		}
+	}
 }

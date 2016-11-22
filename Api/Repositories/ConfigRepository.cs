@@ -1,20 +1,17 @@
 namespace Api.Repositories
 {
-    using System;
-    using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    
-    using Microsoft.Extensions.Options;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Reflection;
+	using System.Threading.Tasks;
+	
+	using Microsoft.Extensions.Options;
+	using MongoDB.Driver;
 
-    using MongoDB.Driver;
-    using MongoDB.Bson;
-    
+	using Api.Models;
 	using Api.Config;
-    using Api.Models;
-    
-    public interface IConfigRepository
+
+	public interface IConfigRepository
     {
         Task<Config> Config();
     }
@@ -43,13 +40,13 @@ namespace Api.Repositories
             return _config;
         }
 
-        public static Config Merge<Config>(Config target, Config source)
+        public static Config Merge(Config target, Config source)
         {
             typeof(Config)
                 .GetProperties()
-                .Select((PropertyInfo x) => new KeyValuePair<PropertyInfo, object>(x, x.GetValue(source, null)))
-                .Where((KeyValuePair<PropertyInfo, object> x) => x.Value != null).ToList()
-                .ForEach((KeyValuePair<PropertyInfo, object> x) => x.Key.SetValue(target, x.Value, null));
+                .Select(x => new KeyValuePair<PropertyInfo, object>(x, x.GetValue(source, null)))
+                .Where(x => x.Value != null).ToList()
+                .ForEach(x => x.Key.SetValue(target, x.Value, null));
 
             return target;  
         }

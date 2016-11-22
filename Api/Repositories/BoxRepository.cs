@@ -22,7 +22,7 @@ namespace Api.Repositories
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-		readonly DateTime? _today;
+		private readonly DateTime? _today;
 
         public BoxRepository(IOptions<Settings> settings)
         {

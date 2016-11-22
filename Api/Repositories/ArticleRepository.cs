@@ -22,7 +22,7 @@ namespace Api.Repositories
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-		readonly DateTime? _today;
+	    private readonly DateTime? _today;
 
         public ArticleRepository(IOptions<Settings> settings)
         {
@@ -90,7 +90,7 @@ namespace Api.Repositories
 				ExpireDate = item.ExpireDate,
 				CreatedDate = item.CreatedDate,
 				ChangedDate = item.ChangedDate,
-				ArticleContent = { }
+				ArticleContent = {}
 			};
 		}
 

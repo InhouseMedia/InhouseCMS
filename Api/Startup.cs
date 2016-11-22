@@ -1,17 +1,19 @@
 namespace Api
 {
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
+	using Microsoft.AspNetCore.Builder;
+	using Microsoft.AspNetCore.Hosting;
+	using Microsoft.AspNetCore.Localization;
+	using Microsoft.AspNetCore.Mvc.Razor;
+
+	using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Microsoft.AspNetCore.Localization;
-    using Microsoft.AspNetCore.Mvc.Localization;
-    using Microsoft.AspNetCore.Mvc.Razor;
-    using System.Globalization;
+	using Microsoft.Extensions.Options;
 
-    using Api.Repositories;
-    using Api.Config;
+	using System.Globalization;
+
+	using Api.Filters;
+	using Api.Repositories;
     using Api.Models;
 
     public class Startup
@@ -20,8 +22,8 @@ namespace Api
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddJsonFile("mongodb.json")
                 .AddJsonFile("config.json")
                 .AddEnvironmentVariables();
@@ -44,7 +46,7 @@ namespace Api
 
 			// RKLANKE add MongoDB to site
 			services.Configure<Settings>(Configuration);
-            services.Configure<Api.Config.Config>(Configuration);
+            services.Configure<Config.Config>(Configuration);
             services.Configure<RequestLocalizationOptions>(
                 opts =>
                 {
@@ -56,7 +58,7 @@ namespace Api
                         new CultureInfo("nl"),
                     };
 
-                    opts.DefaultRequestCulture = new RequestCulture("en-US");
+					opts.DefaultRequestCulture = new RequestCulture("en-US");
                     // Formatting numbers, dates, etc.
                     opts.SupportedCultures = supportedCultures;
                     // UI strings that we have localized.
@@ -68,8 +70,10 @@ namespace Api
             services.AddSingleton<INavigationRepository, NavigationRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IBoxRepository, BoxRepository>();
-            services.AddSingleton<IConfigRepository, ConfigRepository>();   
-        }
+            services.AddSingleton<IConfigRepository, ConfigRepository>();
+
+			services.AddScoped<LanguageActionFilter>();
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -77,7 +81,10 @@ namespace Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc();
-        }
+			var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+			app.UseRequestLocalization(options.Value);
+
+			app.UseMvc();
+		}
     }
 }

@@ -25,7 +25,7 @@ namespace Api.Repositories
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
 		private readonly string _locale;
-		readonly DateTime? _today;
+		private readonly DateTime? _today;
 
         public static IEnumerable<NavigationItem> ActiveNavigationItems;
 		public static List<NavigationSitemap> ActiveNavigationItemsFlat;
@@ -98,7 +98,7 @@ namespace Api.Repositories
 					siteMapItem.Url = parentUrl + tempExtra + siteMapItem.Url;
 					
 				// Flat List of all active menuitems that we can use to search the correct ArticleId to a specific Url
-				var tempItem = (NavigationSitemap)siteMapItem.Clone();
+				var tempItem = siteMapItem.Clone();
 					tempItem.ChildLocations = null;	
 					
 					ActiveNavigationItemsFlat.Add(tempItem);

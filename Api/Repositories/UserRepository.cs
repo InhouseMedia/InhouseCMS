@@ -2,7 +2,6 @@
 {
 	using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     
     using Microsoft.Extensions.Options;
@@ -22,7 +21,7 @@
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-		readonly DateTime? _today;
+		private readonly DateTime? _today;
 		
         public UserRepository(IOptions<Settings> settings)
         {

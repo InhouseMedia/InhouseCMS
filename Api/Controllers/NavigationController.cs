@@ -1,20 +1,16 @@
-namespace Ai.Controllers
+namespace Api.Controllers
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
 	using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Options;
 	using Microsoft.Extensions.Localization;
 
  	using MongoDB.Bson;
 
-    using Api.Models;
+	using Api.Filters;
 	using Api.Repositories;
 
-	//[ServiceFilter(typeof(LanguageActionFilter))]
+	[ServiceFilter(typeof(LanguageActionFilter))]
     [Route("[controller]")]
    	public class NavigationController : Controller
     {
@@ -35,7 +31,7 @@ namespace Ai.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-			var results = await _repository.NavigationItems() as IEnumerable<NavigationItem>;
+			var results = await _repository.NavigationItems();
 
 			if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -51,7 +47,7 @@ namespace Ai.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var results = await _repository.GetById(new ObjectId(id)) as NavigationItem;
+            var results = await _repository.GetById(new ObjectId(id));
 			
             if (results == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -69,7 +65,7 @@ namespace Ai.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-			var result = await _repository.NavigationSitemap() as IEnumerable<NavigationSitemap>;
+			var result = await _repository.NavigationSitemap();
 
 			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -83,7 +79,7 @@ namespace Ai.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var result = await _repository.NavigationList() as IEnumerable<NavigationSitemap>;
+            var result = await _repository.NavigationList();
 			
             if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
