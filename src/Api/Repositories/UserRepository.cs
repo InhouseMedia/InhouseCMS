@@ -7,13 +7,14 @@
     using Microsoft.Extensions.Options;
 
     using MongoDB.Driver;
+    using MongoDB.Bson;
 
     using Api.Models;
 
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> AllUsers();
-        
+        Task<IEnumerable<User>> Users();
+        Task<User> GetById(ObjectId id);
         Task<User> Login(string username, string password);
     }
 
@@ -29,28 +30,22 @@
             _database = Connect();
 			_today = DateTime.UtcNow;
         }
-
-        /*
-        public void Add(User user)
-        {
-            _database.GetCollection<User>("user").Save(user);
-        }
-		*/
 		
-        public async Task<IEnumerable<User>> AllUsers()
+        public async Task<IEnumerable<User>> Users()
         {
             var test = _database.GetCollection<User>("User");
             var temp = await test.Find(_=>true).ToListAsync();
             return temp.ToArray();
         }
 		
-		/*
-        public User GetById(ObjectId id)
+		public async Task<User> GetById(ObjectId id)
         {
-            var query = Query<User>.EQ(e => e.Id, id);
-            return _database.GetCollection<User>("user").FindOne(query);
+			var builder = Builders<User>.Filter; 
+            var filter = builder.Eq("Id", id);
+			var conn = _database.GetCollection<User>("User");
+			var temp = await conn.Find(filter).FirstOrDefaultAsync();
+			return temp;	
         }
-        */
 		
         public async Task<User> Login(string username, string password) {
 			//string hashedPassword = Crypto.HashPassword(password);

@@ -6,6 +6,8 @@
 
     using Microsoft.AspNetCore.Mvc;
 	
+    using MongoDB.Bson;
+    
     using Api.Models;
 	using Api.Repositories;
 
@@ -18,14 +20,38 @@
         {
             _repository = settings;
         }
-   
+        
         [HttpGet]
+		//[ValidateAntiForgeryToken]
         //[Authorize]
-        public async Task<IEnumerable<User>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _repository.AllUsers(); 
+			if (!ModelState.IsValid)
+				return new StatusCodeResult(500); // 500 Internal Server Error
+
+			var results = await _repository.Users();
+
+			if (results == null)
+				return new StatusCodeResult(204); // 204 No Content
+			
+			return new ObjectResult(results);
         }
-   
+
+        [HttpGet("{id:length(24)}")]
+		//[ValidateAntiForgeryToken]
+		//[Authorize]
+        public async Task<IActionResult> Get(string id)
+        {
+			if (!ModelState.IsValid)
+				return new StatusCodeResult(500); // 500 Internal Server Error
+				
+            var results = await _repository.GetById(new ObjectId(id));
+			
+            if (results == null)
+				return new StatusCodeResult(204); // 204 No Content
+
+            return new ObjectResult(results);
+        }
         [HttpPost]
         //[AllowAnonymous]
         //[ValidateAntiForgeryToken]
