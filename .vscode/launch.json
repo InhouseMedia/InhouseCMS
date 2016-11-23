@@ -1,14 +1,13 @@
 {
     "version": "0.2.0",
-    "configurations": [
-        {
+    "configurations": [{
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/Api/bin/Debug/netcoreapp1.0/api.dll",
+            "program": "${workspaceRoot}/src/Api/bin/Debug/netcoreapp1.0/api.dll",
             "args": [],
-            "cwd": "${workspaceRoot}/Api",
+            "cwd": "${workspaceRoot}/src/Api",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
@@ -29,7 +28,7 @@
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
-                "/Views": "${workspaceRoot}/Api/Views"
+                "/Views": "${workspaceRoot}/src/Api/Views"
             }
         },
         {
