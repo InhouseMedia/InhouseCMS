@@ -49,7 +49,7 @@ namespace Api.Controllers
             return new ObjectResult(results);
         }
 		
-		[HttpGet("Page/{id:length(24)}")]
+		[HttpGet("{id:length(24)}/content")]
 		//[ValidateAntiForgeryToken]
 		//[Authorize]
         public async Task<IActionResult> Page(string id)
