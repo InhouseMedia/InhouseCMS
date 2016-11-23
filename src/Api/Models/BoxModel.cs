@@ -7,17 +7,20 @@
 
 	public class Box
 	{
-		public ObjectId Id { get; set; }
+		[BsonRepresentation(BsonType.ObjectId)]
+		public string Id { get; set; }
+		[BsonRepresentation(BsonType.ObjectId)]
 		[BsonElement("UserId")]
-		public ObjectId UserId { get; set; }
+		public string UserId { get; set; }
 		[BsonElement("Controller")]
 		public string Controller { get; set; }
 		[BsonElement("Action")]
 		public string Action { get; set; }
 		[BsonElement("Placement")]
 		public int Placement { get; set; }
+		[BsonRepresentation(BsonType.ObjectId)]
 		[BsonElement("ArticleId")]
-		public ObjectId? ArticleId { get; set; }
+		public string ArticleId { get; set; }
 		[BsonElement("Template")]
 		public string Template { get; set; }
 		[BsonElement("Level")]

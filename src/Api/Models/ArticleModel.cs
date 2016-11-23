@@ -8,9 +8,11 @@ namespace Api.Models
 
     public class Article
     {
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set;}
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("UserId")]
-        public ObjectId UserId { get; set; }
+        public string UserId { get; set; }
         [BsonElement("CompanyId")]
         public int CompanyId { get; set; }
         [BsonElement("MetaTitle")]
@@ -39,10 +41,14 @@ namespace Api.Models
 
     public class ArticleContent
 	{
-		public ObjectId Id { get; set; }
-		public ObjectId ArticleId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+		public string Id { get; set; }
+		[BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("ArticleId")]
+        public string ArticleId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("UserId")]
-		public ObjectId UserId { get; set; }
+		public string UserId { get; set; }
         [BsonElement("Title")]
 		public string Title { get; set; }
         [BsonElement("Text")]
@@ -67,9 +73,11 @@ namespace Api.Models
 
     public class ArticlePage
     {
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("UserId")]
-        public ObjectId UserId { get; set; }
+        public string UserId { get; set; }
         [BsonElement("CompanyId")]
         public int CompanyId { get; set; }
         [BsonElement("MetaTitle")]

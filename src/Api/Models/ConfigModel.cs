@@ -6,7 +6,8 @@ namespace Api.Config
 	
 	public class Config
 	{
-		public ObjectId Id { get; set; }
+		[BsonRepresentation(BsonType.ObjectId)]
+		public string Id { get; set; }
 		[BsonElement("Domain")]
 		public string Domain { get; set; }
 		[BsonElement("Name")]

@@ -8,13 +8,17 @@ namespace Api.Models
 
     public class NavigationItem
     {
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("ArticleId")]
-        public ObjectId ArticleId { get; set; }
+        public string ArticleId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("UserId")]
-        public ObjectId UserId { get; set; }
+        public string UserId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("ParentId")]
-        public ObjectId? ParentId { get; set; }
+        public string ParentId { get; set; }
         [BsonElement("Level")]
         public int Level { get; set; }
         [BsonElement("Priority")]
