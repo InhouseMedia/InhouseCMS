@@ -2,7 +2,8 @@ namespace Api.Repositories
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+	using System.Globalization;
+	using System.Linq;
     using System.Threading.Tasks;
     
     using Microsoft.Extensions.Options;
@@ -24,19 +25,15 @@ namespace Api.Repositories
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-		private readonly string _locale;
-		private readonly DateTime? _today;
 
         public static IEnumerable<NavigationItem> ActiveNavigationItems;
 		public static List<NavigationSitemap> ActiveNavigationItemsFlat;
-
+		
         public NavigationRepository(IOptions<Settings> settings)
         {
 			_settings = settings.Value;
             _database = Connect();
-			_locale = "nl-NL"; //TODO: Should be session selected
-			_today = DateTime.UtcNow;
-        }
+		}
 
         public async Task<IEnumerable<NavigationItem>> NavigationItems()
         {
@@ -49,7 +46,7 @@ namespace Api.Repositories
         {
 			var builder = Builders<NavigationItem>.Filter; 
             var filter = builder.Eq("Id", id) &
-						builder.Eq("Locale", _locale);
+						builder.Eq("Locale", CultureInfo.CurrentUICulture.Name);
 			var conn = _database.GetCollection<NavigationItem>("Navigation");
 			var temp = await conn.Find(filter).FirstOrDefaultAsync();
 			return temp;
@@ -57,15 +54,17 @@ namespace Api.Repositories
 
         public async Task<IEnumerable<NavigationSitemap>> NavigationSitemap()
 		{
+
 			ActiveNavigationItemsFlat = new List<NavigationSitemap>();
 			
 			var builderSort = Builders<NavigationItem>.Sort;
 			var sort = builderSort.Ascending("ParentId").Ascending("Level");
-			
+
+
 			var builderFilter = Builders<NavigationItem>.Filter;
 			var filter = builderFilter.Eq("Active", true) & 
-						builderFilter.Lte("CreatedDate", _today) &
-						builderFilter.Eq("Locale", _locale);
+						builderFilter.Lte("CreatedDate", DateTime.UtcNow) &
+						builderFilter.Eq("Locale", CultureInfo.CurrentUICulture.Name);
 			var conn = _database.GetCollection<NavigationItem>("Navigation");
 			ActiveNavigationItems = await conn.Find(filter).Sort(sort).ToListAsync();
 			
@@ -76,11 +75,10 @@ namespace Api.Repositories
 		
 		public async Task<IEnumerable<NavigationSitemap>> NavigationList()
 		{
-           if (ActiveNavigationItemsFlat == null)
-			{
-				ActiveNavigationItemsFlat = new List<NavigationSitemap>();
-				await NavigationSitemap();
-			}
+			if (ActiveNavigationItemsFlat != null && ActiveNavigationItems.Any()) return ActiveNavigationItemsFlat.ToArray();
+
+			ActiveNavigationItemsFlat = new List<NavigationSitemap>();
+			await NavigationSitemap();
 
 			return ActiveNavigationItemsFlat.ToArray();
 		}

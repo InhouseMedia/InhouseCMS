@@ -28,10 +28,24 @@ namespace Api.Filters
 		{
 			var culture = context.RouteData.Values["culture"]?.ToString();
 
+
 			if (!string.IsNullOrWhiteSpace(culture))
 			{
+				switch (culture)
+				{
+					case "nl":
+						culture = "nl-NL";
+						break;
+					case "en":
+						culture = "en-US";
+						break;
+					default:
+						culture = "en-US";
+						break;
+				}
+
 				_logger.LogInformation($"Setting the culture from the URL: {culture}");
-				
+
 				CultureInfo.CurrentCulture = new CultureInfo(culture);
 				CultureInfo.CurrentUICulture = new CultureInfo(culture);
 			}

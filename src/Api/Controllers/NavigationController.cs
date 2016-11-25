@@ -11,8 +11,9 @@ namespace Api.Controllers
 	using Api.Repositories;
 
 	[ServiceFilter(typeof(LanguageActionFilter))]
-    [Route("[controller]")]
-   	public class NavigationController : Controller
+	[Route("{culture:regex(^[[a-z]]{{2}}(?:-[[A-Z]]{{2}})?$)}/[controller]")]
+	[Route("[controller]")]
+	public class NavigationController : Controller
     {
         private readonly INavigationRepository _repository;
 		private readonly IStringLocalizer<NavigationController> _localizer;
