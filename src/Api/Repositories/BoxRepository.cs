@@ -22,13 +22,11 @@ namespace Api.Repositories
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-		private readonly DateTime? _today;
-
+		
         public BoxRepository(IOptions<Settings> settings)
         {
             _settings = settings.Value;
             _database = Connect();
-			_today = DateTime.UtcNow;
         }
 		
         public async Task<IEnumerable<Box>> Boxes()
@@ -54,9 +52,9 @@ namespace Api.Repositories
 
 			var builderFilter = Builders<Box>.Filter;
             var filter = builderFilter.Eq("Active", true) &
-						(builderFilter.Lte("PublishDate", _today) |
+						(builderFilter.Lte("PublishDate", DateTime.UtcNow) |
                         builderFilter.Eq(e => e.ExpireDate, null) ) &
-						(builderFilter.Gte("ExpireDate", _today) | 
+						(builderFilter.Gte("ExpireDate", DateTime.UtcNow) | 
 						builderFilter.Eq(e => e.ExpireDate, null) );
             var conn = _database.GetCollection<Box>("Box");
             var temp = await conn.Find(filter).Sort(sort).ToListAsync();

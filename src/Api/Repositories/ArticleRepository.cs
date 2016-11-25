@@ -22,13 +22,11 @@ namespace Api.Repositories
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-	    private readonly DateTime? _today;
 
         public ArticleRepository(IOptions<Settings> settings)
         {
             _settings = settings.Value;
             _database = Connect();
-			_today = DateTime.UtcNow;
         }
 		
         public async Task<IEnumerable<Article>> Articles()
@@ -55,8 +53,8 @@ namespace Api.Repositories
 			var builderFilter = Builders<Article>.Filter; 
             var filter = (builderFilter.Eq("Id", id) | builderFilter.Eq("Controller", "Maintenance")) &
 						builderFilter.Eq("Active", true) &
-						builderFilter.Lte("PublishDate", _today) &
-						(builderFilter.Gt("ExpireDate", _today) | 
+						builderFilter.Lte("PublishDate", DateTime.UtcNow) &
+						(builderFilter.Gt("ExpireDate", DateTime.UtcNow) | 
 						builderFilter.Eq(e => e.ExpireDate, null) );
 			var conn = _database.GetCollection<Article>("Article");
 			var temp = await conn.Find(filter).Sort(sort).FirstOrDefaultAsync();

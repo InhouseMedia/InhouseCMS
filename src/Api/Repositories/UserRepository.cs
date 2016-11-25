@@ -22,13 +22,11 @@
     {
         private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-		private readonly DateTime? _today;
 		
         public UserRepository(IOptions<Settings> settings)
         {
             _settings = settings.Value;
             _database = Connect();
-			_today = DateTime.UtcNow;
         }
 		
         public async Task<IEnumerable<User>> Users()
@@ -57,7 +55,7 @@
             var filter = Builders<User>.Filter.Where(x => x.UserName.Equals(username));
 			var test = _database.GetCollection<User>("User");
             var temp = await test.Find(filter).SingleOrDefaultAsync();
-            return temp as User;
+            return temp;
         }
         
         /*
