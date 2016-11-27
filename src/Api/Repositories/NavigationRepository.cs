@@ -2,17 +2,15 @@ namespace Api.Repositories
 {
     using System;
     using System.Collections.Generic;
-	using System.Globalization;
-	using System.Linq;
+    using System.Globalization;
+    using System.Linq;
     using System.Threading.Tasks;
-    
-    using Microsoft.Extensions.Options;
 
     using MongoDB.Driver;
     using MongoDB.Bson;
 
     using Api.Models;
-    
+
     public interface INavigationRepository
 	{
 		Task<IEnumerable<NavigationItem>> NavigationItems();
@@ -23,16 +21,13 @@ namespace Api.Repositories
 
     public class NavigationRepository : INavigationRepository
     {
-        private readonly Settings _settings;
         private readonly IMongoDatabase _database;
-
         public static IEnumerable<NavigationItem> ActiveNavigationItems;
 		public static List<NavigationSitemap> ActiveNavigationItemsFlat;
 		
-        public NavigationRepository(IOptions<Settings> settings)
+        public NavigationRepository(DataAccess access)
         {
-			_settings = settings.Value;
-            _database = Connect();
+            _database = access.Connect();
 		}
 
         public async Task<IEnumerable<NavigationItem>> NavigationItems()
@@ -117,15 +112,7 @@ namespace Api.Repositories
 				Priority = item.Priority,
 				//PublishDate = item.PublishDate,
 				ChildLocations = { }
-			};
-			
+			};	
 		}
-        
-        private IMongoDatabase Connect()
-        {
-            var client = new MongoClient(_settings.MongoConnection);
-            var database = client.GetDatabase(_settings.Database);
-            return database;
-        }
     }
 }

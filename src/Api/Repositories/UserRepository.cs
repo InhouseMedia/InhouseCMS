@@ -1,10 +1,7 @@
 ﻿namespace Api.Repositories
 {
-	using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    
-    using Microsoft.Extensions.Options;
 
     using MongoDB.Driver;
     using MongoDB.Bson;
@@ -20,13 +17,11 @@
 
     public class UserRepository : IUserRepository
     {
-        private readonly Settings _settings;
         private readonly IMongoDatabase _database;
 		
-        public UserRepository(IOptions<Settings> settings)
+        public UserRepository(DataAccess access)
         {
-            _settings = settings.Value;
-            _database = Connect();
+            _database = access.Connect();
         }
 		
         public async Task<IEnumerable<User>> Users()
@@ -74,12 +69,5 @@
             _database.GetCollection<User>("user").Update(query, update);
         }
         */
-
-        private IMongoDatabase Connect()
-        {
-            var client = new MongoClient(_settings.MongoConnection);
-            var database = client.GetDatabase(_settings.Database);
-            return database;
-        }
     }
 }

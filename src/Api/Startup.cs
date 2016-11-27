@@ -73,6 +73,8 @@ namespace Api
             services.AddSingleton<IConfigRepository, ConfigRepository>();
 
 			services.AddScoped<LanguageActionFilter>();
+
+            services.AddTransient<DataAccess>();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

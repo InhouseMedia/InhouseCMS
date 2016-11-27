@@ -19,14 +19,12 @@ namespace Api.Repositories
     public class ConfigRepository : IConfigRepository
     {
 		private readonly Config _config;
-        private readonly Settings _settings;
         private readonly IMongoDatabase _database;
 
-        public ConfigRepository(IOptions<Settings> settings, IOptions<Config> config)
+        public ConfigRepository(DataAccess access, IOptions<Config> config)
         {
 			_config = config.Value;
-            _settings = settings.Value;
-            _database = Connect();
+            _database = access.Connect();
         }
 		
         public async Task<Config> Config()
@@ -49,13 +47,6 @@ namespace Api.Repositories
                 .ForEach(x => x.Key.SetValue(target, x.Value, null));
 
             return target;  
-        }
-
-        private IMongoDatabase Connect()
-        {
-            var client = new MongoClient(_settings.MongoConnection);
-            var database = client.GetDatabase(_settings.Database);
-            return database;
         }
     }
 }

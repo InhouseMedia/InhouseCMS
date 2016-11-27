@@ -3,14 +3,12 @@ namespace Api.Repositories
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    
-    using Microsoft.Extensions.Options;
 
     using MongoDB.Driver;
     using MongoDB.Bson;
-    
+
     using Api.Models;
-    
+
     public interface IArticleRepository
     {
         Task<IEnumerable<Article>> Articles();
@@ -20,13 +18,11 @@ namespace Api.Repositories
 
     public class ArticleRepository : IArticleRepository
     {
-        private readonly Settings _settings;
         private readonly IMongoDatabase _database;
 
-        public ArticleRepository(IOptions<Settings> settings)
+        public ArticleRepository(DataAccess access)
         {
-            _settings = settings.Value;
-            _database = Connect();
+            _database = access.Connect();
         }
 		
         public async Task<IEnumerable<Article>> Articles()
@@ -91,12 +87,5 @@ namespace Api.Repositories
 				ArticleContent = {}
 			};
 		}
-
-        private IMongoDatabase Connect()
-        {
-            var client = new MongoClient(_settings.MongoConnection);
-            var database = client.GetDatabase(_settings.Database);
-            return database;
-        }
     }
 }

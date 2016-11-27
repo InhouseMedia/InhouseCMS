@@ -3,14 +3,12 @@ namespace Api.Repositories
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    
-    using Microsoft.Extensions.Options;
 
     using MongoDB.Driver;
     using MongoDB.Bson;
-    
+
     using Api.Models;
-    
+
     public interface IBoxRepository
     {
         Task<IEnumerable<Box>> Boxes();
@@ -20,13 +18,11 @@ namespace Api.Repositories
 
     public class BoxRepository : IBoxRepository
     {
-        private readonly Settings _settings;
         private readonly IMongoDatabase _database;
 		
-        public BoxRepository(IOptions<Settings> settings)
+        public BoxRepository(DataAccess access)
         {
-            _settings = settings.Value;
-            _database = Connect();
+            _database = access.Connect();
         }
 		
         public async Task<IEnumerable<Box>> Boxes()
@@ -59,13 +55,6 @@ namespace Api.Repositories
             var conn = _database.GetCollection<Box>("Box");
             var temp = await conn.Find(filter).Sort(sort).ToListAsync();
             return temp.ToArray();
-        }
-
-        private IMongoDatabase Connect()
-        {
-            var client = new MongoClient(_settings.MongoConnection);
-            var database = client.GetDatabase(_settings.Database);
-            return database;
         }
     }
 }
