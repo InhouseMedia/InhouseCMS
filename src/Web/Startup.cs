@@ -49,7 +49,7 @@ namespace Web
                         new CultureInfo("nl"),
                     };
 
-					opts.DefaultRequestCulture = new RequestCulture("en-US");
+					opts.DefaultRequestCulture = new RequestCulture("nl-NL");
                     // Formatting numbers, dates, etc.
                     opts.SupportedCultures = supportedCultures;
                     // UI strings that we have localized.
