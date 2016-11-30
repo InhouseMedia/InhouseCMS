@@ -28,7 +28,6 @@ namespace Api.Filters
 		{
 			var culture = context.RouteData.Values["culture"]?.ToString();
 
-
 			if (!string.IsNullOrWhiteSpace(culture))
 			{
 				switch (culture)
