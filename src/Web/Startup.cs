@@ -45,7 +45,7 @@ namespace Web
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             
             services.Configure<RequestLocalizationOptions>(
-                opts =>
+                options =>
                 {
                     var supportedCultures = new[]
                     {
@@ -55,11 +55,11 @@ namespace Web
                         new CultureInfo("nl"),
                     };
 
-					opts.DefaultRequestCulture = new RequestCulture("nl-NL");
+					options.DefaultRequestCulture = new RequestCulture("nl-NL");
                     // Formatting numbers, dates, etc.
-                    opts.SupportedCultures = supportedCultures;
+                    options.SupportedCultures = supportedCultures;
                     // UI strings that we have localized.
-                    opts.SupportedUICultures = supportedCultures;
+                    options.SupportedUICultures = supportedCultures;
                 }
             );
 
