@@ -11,7 +11,11 @@ namespace Web
     using Microsoft.Extensions.Options;
 
     using System.Globalization;
-    
+    using Microsoft.AspNetCore.Routing;
+
+    using Web.Filters;
+    using Web.Models;
+
     public class Startup
     {
         public Startup(IHostingEnvironment env)
@@ -38,6 +42,8 @@ namespace Web
                 opts => { opts.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
+            services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+            
             services.Configure<RequestLocalizationOptions>(
                 opts =>
                 {
@@ -56,6 +62,11 @@ namespace Web
                     opts.SupportedUICultures = supportedCultures;
                 }
             );
+
+            services.AddScoped<LocalizationActionFilter>();
+            
+            services.AddTransient<Config>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

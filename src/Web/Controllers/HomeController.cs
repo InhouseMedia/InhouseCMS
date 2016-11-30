@@ -7,7 +7,10 @@ namespace Web.Controllers
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Localization;
+    
+    using Web.Filters;
 
+    [ServiceFilter(typeof(LocalizationActionFilter))]
     public class HomeController : Controller
     {
         private readonly IStringLocalizer<HomeController> _localizer;
