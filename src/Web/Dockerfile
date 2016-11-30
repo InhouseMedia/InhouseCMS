@@ -7,5 +7,5 @@ COPY . /app
 WORKDIR /app
 RUN ["dnu", "restore"]
 
-EXPOSE 5000/tcp
-ENTRYPOINT ["dnx", "-p", "project.json", "Microsoft.AspNet.Server.Kestrel", "--server.urls", "http://0.0.0.0:5000"]
+EXPOSE 5050/tcp
+ENTRYPOINT ["dnx", "-p", "project.json", "Microsoft.AspNet.Server.Kestrel", "--server.urls", "http://0.0.0.0:5050"]
