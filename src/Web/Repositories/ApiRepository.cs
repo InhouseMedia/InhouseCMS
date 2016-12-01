@@ -9,6 +9,7 @@ namespace Web.Repositories
     public class ApiRespository
     {
         private const string ConnectionString = "Inhouse";
+	    private const string DefaultApiServer = "Http://localhost:5000";
         private readonly string _newConnectionString;
         private readonly string _apiserver;
 
@@ -16,7 +17,7 @@ namespace Web.Repositories
         {
             _newConnectionString = GetConnectionString(domain);
             //_newConnectionString += "Connection";
-            _apiserver = url;
+            _apiserver = url != "" ? url : DefaultApiServer;
         }
 
         public static string GetConnectionString(string domain)
@@ -24,7 +25,7 @@ namespace Web.Repositories
             var domainList = domain.Split('.');
             var isLocalhost = domainList.Any(x => x.Equals("localhost"));
             var isBinckDna = domainList.Any(x => x.Equals("binckdna"));
-            if (domainList.Any() && !isLocalhost)
+            if (domainList.Any() && !isLocalhost && domain != "")
             {
                 domain = (isBinckDna) ? domainList.First() : domainList[1];
             }

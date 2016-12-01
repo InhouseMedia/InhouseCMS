@@ -13,6 +13,7 @@ namespace Web
     using System.Globalization;
     using Microsoft.AspNetCore.Routing;
 
+	using Library.Models;
     using Web.Filters;
     using Web.Models;
 
@@ -22,9 +23,10 @@ namespace Web
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+				.AddJsonFile("api.json")
+				.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
@@ -42,7 +44,9 @@ namespace Web
                 opts => { opts.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
-            services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+			services.Configure<Api>(Configuration);
+
+			services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             
             services.Configure<RequestLocalizationOptions>(
                 options =>

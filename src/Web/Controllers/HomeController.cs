@@ -1,3 +1,5 @@
+using Web.Models;
+
 namespace Web.Controllers
 {
     using System;
@@ -15,7 +17,7 @@ namespace Web.Controllers
     {
         private readonly IStringLocalizer<HomeController> _localizer;
 
-        public HomeController(IStringLocalizer<HomeController> localizer)
+        public HomeController(IStringLocalizer<HomeController> localizer, Config config)
         {
 			
             _localizer = localizer;
