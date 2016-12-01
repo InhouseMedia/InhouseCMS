@@ -6,8 +6,8 @@ namespace Api.Models
     public class DataAccess
     {
 		private readonly Settings _settings;
-        private MongoClient _client;
-        private IMongoDatabase _db;
+        private readonly MongoClient _client;
+        private readonly IMongoDatabase _db;
 
         public DataAccess(IOptions<Settings> settings)
         {

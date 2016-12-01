@@ -48,7 +48,7 @@ namespace Api
 			services.Configure<Settings>(Configuration);
             services.Configure<Config.Config>(Configuration);
             services.Configure<RequestLocalizationOptions>(
-                opts =>
+                options =>
                 {
                     var supportedCultures = new[]
                     {
@@ -58,11 +58,11 @@ namespace Api
                         new CultureInfo("nl"),
                     };
 
-					opts.DefaultRequestCulture = new RequestCulture("en-US");
+					options.DefaultRequestCulture = new RequestCulture("en-US");
                     // Formatting numbers, dates, etc.
-                    opts.SupportedCultures = supportedCultures;
+                    options.SupportedCultures = supportedCultures;
                     // UI strings that we have localized.
-                    opts.SupportedUICultures = supportedCultures;
+                    options.SupportedUICultures = supportedCultures;
                 }
             );
 
