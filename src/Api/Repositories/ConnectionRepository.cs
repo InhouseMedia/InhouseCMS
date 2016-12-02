@@ -4,11 +4,11 @@ namespace Api.Repositories
 
     using Api.Connections;
 
-    public class ApiRepository
+    public class ConnectionRepository
     {
         protected readonly IMongoDatabase _database;
 
-        public ApiRepository(DatabaseConnection database)
+        public ConnectionRepository(DatabaseConnection database)
         {
             _database = database.Connect();
         }

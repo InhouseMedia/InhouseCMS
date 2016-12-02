@@ -16,7 +16,7 @@
         Task<User> Login(string username, string password);
     }
 
-    public class UserRepository : ApiRepository, IUserRepository
+    public class UserRepository : ConnectionRepository, IUserRepository
     {
         public UserRepository(DatabaseConnection database) : base(database)
         {

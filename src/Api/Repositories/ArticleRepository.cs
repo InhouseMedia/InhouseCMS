@@ -17,7 +17,7 @@ namespace Api.Repositories
         Task<ArticlePage> GetPage(ObjectId id);
     }
 
-    public class ArticleRepository : ApiRepository, IArticleRepository
+    public class ArticleRepository : ConnectionRepository, IArticleRepository
     {
         public ArticleRepository(DatabaseConnection database) : base(database)
         {

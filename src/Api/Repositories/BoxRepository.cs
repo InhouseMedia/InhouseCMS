@@ -17,7 +17,7 @@ namespace Api.Repositories
         Task<IEnumerable<Box>> BoxList();
     }
 
-    public class BoxRepository : ApiRepository, IBoxRepository
+    public class BoxRepository : ConnectionRepository, IBoxRepository
     {
         public BoxRepository(DatabaseConnection database) : base(database)
         {

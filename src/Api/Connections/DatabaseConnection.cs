@@ -1,28 +1,28 @@
 namespace Api.Connections
 {
-	using Microsoft.AspNetCore.Http;
-	using Microsoft.Extensions.Options;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Options;
 
-	using MongoDB.Driver;
+    using MongoDB.Driver;
 
-    using Api.Models;
-    
+    using Library.Models;
+
     public class DatabaseConnection
     {
-	    private readonly IMongoDatabase _db;
+        private readonly IMongoDatabase _db;
 
-        public DatabaseConnection(IOptions<Settings> settings, IHttpContextAccessor httpContextAccessor)
+        public DatabaseConnection(IOptions<Database> database, IHttpContextAccessor httpContextAccessor)
         {
+            var connection = database.Value;
+            var databaseName = (string)httpContextAccessor.HttpContext.Request.Headers["ConnectionKey"] ?? connection.DatabaseName;
 
-			var connection = settings.Value;
-			var database = (string)httpContextAccessor.HttpContext.Request.Headers["ConnectionKey"] ?? connection.Database;
-
-			var client = new MongoClient(connection.MongoConnection);
-            _db = client.GetDatabase(database);
+            var client = new MongoClient(connection.MongoConnection);
+            _db = client.GetDatabase(databaseName);
         }
 
-        public IMongoDatabase Connect(){
+        public IMongoDatabase Connect()
+        {
             return _db;
         }
-	}
+    }
 }

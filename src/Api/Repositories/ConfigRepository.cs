@@ -16,7 +16,7 @@ namespace Api.Repositories
         Task<SiteConfig> Config();
     }
 
-    public class ConfigRepository : ApiRepository, IConfigRepository
+    public class ConfigRepository : ConnectionRepository, IConfigRepository
     {
         private readonly SiteConfig _config;
 

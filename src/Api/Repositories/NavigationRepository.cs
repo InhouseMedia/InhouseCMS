@@ -20,7 +20,7 @@ namespace Api.Repositories
         Task<IEnumerable<NavigationSitemap>> NavigationList();
 	}
 
-    public class NavigationRepository : ApiRepository, INavigationRepository
+    public class NavigationRepository : ConnectionRepository, INavigationRepository
     {
         public static IEnumerable<NavigationItem> ActiveNavigationItems;
 		public static List<NavigationSitemap> ActiveNavigationItemsFlat;

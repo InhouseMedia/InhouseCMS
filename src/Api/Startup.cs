@@ -16,8 +16,9 @@ namespace Api
     using Api.Connections;
     using Api.Filters;
     using Api.Repositories;
-    using Api.Models;
+    
     using Library.Config;
+    using Library.Models;
 
     public class Startup
     {
@@ -48,7 +49,7 @@ namespace Api
                 .AddDataAnnotationsLocalization();
 
             // RKLANKE add MongoDB to site
-            services.Configure<Settings>(Configuration);
+            services.Configure<Database>(Configuration);
             services.Configure<SiteConfig>(Configuration);
             services.Configure<RequestLocalizationOptions>(
                 options =>
