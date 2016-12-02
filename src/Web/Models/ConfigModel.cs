@@ -1,22 +1,22 @@
 namespace Web.Models
 {
-	using System.Net.Http;
-	using Microsoft.AspNetCore.Http;
-	using Microsoft.Extensions.Options;
+    using System.Net.Http;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Options;
 
-	using Library.Config;
-	using Library.Models;
-	using Web.Repositories;
+    using Library.Config;
+    using Library.Models;
+    using Web.Repositories;
 
-	public class Config
-	{
+    public class Config
+    {
         private readonly SiteConfig _config;
 
-		public Config(IOptions<Api> api, IHttpContextAccessor httpContextAccessor)
-		{
-			var connectionName = httpContextAccessor.HttpContext.Request.Host.Host ?? "";
-			
-			var clientApi = new ApiRespository(api.Value.Url, connectionName);
+        public Config(IOptions<Api> api, IHttpContextAccessor httpContextAccessor)
+        {
+            var connectionName = httpContextAccessor.HttpContext.Request.Host.Host ?? "";
+
+            var clientApi = new ApiRespository(api.Value.Url, connectionName);
             var configResponse = clientApi.GetResultsSync("config");
 
             var items = configResponse.Content.ReadAsAsync<SiteConfig>();
