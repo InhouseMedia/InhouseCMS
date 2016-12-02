@@ -1,15 +1,17 @@
-namespace Api.Models
+namespace Api.Connections
 {
 	using Microsoft.AspNetCore.Http;
 	using Microsoft.Extensions.Options;
 
 	using MongoDB.Driver;
 
-    public class DataAccess
+    using Api.Models;
+    
+    public class DatabaseConnection
     {
 	    private readonly IMongoDatabase _db;
 
-        public DataAccess(IOptions<Settings> settings, IHttpContextAccessor httpContextAccessor)
+        public DatabaseConnection(IOptions<Settings> settings, IHttpContextAccessor httpContextAccessor)
         {
 
 			var connection = settings.Value;

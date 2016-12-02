@@ -7,6 +7,7 @@
     using MongoDB.Bson;
 
     using Api.Models;
+    using Api.Connections;
 
     public interface IUserRepository
     {
@@ -15,44 +16,42 @@
         Task<User> Login(string username, string password);
     }
 
-    public class UserRepository : IUserRepository
+    public class UserRepository : ApiRepository, IUserRepository
     {
-        private readonly IMongoDatabase _database;
-		
-        public UserRepository(DataAccess access)
+        public UserRepository(DatabaseConnection database) : base(database)
         {
-            _database = access.Connect();
         }
-		
+
         public async Task<IEnumerable<User>> Users()
         {
             var test = _database.GetCollection<User>("User");
-            var temp = await test.Find(_=>true).ToListAsync();
+            var temp = await test.Find(_ => true).ToListAsync();
             return temp.ToArray();
         }
-		
-		public async Task<User> GetById(ObjectId id)
+
+        public async Task<User> GetById(ObjectId id)
         {
-			var builder = Builders<User>.Filter; 
+            var builder = Builders<User>.Filter;
             var filter = builder.Eq("Id", id);
-			var conn = _database.GetCollection<User>("User");
-			var temp = await conn.Find(filter).FirstOrDefaultAsync();
-			return temp;	
+            var conn = _database.GetCollection<User>("User");
+            var temp = await conn.Find(filter).FirstOrDefaultAsync();
+            return temp;
         }
-		
-        public async Task<User> Login(string username, string password) {
-			//string hashedPassword = Crypto.HashPassword(password);
-			//	bool verify = Crypto.VerifyHashedPassword(hashedPassword, password);
-				
-			//Console.Write(" PasswordHash " + hashedPassword + " Verify " + verify.ToString());
+
+        public async Task<User> Login(string username, string password)
+        {
+            //string hashedPassword = Crypto.HashPassword(password);
+            //	bool verify = Crypto.VerifyHashedPassword(hashedPassword, password);
+
+            //Console.Write(" PasswordHash " + hashedPassword + " Verify " + verify.ToString());
             //var filter = Builders<User>.Filter.Eq("UserName", username);
             //var filter = Builders<User>.Filter.Where(x => x.UserName.Equals(username) && x.Password.Equals(password));
             var filter = Builders<User>.Filter.Where(x => x.UserName.Equals(username));
-			var test = _database.GetCollection<User>("User");
+            var test = _database.GetCollection<User>("User");
             var temp = await test.Find(filter).SingleOrDefaultAsync();
             return temp;
         }
-        
+
         /*
         public bool Remove(ObjectId id)
         {
