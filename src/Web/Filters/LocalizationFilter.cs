@@ -13,10 +13,9 @@
 
 	public class LocalizationActionFilter : ActionFilterAttribute
     {
-        // private readonly string _webApiUrl = ConfigurationManager.AppSettings["WebApiUrl"];
 	    private readonly SiteConfig _config;
-        private readonly ILogger _logger;
-        private readonly IOptions<RequestLocalizationOptions> _localizationOptions;
+		private readonly RequestLocalizationOptions _localizationOptions;
+		private readonly ILogger _logger;
 
         public LocalizationActionFilter(
 			ILoggerFactory loggerFactory, 
@@ -30,7 +29,7 @@
                 throw new ArgumentNullException(nameof(options));
 
             _logger = loggerFactory.CreateLogger(nameof(LocalizationActionFilter));
-            _localizationOptions = options;
+            _localizationOptions = options.Value;
 	        _config = config.GetConfig();
         }
 
