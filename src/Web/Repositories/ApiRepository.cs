@@ -16,7 +16,6 @@ namespace Web.Repositories
         public ApiRespository(string url, string domain)
         {
             _newConnectionString = GetConnectionString(domain);
-            //_newConnectionString += "Connection";
             _apiserver = url != "" ? url : DefaultApiServer;
         }
 

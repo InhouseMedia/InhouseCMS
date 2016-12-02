@@ -39,7 +39,6 @@
 
             CultureInfo.CurrentCulture = new CultureInfo(culture);
             CultureInfo.CurrentUICulture = new CultureInfo(culture);
-
         }
     }
 }
