@@ -1,5 +1,6 @@
 {
 	"dependencies": {
+		"Newtonsoft.Json": "9.0.1",
 		"Microsoft.NETCore.App": {
 			"version": "1.0.1",
 			"type": "platform"
@@ -21,7 +22,8 @@
 		"Microsoft.Extensions.Logging.Debug": "1.0.0",
 		"Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
 		"Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-		"Library": "1.0.0"
+		"Library": "1.0.0",
+		"System.Runtime.Serialization.Xml": "4.3.0"
 	},
 
     "tools": {

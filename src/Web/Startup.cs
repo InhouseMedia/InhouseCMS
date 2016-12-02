@@ -2,16 +2,17 @@ namespace Web
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Localization;
+	using Microsoft.AspNetCore.Http;
+	using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc.Razor;
+	using Microsoft.AspNetCore.Routing;
 
-    using Microsoft.Extensions.Configuration;
+	using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
 
     using System.Globalization;
-    using Microsoft.AspNetCore.Routing;
 
 	using Library.Models;
     using Web.Filters;
@@ -66,8 +67,9 @@ namespace Web
                     options.SupportedUICultures = supportedCultures;
                 }
             );
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddScoped<LocalizationActionFilter>();
+			services.AddScoped<LocalizationActionFilter>();
             
             services.AddTransient<Config>();
 

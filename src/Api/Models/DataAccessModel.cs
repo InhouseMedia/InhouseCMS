@@ -1,20 +1,21 @@
 namespace Api.Models
 {
-    using Microsoft.Extensions.Options;
-    using MongoDB.Driver;
+	using Microsoft.AspNetCore.Http;
+	using Microsoft.Extensions.Options;
+
+	using MongoDB.Driver;
 
     public class DataAccess
     {
-		private readonly Settings _settings;
-        private readonly MongoClient _client;
-        private readonly IMongoDatabase _db;
+	    private readonly IMongoDatabase _db;
 
-        public DataAccess(IOptions<Settings> settings)
+        public DataAccess(IOptions<Settings> settings, IHttpContextAccessor httpContextAccessor)
         {
-            _settings = settings.Value;
+	        var connection = settings.Value;
+			var database = (string)httpContextAccessor.HttpContext.Request.Headers["ConnectionKey"] ?? connection.Database;
 
-			_client = new MongoClient(_settings.MongoConnection);
-            _db = _client.GetDatabase(_settings.Database);
+			var client = new MongoClient(connection.MongoConnection);
+            _db = client.GetDatabase(database);
         }
 
         public IMongoDatabase Connect(){

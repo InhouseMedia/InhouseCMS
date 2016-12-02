@@ -4,9 +4,9 @@ namespace Api.Repositories
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using MongoDB.Driver;
-    using MongoDB.Bson;
-
+	using MongoDB.Bson;
+	using MongoDB.Driver;
+	
     using Api.Models;
 
     public interface IArticleRepository

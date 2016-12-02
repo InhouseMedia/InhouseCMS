@@ -10,19 +10,13 @@ namespace Web.Models
 
 	public class Config
 	{
-		private readonly Api _api;
         private readonly SiteConfig _config;
-		private readonly IHttpContextAccessor _httpContextAccessor;
 
-		public Config(IOptions<Api> api, IOptions<HttpContextAccessor> httpContextAccessor)
+		public Config(IOptions<Api> api, IHttpContextAccessor httpContextAccessor)
 		{
-			_api = api.Value;
-			_httpContextAccessor = httpContextAccessor.Value;
-
-			//var connectionName = _httpContextAccessor.HttpContext.Request.Host.Host ?? "";
-			var connectionName = "";
-
-			var clientApi = new ApiRespository(_api.Url, connectionName);
+			var connectionName = httpContextAccessor.HttpContext.Request.Host.Host ?? "";
+			
+			var clientApi = new ApiRespository(api.Value.Url, connectionName);
             var configResponse = clientApi.GetResultsSync("config");
 
             var items = configResponse.Content.ReadAsAsync<SiteConfig>();

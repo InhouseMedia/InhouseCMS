@@ -2,6 +2,7 @@ namespace Api
 {
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Hosting;
+	using Microsoft.AspNetCore.Http;
 	using Microsoft.AspNetCore.Localization;
 	using Microsoft.AspNetCore.Mvc.Razor;
 
@@ -71,6 +72,7 @@ namespace Api
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IBoxRepository, BoxRepository>();
             services.AddSingleton<IConfigRepository, ConfigRepository>();
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddScoped<LanguageActionFilter>();
 
