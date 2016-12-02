@@ -1,0 +1,39 @@
+﻿@using Library.Resources
+@model Library.Models.Company
+@{
+	Layout = null;
+}
+
+
+<div id='gmap_canvas' class="google-maps" style='height: 440px; width: 700px;'></div>
+
+<script type='text/javascript'>
+    function initMap() {
+        var myOptions = {
+            zoom: 16,
+            center: new google.maps.LatLng(@(Model.Geolocation.Latitude), @(Model.Geolocation.Longitude)),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+
+        var marker = new google.maps.Marker(
+            {
+                map: map,
+                position: new google.maps.LatLng(@(Model.Geolocation.Latitude), @(Model.Geolocation.Longitude))
+            }
+        );
+
+        var infowindow = new google.maps.InfoWindow(
+            {
+                content: '<strong>@(Model.Name)</strong><br>@(Model.Address.Street) @(Model.Address.Number), @(Model.Address.City)'
+            }
+        );
+
+        google.maps.event.addListener(marker, 'click', function() { infowindow.open(map, marker); });
+        
+        infowindow.open(map, marker);
+    }
+</script>
+
+<script async defer src='https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyBdP8A2Vgi1ypeKY5-g_rN1UV5RYwFe48w&v=3.exp'></script>

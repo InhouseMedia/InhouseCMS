@@ -1,0 +1,13 @@
+﻿@using Library.Resources
+
+@{
+	Layout = null;
+}
+@if (Model)
+{
+	<div id="company-logo"></div>
+}
+else
+{
+	<a href="/" id="company-logo" title="@Translate.HeaderHomepage"></a>
+}
