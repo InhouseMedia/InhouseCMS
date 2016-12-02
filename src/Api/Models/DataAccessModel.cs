@@ -11,7 +11,8 @@ namespace Api.Models
 
         public DataAccess(IOptions<Settings> settings, IHttpContextAccessor httpContextAccessor)
         {
-	        var connection = settings.Value;
+
+			var connection = settings.Value;
 			var database = (string)httpContextAccessor.HttpContext.Request.Headers["ConnectionKey"] ?? connection.Database;
 
 			var client = new MongoClient(connection.MongoConnection);
