@@ -2,6 +2,7 @@
 {
     public class Api
     {
-        public string Url { get; set; }
+        public string ApiConnection { get; set; }
+        public string DatabaseName { get; set; }
     }
 }

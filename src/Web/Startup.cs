@@ -2,21 +2,23 @@ namespace Web
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-	using Microsoft.AspNetCore.Http;
-	using Microsoft.AspNetCore.Localization;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc.Razor;
-	using Microsoft.AspNetCore.Routing;
+    using Microsoft.AspNetCore.Routing;
 
-	using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
 
     using System.Globalization;
 
-	using Library.Models;
+    using Library.Models;
+
+    using Web.Connections;
     using Web.Filters;
-    using Web.Models;
+    using Web.Repositories;
 
     public class Startup
     {
@@ -26,8 +28,8 @@ namespace Web
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", true, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
-				.AddJsonFile("api.json")
-				.AddEnvironmentVariables();
+                .AddJsonFile("api.json")
+                .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
@@ -39,16 +41,14 @@ namespace Web
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
             // Add framework services.
-            services.AddMvc()            
+            services.AddMvc()
                 .AddViewLocalization(
                 LanguageViewLocationExpanderFormat.Suffix,
                 opts => { opts.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
-			services.Configure<Api>(Configuration);
-
-			services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
-            
+            services.Configure<Api>(Configuration);
+            services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             services.Configure<RequestLocalizationOptions>(
                 options =>
                 {
@@ -60,19 +60,20 @@ namespace Web
                         new CultureInfo("nl"),
                     };
 
-					options.DefaultRequestCulture = new RequestCulture("nl-NL");
+                    options.DefaultRequestCulture = new RequestCulture("nl-NL");
                     // Formatting numbers, dates, etc.
                     options.SupportedCultures = supportedCultures;
                     // UI strings that we have localized.
                     options.SupportedUICultures = supportedCultures;
                 }
             );
-			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-			services.AddScoped<LocalizationActionFilter>();
-            
-            services.AddTransient<Config>();
+            //services.AddSingleton<IConfigRepository, ConfigRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.AddScoped<LocalizationActionFilter>();
+            services.AddTransient<ConfigRepository>();
+            services.AddTransient<ApiConnection>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,7 +95,7 @@ namespace Web
             app.UseStaticFiles();
 
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-			app.UseRequestLocalization(options.Value);
+            app.UseRequestLocalization(options.Value);
 
             app.UseMvc(routes =>
             {

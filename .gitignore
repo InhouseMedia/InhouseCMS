@@ -3,6 +3,7 @@
 
 #INHOUSE
 Api/mongodb.json
+Web/api.json
 *.DS_Store
 Library/Init_Database/User.json
 

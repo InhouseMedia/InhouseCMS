@@ -9,9 +9,9 @@
     using Microsoft.Extensions.Options;
 
 	using Library.Config;
-	using Web.Models;
+    using Web.Repositories;
 
-	public class LocalizationActionFilter : ActionFilterAttribute
+    public class LocalizationActionFilter : ActionFilterAttribute
     {
 	    private readonly SiteConfig _config;
 		private readonly RequestLocalizationOptions _localizationOptions;
@@ -20,7 +20,7 @@
         public LocalizationActionFilter(
 			ILoggerFactory loggerFactory, 
 			IOptions<RequestLocalizationOptions> options,
-			Config config)
+			ConfigRepository config)
         {
             if (loggerFactory == null)
                 throw new ArgumentNullException(nameof(loggerFactory));
