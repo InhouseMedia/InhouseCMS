@@ -27,17 +27,12 @@ namespace Web.Connections
             _apiConnection = _api.ApiConnection;
             _databaseName = httpContextAccessor.HttpContext.Request.Host.Host;
 
+            var ssl = httpContextAccessor.HttpContext.Request.Scheme;
             var domainList = _databaseName.Split('.');
             var isLocalhost = domainList.Any(x => x.Equals("localhost"));
-            var isBinckDna = domainList.Any(x => x.Equals("binckdna"));
-            if (domainList.Any() && !isLocalhost && _databaseName != "")
-            {
-                _databaseName = (isBinckDna) ? domainList.First() : domainList[1];
-            }
-            else
-            {
-                _databaseName = _api.DatabaseName;
-            }
+
+            _databaseName = (domainList.Any() && !isLocalhost && _databaseName != "") ? domainList[1] : _api.DatabaseName;
+            _apiConnection = (!isLocalhost && _databaseName != "") ? ssl + "://api." + _databaseName : _api.ApiConnection;
         }
 
         public async Task<HttpResponseMessage> ConnectAsync(string call)
