@@ -10,6 +10,7 @@ namespace Api.Repositories
     using MongoDB.Bson;
 
     using Api.Models;
+    using Api.Connections;
 
     public interface INavigationRepository
 	{
@@ -19,16 +20,14 @@ namespace Api.Repositories
         Task<IEnumerable<NavigationSitemap>> NavigationList();
 	}
 
-    public class NavigationRepository : INavigationRepository
+    public class NavigationRepository : ConnectionRepository, INavigationRepository
     {
-        private readonly IMongoDatabase _database;
         public static IEnumerable<NavigationItem> ActiveNavigationItems;
 		public static List<NavigationSitemap> ActiveNavigationItemsFlat;
-		
-        public NavigationRepository(DataAccess access)
+
+        public NavigationRepository(DatabaseConnection database) : base(database)
         {
-            _database = access.Connect();
-		}
+        }
 
         public async Task<IEnumerable<NavigationItem>> NavigationItems()
         {
@@ -54,7 +53,6 @@ namespace Api.Repositories
 			
 			var builderSort = Builders<NavigationItem>.Sort;
 			var sort = builderSort.Ascending("ParentId").Ascending("Level");
-
 
 			var builderFilter = Builders<NavigationItem>.Filter;
 			var filter = builderFilter.Eq("Active", true) & 

@@ -38,7 +38,7 @@
     } 
   },
 	"searchEngines": {
-		"googleverification": "",
+		"googleVerification": "",
 		"googleTranslation": false,
 		"websiteType": "company",
 		"author": "BinckBank N.V.",

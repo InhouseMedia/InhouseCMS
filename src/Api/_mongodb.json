@@ -1,4 +1,4 @@
 {
     "mongoconnection": "mongodb://localhost:27017",
-    "database":  "xxx"
+    "databasename": "xxx"
 }

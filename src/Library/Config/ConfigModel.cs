@@ -1,10 +1,9 @@
-namespace Api.Config
+namespace Library.Config
 {
-
 	using MongoDB.Bson;
 	using MongoDB.Bson.Serialization.Attributes;
 	
-	public class Config
+	public class SiteConfig
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; set; }
@@ -70,7 +69,7 @@ namespace Api.Config
 
 	public class Searchengines
 	{
-		public string Googleverification { get; set; }
+		public string GoogleVerification { get; set; }
 		public bool GoogleTranslation { get; set; }
 		public string WebsiteType { get; set; }
 		public string Author { get; set; }

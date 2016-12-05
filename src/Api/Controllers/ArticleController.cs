@@ -10,7 +10,7 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class ArticleController : Controller
     {
-        readonly IArticleRepository _repository;
+	    private readonly IArticleRepository _repository;
 
         public ArticleController(IArticleRepository settings)
         {   

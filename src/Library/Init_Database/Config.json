@@ -1,34 +1,35 @@
 {
-	"_id": {
-		"$oid": "5825a5a22cbebf64ef66bb20"
-	},
-	"Name": "Inhouse Media",
-	"Color": "#F1592A",
-	"Path": "inhouse",
-	"Company": {
-		"Name": "Inhouse Media",
-		"Address": {
-			"Street": "Krugerstraat",
-			"Number": "4",
-			"Zipcode": "1601NX",
-			"City": "Enkhuizen",
-			"Country": "Nederland"
-		},
-		"Contact": {
-			"Name": "",
-			"Function": "",
-			"Phonenumber": "",
-			"Mobilenumber": "06 - 250 815 58",
-			"Fax": "",
-			"Email": "info@inhousemedia.nl"
-		},
-		"Geolocation": {
-			"Latitude": "52.7035903",
-			"Longitude": "5.2828888"
-		}
-	},
-	"SearchEngines": {
-		"Author": "Inhouse Media",
-		"Generator": "Inhouse Media CMS"
-	}
+    "_id": {
+        "$oid": "5825a5a22cbebf64ef66bb20"
+    },
+    "Name": "Inhouse Media",
+    "Color": "#F1592A",
+    "Path": "inhouse",
+    "Company": {
+        "Name": "Inhouse Media",
+        "Address": {
+            "Street": "Krugerstraat",
+            "Number": "4",
+            "Zipcode": "1601NX",
+            "City": "Enkhuizen",
+            "Country": "Nederland"
+        },
+        "Contact": {
+            "Name": "",
+            "Function": "",
+            "Phonenumber": "",
+            "Mobilenumber": "06 - 250 815 58",
+            "Fax": "",
+            "Email": "info@inhousemedia.nl"
+        },
+        "Geolocation": {
+            "Latitude": "52.7035903",
+            "Longitude": "5.2828888"
+        }
+    },
+    "SearchEngines": {
+        "GoogleVerification": "_HXm7WJKa-qPXkJpT7l_um6A28YrNSYd899_yMEW2sk",
+        "Author": "Inhouse Media",
+        "Generator": "Inhouse Media CMS"
+    }
 }

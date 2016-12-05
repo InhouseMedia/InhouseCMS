@@ -1,36 +1,34 @@
 namespace Api.Repositories
 {
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
-	using System.Threading.Tasks;
-	
-	using Microsoft.Extensions.Options;
-	using MongoDB.Driver;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading.Tasks;
 
-	using Api.Models;
-	using Api.Config;
+    using Microsoft.Extensions.Options;
+    using MongoDB.Driver;
 
-	public interface IConfigRepository
+    using Library.Config;
+    using Api.Connections;
+
+    public interface IConfigRepository
     {
-        Task<Config> Config();
+        Task<SiteConfig> Config();
     }
 
-    public class ConfigRepository : IConfigRepository
+    public class ConfigRepository : ConnectionRepository, IConfigRepository
     {
-		private readonly Config _config;
-        private readonly IMongoDatabase _database;
+        private readonly SiteConfig _config;
 
-        public ConfigRepository(DataAccess access, IOptions<Config> config)
+        public ConfigRepository(DatabaseConnection database, IOptions<SiteConfig> config) : base(database)
         {
-			_config = config.Value;
-            _database = access.Connect();
+            _config = config.Value;
         }
-		
-        public async Task<Config> Config()
+
+        public async Task<SiteConfig> Config()
         {
-            var conn = _database.GetCollection<Config>("Config");
-            var temp = await conn.Find(_=>true).FirstOrDefaultAsync();
+            var conn = _database.GetCollection<SiteConfig>("Config");
+            var temp = await conn.Find(_ => true).FirstOrDefaultAsync();
 
             //return the modified copy of Target			
             Merge(_config, temp);
@@ -38,15 +36,15 @@ namespace Api.Repositories
             return _config;
         }
 
-        public static Config Merge(Config target, Config source)
+        public static SiteConfig Merge(SiteConfig target, SiteConfig source)
         {
-            typeof(Config)
+            typeof(SiteConfig)
                 .GetProperties()
                 .Select(x => new KeyValuePair<PropertyInfo, object>(x, x.GetValue(source, null)))
                 .Where(x => x.Value != null).ToList()
                 .ForEach(x => x.Key.SetValue(target, x.Value, null));
 
-            return target;  
+            return target;
         }
     }
 }

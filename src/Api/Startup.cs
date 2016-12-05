@@ -1,20 +1,24 @@
 namespace Api
 {
-	using Microsoft.AspNetCore.Builder;
-	using Microsoft.AspNetCore.Hosting;
-	using Microsoft.AspNetCore.Localization;
-	using Microsoft.AspNetCore.Mvc.Razor;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Localization;
+    using Microsoft.AspNetCore.Mvc.Razor;
 
-	using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-	using Microsoft.Extensions.Options;
+    using Microsoft.Extensions.Options;
 
-	using System.Globalization;
+    using System.Globalization;
 
-	using Api.Filters;
-	using Api.Repositories;
-    using Api.Models;
+    using Api.Connections;
+    using Api.Filters;
+    using Api.Repositories;
+    
+    using Library.Config;
+    using Library.Models;
 
     public class Startup
     {
@@ -38,17 +42,17 @@ namespace Api
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
             // Add framework services.
-            services.AddMvc()            
+            services.AddMvc()
                 .AddViewLocalization(
                 LanguageViewLocationExpanderFormat.Suffix,
                 opts => { opts.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
-			// RKLANKE add MongoDB to site
-			services.Configure<Settings>(Configuration);
-            services.Configure<Config.Config>(Configuration);
+            // RKLANKE add MongoDB to site
+            services.Configure<Database>(Configuration);
+            services.Configure<SiteConfig>(Configuration);
             services.Configure<RequestLocalizationOptions>(
-                opts =>
+                options =>
                 {
                     var supportedCultures = new[]
                     {
@@ -58,24 +62,25 @@ namespace Api
                         new CultureInfo("nl"),
                     };
 
-					opts.DefaultRequestCulture = new RequestCulture("en-US");
+                    options.DefaultRequestCulture = new RequestCulture("en-US");
                     // Formatting numbers, dates, etc.
-                    opts.SupportedCultures = supportedCultures;
+                    options.SupportedCultures = supportedCultures;
                     // UI strings that we have localized.
-                    opts.SupportedUICultures = supportedCultures;
+                    options.SupportedUICultures = supportedCultures;
                 }
             );
 
-			services.AddSingleton<IArticleRepository, ArticleRepository>();
+            services.AddSingleton<IArticleRepository, ArticleRepository>();
             services.AddSingleton<INavigationRepository, NavigationRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IBoxRepository, BoxRepository>();
             services.AddSingleton<IConfigRepository, ConfigRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-			services.AddScoped<LanguageActionFilter>();
+            services.AddScoped<LanguageActionFilter>();
 
-            services.AddTransient<DataAccess>();
-		}
+            services.AddTransient<DatabaseConnection>();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -83,10 +88,10 @@ namespace Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-			var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-			app.UseRequestLocalization(options.Value);
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
 
-			app.UseMvc();
-		}
+            app.UseMvc();
+        }
     }
 }

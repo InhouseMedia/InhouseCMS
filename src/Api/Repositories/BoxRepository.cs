@@ -8,6 +8,7 @@ namespace Api.Repositories
     using MongoDB.Bson;
 
     using Api.Models;
+    using Api.Connections;
 
     public interface IBoxRepository
     {
@@ -16,42 +17,39 @@ namespace Api.Repositories
         Task<IEnumerable<Box>> BoxList();
     }
 
-    public class BoxRepository : IBoxRepository
+    public class BoxRepository : ConnectionRepository, IBoxRepository
     {
-        private readonly IMongoDatabase _database;
-		
-        public BoxRepository(DataAccess access)
+        public BoxRepository(DatabaseConnection database) : base(database)
         {
-            _database = access.Connect();
         }
-		
+        
         public async Task<IEnumerable<Box>> Boxes()
         {
             var conn = _database.GetCollection<Box>("Box");
-            var temp = await conn.Find(_=>true).ToListAsync();
+            var temp = await conn.Find(_ => true).ToListAsync();
             return temp.ToArray();
         }
 
         public async Task<Box> GetById(ObjectId id)
         {
-			var builder = Builders<Box>.Filter; 
+            var builder = Builders<Box>.Filter;
             var filter = builder.Eq("Id", id);
-			var conn = _database.GetCollection<Box>("Box");
-			var temp = await conn.Find(filter).FirstOrDefaultAsync();
-			return temp;	
+            var conn = _database.GetCollection<Box>("Box");
+            var temp = await conn.Find(filter).FirstOrDefaultAsync();
+            return temp;
         }
 
         public async Task<IEnumerable<Box>> BoxList()
         {
             var builderSort = Builders<Box>.Sort;
-			var sort = builderSort.Ascending("Placement").Ascending("Level");
+            var sort = builderSort.Ascending("Placement").Ascending("Level");
 
-			var builderFilter = Builders<Box>.Filter;
+            var builderFilter = Builders<Box>.Filter;
             var filter = builderFilter.Eq("Active", true) &
-						(builderFilter.Lte("PublishDate", DateTime.UtcNow) |
-                        builderFilter.Eq(e => e.ExpireDate, null) ) &
-						(builderFilter.Gte("ExpireDate", DateTime.UtcNow) | 
-						builderFilter.Eq(e => e.ExpireDate, null) );
+                        (builderFilter.Lte("PublishDate", DateTime.UtcNow) |
+                        builderFilter.Eq(e => e.ExpireDate, null)) &
+                        (builderFilter.Gte("ExpireDate", DateTime.UtcNow) |
+                        builderFilter.Eq(e => e.ExpireDate, null));
             var conn = _database.GetCollection<Box>("Box");
             var temp = await conn.Find(filter).Sort(sort).ToListAsync();
             return temp.ToArray();

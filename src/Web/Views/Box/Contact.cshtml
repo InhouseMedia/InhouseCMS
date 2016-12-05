@@ -1,0 +1,10 @@
+﻿@using Library.Resources
+@using Web
+
+@{
+	Layout = null;
+	//TODO: Maybe added into config file.
+	var url = (Model) ? "tel:020606266" : "/" + Translate.ContactUrl;
+}
+
+<a href="@url" id="company-contact" title="@string.Format(Translate.HeaderContact, MvcApplication.Config.Name)">@string.Format(Translate.HeaderContact, MvcApplication.Config.Name)</a>

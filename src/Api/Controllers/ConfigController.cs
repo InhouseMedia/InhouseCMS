@@ -3,13 +3,12 @@ namespace Api.Controllers
 	using System.Threading.Tasks;
 	using Microsoft.AspNetCore.Mvc;
 
-	using Api.Config;
 	using Api.Repositories;
 
-    [Route("[controller]")]
+	[Route("[controller]")]
     public class ConfigController : Controller
     {
-        readonly IConfigRepository _repository;
+		private readonly IConfigRepository _repository;
 
         public ConfigController(IConfigRepository settings)
         {   
