@@ -2,8 +2,10 @@ namespace Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Localization;
-    
-    using Web.Filters;
+
+	using System.Globalization;
+
+	using Web.Filters;
 
     [ServiceFilter(typeof(LocalizationActionFilter))]
     public class HomeController : Controller
@@ -17,7 +19,9 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+			var culture = CultureInfo.CurrentUICulture;
+
+			return View();
         }
 
         public IActionResult About()

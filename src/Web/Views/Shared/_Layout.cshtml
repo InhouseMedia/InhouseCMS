@@ -1,15 +1,18 @@
 ﻿@using System.Globalization 
 @using System.Threading.Tasks 
+@using Library.Models
 @using Web.Controllers 
 @using Web.Repositories 
+
 @inject ConfigRepository Config
+@inject IBoxRepository Boxes
 @{ 
-	var config = Config.GetConfig(); 
-	//var articleId = (int)ViewBag.ArticleId; 
-	var locale = CultureInfo.CurrentUICulture.ToString();
+	var config = Config.GetConfig();
+	var articleId = "";//(string)ViewBag.ArticleId; 
+	var locale = CultureInfo.DefaultThreadCurrentUICulture.ToString();
 	var language = locale.Split('-').First(); 
-	//var boxesHeader = new BoxController().Selection((int)BoxPlacement.Header, articleId, @Html.Controller()); 
-	//var boxesFooter = new BoxController().Selection((int)BoxPlacement.Footer, articleId, @Html.Controller());
+	var boxesHeader = Boxes.BoxList((int)BoxPlacement.Header, articleId, "Article"); 
+	var boxesFooter = Boxes.BoxList((int)BoxPlacement.Footer, articleId, "Article");
 }
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="@language" xml:lang="@language">
@@ -71,7 +74,12 @@
 </head>
 
 <body class="template-@*Html.Controller().ToLower()*@">
-
+	<header>
+		@foreach (var box in boxesHeader)
+		{
+			@await Component.InvokeAsync(box.Action)
+		}
+	</header>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -114,7 +122,12 @@
 	</script>
 		<script src="~/js/site.min.js" asp-append-version="true"></script>
 	</environment>
-
+	<footer>
+	@foreach (var box in boxesFooter)
+	{
+		@await Component.InvokeAsync(box.Action)
+	}
+	</footer>
 	@RenderSection("scripts", required: false)
 </body>
 </html>

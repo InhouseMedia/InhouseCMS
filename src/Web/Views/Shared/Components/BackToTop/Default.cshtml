@@ -1,0 +1,11 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Web.Repositories
+@inject IViewLocalizer Localizer
+@inject ConfigRepository Config
+@{
+	Layout = null;
+	var language = Config.GetConfig().Language.Locale.FirstOrDefault();
+	var culture = CultureInfo.CurrentUICulture;
+}
+<a href="#" id="backToTop" title="@Localizer["Back to top"]">@Localizer["Back to top"] @language @culture</a>

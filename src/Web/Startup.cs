@@ -68,6 +68,7 @@ namespace Web
                 }
             );
 
+            services.AddSingleton<IBoxRepository, BoxRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<LocalizationActionFilter>();

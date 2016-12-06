@@ -3,7 +3,8 @@
     using System;
     using System.Globalization;
     using System.Linq;
-    using Microsoft.AspNetCore.Builder;
+	using System.Threading;
+	using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
@@ -39,6 +40,10 @@
 
             CultureInfo.CurrentCulture = new CultureInfo(culture);
             CultureInfo.CurrentUICulture = new CultureInfo(culture);
-        }
+
+			CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(culture);
+			CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(culture);
+
+		}
     }
 }
