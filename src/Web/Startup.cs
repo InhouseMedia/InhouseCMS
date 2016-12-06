@@ -68,13 +68,12 @@ namespace Web
                 }
             );
 
-            //services.AddSingleton<IConfigRepository, ConfigRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<LocalizationActionFilter>();
             services.AddTransient<ConfigRepository>();
             services.AddTransient<ApiConnection>();
-        }
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

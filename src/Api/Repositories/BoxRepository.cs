@@ -6,9 +6,9 @@ namespace Api.Repositories
 
     using MongoDB.Driver;
     using MongoDB.Bson;
-
-    using Api.Models;
+	
     using Api.Connections;
+	using Library.Models;
 
     public interface IBoxRepository
     {

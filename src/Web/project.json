@@ -29,11 +29,11 @@
     "tools": {
         "Microsoft.AspNetCore.Razor.Tools": {
             "version": "1.0.0-preview2-final",
-            "imports": "portable-net45+win8+dnxcore50"
+            "imports": "portable-net46+win8+dnxcore50"
         },
         "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
             "version": "1.0.0-preview2-final",
-            "imports": "portable-net45+win8+dnxcore50"
+            "imports": "portable-net46+win8+dnxcore50"
         }
     },
 
@@ -42,7 +42,7 @@
             "imports": [
                 "dotnet5.6",
                 "dnxcore50",
-                "portable-net45+win8"
+                "portable-net46+win8"
             ]
         }
     },
