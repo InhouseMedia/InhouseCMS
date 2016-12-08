@@ -13,8 +13,10 @@ namespace Web
     using Microsoft.Extensions.Options;
 
     using System.Globalization;
+	using System.Linq;
+	using System.Threading.Tasks;
 
-    using Library.Models;
+	using Library.Models;
 
     using Web.Connections;
     using Web.Filters;
@@ -38,14 +40,12 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
-
             // Add framework services.
-            services.AddMvc()
-                .AddViewLocalization(
-                LanguageViewLocationExpanderFormat.Suffix,
-                opts => { opts.ResourcesPath = "Resources"; })
-                .AddDataAnnotationsLocalization();
+	        services
+		        .AddLocalization(options => { options.ResourcesPath = "Resources"; })
+		        .AddMvc()
+		        .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+		        .AddDataAnnotationsLocalization();
 
             services.Configure<Api>(Configuration);
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
@@ -57,15 +57,29 @@ namespace Web
                         new CultureInfo("en-US"),
                         new CultureInfo("en"),
                         new CultureInfo("nl-NL"),
-                        new CultureInfo("nl"),
+                        new CultureInfo("nl")
                     };
 
                     options.DefaultRequestCulture = new RequestCulture("nl-NL");
-                    // Formatting numbers, dates, etc.
                     options.SupportedCultures = supportedCultures;
-                    // UI strings that we have localized.
                     options.SupportedUICultures = supportedCultures;
-                }
+					
+					// Set Current Culture for views
+					options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async context =>
+					{
+						var config = context.RequestServices.GetService<ConfigRepository>();
+						var culture = config.GetConfig().Language.Locale.FirstOrDefault();
+
+						CultureInfo.CurrentCulture = new CultureInfo(culture);
+						CultureInfo.CurrentUICulture = new CultureInfo(culture);
+
+						CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(culture);
+						CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(culture);
+
+						return await Task.FromResult(new ProviderCultureResult(culture));
+					}));
+
+				}
             );
 
             services.AddSingleton<IBoxRepository, BoxRepository>();

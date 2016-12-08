@@ -7,7 +7,8 @@ namespace Web.Controllers
 
 	using Web.Filters;
 
-    [ServiceFilter(typeof(LocalizationActionFilter))]
+	//Done in startup
+    //[ServiceFilter(typeof(LocalizationActionFilter))]
     public class HomeController : Controller
     {
 		private readonly IStringLocalizer<HomeController> _localizer;
