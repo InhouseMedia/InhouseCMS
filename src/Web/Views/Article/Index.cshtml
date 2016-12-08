@@ -1,13 +1,5 @@
-@model Api.Models.ArticlePageModel
 
 @{
 	Layout = null;
 }
 
-@foreach (var item in Model.ArticleContent)
-{
-    @*Html.Action(item.Action, Model.Controller, item)*@
-	@item.Action
-	@item.Controller
-
-}
