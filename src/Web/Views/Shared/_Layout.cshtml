@@ -12,6 +12,10 @@
 	var language = locale.Split('-').First(); 
 	var boxesHeader = Boxes.BoxList((int)BoxPlacement.Header, articleId, "Article"); 
 	var boxesFooter = Boxes.BoxList((int)BoxPlacement.Footer, articleId, "Article");
+    var boxesTop = Boxes.BoxList((int)BoxPlacement.Top, articleId, "Article"); 
+	var boxesBottom = Boxes.BoxList((int)BoxPlacement.Bottom, articleId, "Article");
+    var boxesLeft = Boxes.BoxList((int)BoxPlacement.Left, articleId, "Article"); 
+	var boxesRIght = Boxes.BoxList((int)BoxPlacement.Right, articleId, "Article");
 }
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="@language" xml:lang="@language">
@@ -73,39 +77,39 @@
 </head>
 
 <body class="template-@*Html.Controller().ToLower()*@">
-	<header>
-		@foreach (var box in boxesHeader)
-		{
-			@await Component.InvokeAsync(box.Action)
-		}
-	</header>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-				<a asp-controller="Home" asp-action="Index" class="navbar-brand">Web</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a asp-controller="Home" asp-action="Index">Home</a></li>
-					<li><a asp-controller="Home" asp-action="About">About</a></li>
-					<li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="container body-content">
-		@RenderBody()
-		<hr />
-		<footer>
-			<p>&copy; 2016 - Web</p>
-		</footer>
-	</div>
+	<div class="container">
+        <header>
+            @foreach (var box in boxesHeader)
+            {
+                @await Component.InvokeAsync(box.Action)
+            }
+        </header>
+
+        <section>
+            <header>
+                @foreach (var box in boxesTop)
+                {
+                    @await Component.InvokeAsync(box.Action)
+                }
+            </header>
+
+            @RenderBody()
+            
+            <footer>
+                @foreach (var box in boxesBottom)
+                {
+                    @await Component.InvokeAsync(box.Action)
+                }
+            </footer>
+        </section>
+
+        <footer>
+            @foreach (var box in boxesFooter)
+            {
+                @await Component.InvokeAsync(box.Action)
+            }
+        </footer>
+    </div>
 
 	<environment names="Development">
 		<script src="~/lib/jquery/dist/jquery.js"></script>
@@ -121,12 +125,7 @@
 	</script>
 		<script src="~/js/site.min.js" asp-append-version="true"></script>
 	</environment>
-	<footer>
-	@foreach (var box in boxesFooter)
-	{
-		@await Component.InvokeAsync(box.Action)
-	}
-	</footer>
+	
 	@RenderSection("scripts", required: false)
 </body>
 </html>
