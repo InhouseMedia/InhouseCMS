@@ -21,6 +21,7 @@ namespace Web
     using Web.Connections;
     using Web.Filters;
     using Web.Repositories;
+    using Microsoft.Extensions.Caching.Memory;
 
     public class Startup
     {
@@ -91,7 +92,9 @@ namespace Web
 
 			services.AddTransient<ApiConnection>();
 			services.AddTransient<ConfigRepository>();
-			services.AddTransient<IRouteConnection, RouteConnection>();
+		   // services.AddTransient<IRouteConnection, RouteConnection>();
+           // services.AddTransient<IMemoryCache, MemoryCache>();
+           // services.AddTransient<IRouter, Route>();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,35 +120,12 @@ namespace Web
 
             app.UseMvc(routes =>
             {
-				routes.Routes.Add(routes.ServiceProvider.GetService<IRouteConnection>());
-/*
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+				//routes.Routes.Add(routes.ServiceProvider.GetService<IRouteConnection>());
+                routes.Routes.Add( new RouteConnection(
+                    routes.ServiceProvider.GetRequiredService<IMemoryCache>(), 
+                       routes.DefaultHandler));
 
-                routes.MapRoute( 
-                    name: "url", 
-                    template: "{*path}",
-                    defaults: new {controller = "Article", action = "Index"});
-
-                routes.MapGet("{*path}", context =>
-                    {
-                        var article = context.RequestServices.GetService<IArticleRepository>();
-						var navigation = context.RequestServices.GetService<INavigationRepository>();
-
-						var path = context.Request.Path.Value ?? "/";
-                        var navItem = navigation.GetNavigationItem(path);
-	                    var articleId = navItem?.ArticleId ?? "012345678901234567890123"; // fake articleId needs to be 24 chars long
-
-	                    var articleItem = article.GetPage(articleId);
-
-	                   
-
-
-	                    return context.Response.WriteAsync($"Hi, {articleItem.Result.MetaTitle}!");
-                    }
-                );
-				*/
+                routes.MapRoute( name: "default", template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

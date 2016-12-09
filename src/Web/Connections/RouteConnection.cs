@@ -1,32 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Web.Repositories;
-
-namespace Web.Connections
+﻿namespace Web.Connections
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
+    using Microsoft.AspNetCore.Routing;
+    using Microsoft.Extensions.Caching.Memory;
+	using Microsoft.Extensions.DependencyInjection;
+	
 	using System.Threading.Tasks;
-	using Microsoft.AspNetCore.Mvc;
-	using Microsoft.AspNetCore.Routing;
-	using Microsoft.Extensions.Caching.Memory;
 
-	public interface IRouteConnection : IRouter
+	using Web.Repositories;
+
+    public interface IRouteConnection : IRouter
 	{
 	}
 
 	public class RouteConnection : IRouteConnection
 	{
 		private readonly IMemoryCache _cache;
+		private readonly IRouter _defaultRouter;
 		private object _synclock = new object();
 
-		public RouteConnection(IMemoryCache cache)
+		public RouteConnection(IMemoryCache cache, IRouter defaultRouter) 
 		{
 			_cache = cache;
+			_defaultRouter = defaultRouter;
 		}
 
-		public Task RouteAsync(RouteContext context)
+		public async Task RouteAsync(RouteContext context)
 		{
 			var navigation = context.HttpContext.RequestServices.GetRequiredService<INavigationRepository>();
 			var article = context.HttpContext.RequestServices.GetRequiredService<IArticleRepository>();
@@ -36,25 +34,23 @@ namespace Web.Connections
 			var articleId = navItem?.ArticleId ?? "012345678901234567890123"; // fake articleId needs to be 24 chars long
 
 			var articleItem = article.GetPage(articleId);
-			
-			var task = new Task(() =>
-			{
 
-				var routeData = new RouteData(context.RouteData);
-				routeData.Values["controller"] = articleItem.Controller;
-				routeData.Values["action"] = articleItem.Action;
-
-				context.RouteData = routeData;
-			});
-
-			task.Start();
-
-			return task;
+			var oldRouteData = context.RouteData;
+			var routeData = new RouteData(oldRouteData);
+			routeData.Values["controller"] = articleItem.Controller;
+			routeData.Values["action"] = articleItem.Action;
+	
+			context.RouteData = routeData;
+			await _defaultRouter.RouteAsync(context);
 		}
 
 		public VirtualPathData GetVirtualPath(VirtualPathContext context)
 		{
-			throw new NotImplementedException();
+			//TODO: Probably not correct. should be something like: Article/Index/xxx
+			var requestPath = context.HttpContext.Request.Path.Value;
+			var result = new VirtualPathData(this, requestPath);
+           
+			return result;
 		}
 	}
 }
