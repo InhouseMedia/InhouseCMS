@@ -25,9 +25,9 @@ namespace Web.Connections
             //_apiConnection = httpContextAccessor.HttpContext.Request.Host.ToString() ?? connection.ApiConnection;
             //_databaseName = httpContextAccessor.HttpContext.Request.Host.Host ?? connection.DatabaseName;
             _apiConnection = _api.ApiConnection;
-            _databaseName = httpContextAccessor.HttpContext.Request.Host.Host;
+            _databaseName = httpContextAccessor.HttpContext?.Request.Host.Host ?? "";
 
-            var ssl = httpContextAccessor.HttpContext.Request.Scheme;
+            var ssl = httpContextAccessor.HttpContext?.Request.Scheme?? "http";
             var domainList = _databaseName.Split('.');
             var isLocalhost = domainList.Any(x => x.Equals("localhost"));
 

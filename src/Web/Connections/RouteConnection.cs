@@ -1,4 +1,6 @@
-﻿using Web.Repositories;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Web.Repositories;
 
 namespace Web.Connections
 {
@@ -18,29 +20,29 @@ namespace Web.Connections
 	{
 		private readonly IMemoryCache _cache;
 		private object _synclock = new object();
-		private readonly IArticleRepository _article;
-		private readonly INavigationRepository _navigation;
 
-		public RouteConnection(IMemoryCache cache, IArticleRepository article, INavigationRepository navigation)
+		public RouteConnection(IMemoryCache cache)
 		{
-			_article = article;
 			_cache = cache;
-			_navigation = navigation;
 		}
 
 		public Task RouteAsync(RouteContext context)
 		{
+			var navigation = context.HttpContext.RequestServices.GetRequiredService<INavigationRepository>();
+			var article = context.HttpContext.RequestServices.GetRequiredService<IArticleRepository>();
+			
 			var path = context.HttpContext.Request.Path.Value ?? "/";
-			var navItem = _navigation.GetNavigationItem(path);
+			var navItem = navigation.GetNavigationItem(path);
 			var articleId = navItem?.ArticleId ?? "012345678901234567890123"; // fake articleId needs to be 24 chars long
 
-			var articleItem = _article.GetPage(articleId);
-
+			var articleItem = article.GetPage(articleId);
+			
 			var task = new Task(() =>
 			{
-				var routeData = new RouteData();
-				routeData.Values["controller"] = articleItem.Result.Controller;
-				routeData.Values["action"] = articleItem.Result.Action;
+
+				var routeData = new RouteData(context.RouteData);
+				routeData.Values["controller"] = articleItem.Controller;
+				routeData.Values["action"] = articleItem.Action;
 
 				context.RouteData = routeData;
 			});

@@ -117,17 +117,17 @@ namespace Web
 
             app.UseMvc(routes =>
             {
-				//routes.Routes.Add(routes.ServiceProvider.GetService<IRouteConnection>());
-
+				routes.Routes.Add(routes.ServiceProvider.GetService<IRouteConnection>());
+/*
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-/*
+
                 routes.MapRoute( 
                     name: "url", 
                     template: "{*path}",
                     defaults: new {controller = "Article", action = "Index"});
-*/
+
                 routes.MapGet("{*path}", context =>
                     {
                         var article = context.RequestServices.GetService<IArticleRepository>();
@@ -145,6 +145,7 @@ namespace Web
 	                    return context.Response.WriteAsync($"Hi, {articleItem.Result.MetaTitle}!");
                     }
                 );
+				*/
             });
         }
     }
