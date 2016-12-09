@@ -13,7 +13,7 @@ namespace Web.Repositories
     public interface IArticleRepository
 	{
 		Task<Article> GetById(string articleId);
-		ArticlePage GetPage(string articleId);
+		Task<ArticlePage> GetPage(string articleId);
 	}
 
 	public class ArticleRepository : ConnectionRepository, IArticleRepository
@@ -29,11 +29,11 @@ namespace Web.Repositories
 			return await test;
 		}
 
-		public ArticlePage GetPage(string articleId)
+		public async Task<ArticlePage> GetPage(string articleId)
 		{
-			var conn =  _api.Connect("/article/" + articleId + "/content");
+			var conn = await _api.ConnectAsync("/article/" + articleId + "/content");
 			var test = conn.Content.ReadAsAsync<ArticlePage>();
-			return test.Result;
+			return await test;
 		}
 	}
 }
