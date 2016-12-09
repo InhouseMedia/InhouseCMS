@@ -12,9 +12,9 @@ namespace Api.Controllers
     {
 	    private readonly IBoxRepository _repository;
 
-        public BoxController(IBoxRepository settings)
+        public BoxController(IBoxRepository repository)
         {   
-            _repository = settings;
+            _repository = repository;
         }
      
         [HttpGet]

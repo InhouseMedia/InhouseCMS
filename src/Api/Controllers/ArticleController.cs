@@ -12,9 +12,9 @@ namespace Api.Controllers
     {
 	    private readonly IArticleRepository _repository;
 
-        public ArticleController(IArticleRepository settings)
+        public ArticleController(IArticleRepository repository)
         {   
-            _repository = settings;
+            _repository = repository;
         }
      
         [HttpGet]

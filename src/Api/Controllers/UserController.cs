@@ -16,9 +16,9 @@
     {
 	    private readonly IUserRepository _repository;
 
-        public UserController(IUserRepository settings)
+        public UserController(IUserRepository repository)
         {
-            _repository = settings;
+            _repository = repository;
         }
         
         [HttpGet]

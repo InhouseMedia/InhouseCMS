@@ -18,9 +18,9 @@ namespace Api.Controllers
         private readonly INavigationRepository _repository;
 		private readonly IStringLocalizer<NavigationController> _localizer;
 
-        public NavigationController(INavigationRepository settings, IStringLocalizer<NavigationController> localizer)
+        public NavigationController(INavigationRepository repository, IStringLocalizer<NavigationController> localizer)
         {   
-            _repository = settings;
+            _repository = repository;
 			_localizer = localizer;
         }
      
