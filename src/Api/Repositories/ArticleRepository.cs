@@ -7,10 +7,10 @@ namespace Api.Repositories
     using MongoDB.Bson;
     using MongoDB.Driver;
 
-    using Api.Models;
     using Api.Connections;
+	using Library.Models;
 
-    public interface IArticleRepository
+	public interface IArticleRepository
     {
         Task<IEnumerable<Article>> Articles();
         Task<Article> GetById(ObjectId id);
