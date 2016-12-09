@@ -39,7 +39,8 @@
 			var routeData = new RouteData(oldRouteData);
 			routeData.Values["controller"] = articleItem.Result.Controller;
 			routeData.Values["action"] = articleItem.Result.Action;
-	
+			routeData.Values["id"] = articleItem.Result.Id;
+			
 			context.RouteData = routeData;
 			await _defaultRouter.RouteAsync(context);
 		}
