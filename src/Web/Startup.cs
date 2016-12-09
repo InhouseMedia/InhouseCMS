@@ -125,14 +125,14 @@ namespace Web
 */
                 routes.MapGet("{*path}", context =>
                     {
-                        var navigation = context.RequestServices.GetService<NavigationRepository>();
+                        var navigation = context.RequestServices.GetService<INavigationRepository>();
 
-                        var path = "/";
-                        var articleId = navigation.GetNavigationItem(path);
+                        var path = context.Request.Path.Value ?? "/";
+                        var item = navigation.GetNavigationItem(path);
                         // This is the route handler when HTTP GET "hello/<anything>"  matches
                         // To match HTTP GET "hello/<anything>/<anything>,
                         // use routeBuilder.MapGet("hello/{*name}"
-                        return context.Response.WriteAsync($"Hi, {articleId}!");
+                        return context.Response.WriteAsync($"Hi, {item.Title}!");
                     }
                 );
             });
