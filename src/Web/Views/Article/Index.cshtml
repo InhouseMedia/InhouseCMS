@@ -1,6 +1,11 @@
-
+@using Library.Models;
+@model ArticlePage
 @{
-	Layout = null;
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@foreach (var item in Model.ArticleContent)
+{
+    <h1>@Html.Raw(item.Title)</h1><br>
+}
 Test

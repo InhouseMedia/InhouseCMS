@@ -1,14 +1,10 @@
-using System.Threading.Tasks;
-
 namespace Web.Repositories
 {
-	using System.Collections.Generic;
-	using System.Linq;
 	using System.Net.Http;
-
+	using System.Threading.Tasks;
+	
 	using Library.Models;
     using Web.Connections;
-    using System.Globalization;
 
     public interface IArticleRepository
 	{
