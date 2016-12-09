@@ -82,13 +82,16 @@ namespace Web
 				}
             );
 
-            services.AddSingleton<IBoxRepository, BoxRepository>();
+			services.AddSingleton<IArticleRepository, ArticleRepository>();
+			services.AddSingleton<IBoxRepository, BoxRepository>();
             services.AddSingleton<INavigationRepository, NavigationRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<LocalizationActionFilter>();
-            services.AddTransient<ConfigRepository>();
-            services.AddTransient<ApiConnection>();
+
+			services.AddTransient<ApiConnection>();
+			services.AddTransient<ConfigRepository>();
+			services.AddTransient<IRouteConnection, RouteConnection>();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,6 +117,8 @@ namespace Web
 
             app.UseMvc(routes =>
             {
+				//routes.Routes.Add(routes.ServiceProvider.GetService<IRouteConnection>());
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
@@ -125,14 +130,19 @@ namespace Web
 */
                 routes.MapGet("{*path}", context =>
                     {
-                        var navigation = context.RequestServices.GetService<INavigationRepository>();
+                        var article = context.RequestServices.GetService<IArticleRepository>();
+						var navigation = context.RequestServices.GetService<INavigationRepository>();
 
-                        var path = context.Request.Path.Value ?? "/";
-                        var item = navigation.GetNavigationItem(path);
-                        // This is the route handler when HTTP GET "hello/<anything>"  matches
-                        // To match HTTP GET "hello/<anything>/<anything>,
-                        // use routeBuilder.MapGet("hello/{*name}"
-                        return context.Response.WriteAsync($"Hi, {item.Title}!");
+						var path = context.Request.Path.Value ?? "/";
+                        var navItem = navigation.GetNavigationItem(path);
+	                    var articleId = navItem?.ArticleId ?? "012345678901234567890123"; // fake articleId needs to be 24 chars long
+
+	                    var articleItem = article.GetPage(articleId);
+
+	                   
+
+
+	                    return context.Response.WriteAsync($"Hi, {articleItem.Result.MetaTitle}!");
                     }
                 );
             });

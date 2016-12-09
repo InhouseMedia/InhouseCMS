@@ -49,7 +49,7 @@ namespace Library.Models
 		{
 			ChildLocations = new HashSet<NavigationSitemap>();
 		}
-            
+        public string ArticleId { get; set; }   
 		public string Title { get; set; }
 		public string Url { get; set; }
 		public string OnClick { get; set; } 

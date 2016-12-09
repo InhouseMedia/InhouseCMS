@@ -104,6 +104,7 @@ namespace Api.Repositories
 		{
 			return new NavigationSitemap()
 			{
+				ArticleId = item.ArticleId,
 				Title = item.Title,
 				Url = item.Url,
 				OnClick = item.OnClick,
