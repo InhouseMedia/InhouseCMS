@@ -21,6 +21,7 @@ namespace Web
     using Web.Connections;
     using Web.Filters;
     using Web.Repositories;
+    using Microsoft.Extensions.Caching.Memory;
 
     public class Startup
     {
@@ -60,7 +61,7 @@ namespace Web
                         new CultureInfo("nl")
                     };
 
-                    options.DefaultRequestCulture = new RequestCulture("nl-NL");
+                    options.DefaultRequestCulture = new RequestCulture("en-US");
                     options.SupportedCultures = supportedCultures;
                     options.SupportedUICultures = supportedCultures;
 					
@@ -82,12 +83,18 @@ namespace Web
 				}
             );
 
-            services.AddSingleton<IBoxRepository, BoxRepository>();
+			services.AddSingleton<IArticleRepository, ArticleRepository>();
+			services.AddSingleton<IBoxRepository, BoxRepository>();
+            services.AddSingleton<INavigationRepository, NavigationRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<LocalizationActionFilter>();
-            services.AddTransient<ConfigRepository>();
-            services.AddTransient<ApiConnection>();
+
+			services.AddTransient<ApiConnection>();
+			services.AddTransient<ConfigRepository>();
+		   // services.AddTransient<IRouteConnection, RouteConnection>();
+           // services.AddTransient<IMemoryCache, MemoryCache>();
+           // services.AddTransient<IRouter, Route>();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -113,9 +120,12 @@ namespace Web
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+				//routes.Routes.Add(routes.ServiceProvider.GetService<IRouteConnection>());
+                routes.Routes.Add( new RouteConnection(
+                    routes.ServiceProvider.GetRequiredService<IMemoryCache>(), 
+                       routes.DefaultHandler));
+
+                routes.MapRoute( name: "default", template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

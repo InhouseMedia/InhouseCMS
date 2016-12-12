@@ -9,8 +9,8 @@ namespace Api.Repositories
     using MongoDB.Driver;
     using MongoDB.Bson;
 
-    using Api.Models;
     using Api.Connections;
+	using Library.Models;
 
     public interface INavigationRepository
 	{
@@ -104,6 +104,7 @@ namespace Api.Repositories
 		{
 			return new NavigationSitemap()
 			{
+				ArticleId = item.ArticleId,
 				Title = item.Title,
 				Url = item.Url,
 				OnClick = item.OnClick,

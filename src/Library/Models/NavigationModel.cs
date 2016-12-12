@@ -1,4 +1,4 @@
-namespace Api.Models
+namespace Library.Models
 {
 	using System;
 	using System.Collections.Generic;
@@ -49,7 +49,7 @@ namespace Api.Models
 		{
 			ChildLocations = new HashSet<NavigationSitemap>();
 		}
-            
+        public string ArticleId { get; set; }   
 		public string Title { get; set; }
 		public string Url { get; set; }
 		public string OnClick { get; set; } 

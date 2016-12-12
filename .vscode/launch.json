@@ -35,6 +35,7 @@
             "name": ".NET Core Launch (Web)",
             "type": "coreclr",
             "request": "launch",
+            "requireExactSource": false,
             "preLaunchTask": "build",
             "program": "${workspaceRoot}/src/Web/bin/Debug/netcoreapp1.0/Web.dll",
             "args": [],

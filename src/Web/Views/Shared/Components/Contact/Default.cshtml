@@ -1,0 +1,10 @@
+﻿@using Library.Config
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Web.Repositories
+@inject ConfigRepository Config
+@inject IViewLocalizer Localizer
+@{
+	Layout = null;
+	var config = Config.GetConfig();
+}
+<a href="tel:@config.Company.Contact.Phonenumber" id="company-contact" title="@Localizer["Contact our {0} Servicedesk.", config.Name]">@Localizer["Contact our {0} Servicedesk.", config.Name]</a>

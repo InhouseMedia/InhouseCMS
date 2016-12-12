@@ -5,8 +5,6 @@ namespace Web.Controllers
 
 	using System.Globalization;
 
-	using Web.Filters;
-
 	//Done in startup
     //[ServiceFilter(typeof(LocalizationActionFilter))]
     public class HomeController : Controller

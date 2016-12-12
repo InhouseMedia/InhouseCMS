@@ -10,9 +10,9 @@ namespace Api.Controllers
     {
 		private readonly IConfigRepository _repository;
 
-        public ConfigController(IConfigRepository settings)
+        public ConfigController(IConfigRepository repository)
         {   
-            _repository = settings;
+            _repository = repository;
         }
      
         [HttpGet]

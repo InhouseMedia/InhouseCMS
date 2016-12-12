@@ -6,7 +6,7 @@
 		"$oid": "564c7e8fe381e49e50812538"
 	},
 	"Controller": "Box",
-	"Action": "Homebutton",
+	"Action": "HomeButton",
 	"Placement": 1,
 	"Template": null,
 	"ArticleId": null,

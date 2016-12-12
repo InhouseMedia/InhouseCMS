@@ -3,7 +3,6 @@
     using System;
     using System.Globalization;
     using System.Linq;
-	using System.Threading;
 	using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.Extensions.Logging;

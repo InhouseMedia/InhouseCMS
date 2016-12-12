@@ -1,13 +1,10 @@
-@model Api.Models.ArticlePageModel
-
+@using Library.Models;
+@model ArticlePage
 @{
-	Layout = null;
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @foreach (var item in Model.ArticleContent)
 {
-    @*Html.Action(item.Action, Model.Controller, item)*@
-	@item.Action
-	@item.Controller
-
+	@await Component.InvokeAsync(item.Action , new {item})
 }
