@@ -1,122 +1,119 @@
 {
-	"_id": {
-		"$oid": "566b5f2c79ed1300c8260bd2"
-	},
-	"UserId": {
-		"$oid": "564c7e8fe381e49e50812538"
-	},
-	"ArticleId": {
-		"$oid": "566b2d7079ed1300c8260bd0"
-	},
-	"ParentId": null,
-	"Level": 1,
-	"Priority": 1,
-	"Title": "Welkom",
-	"Url": "",
-	"OnClick": "",
-	"Locale": "nl-NL",
-	"Active": true,
-	"PublishDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	},
-	"ExpireDate": null,
-	"CreatedDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	},
-	"ChangedDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	}
-}
-{
-	"_id": {
-		"$oid": "566b626079ed1300c8260bd3"
-	},
-	"UserId": {
-		"$oid": "564c7e8fe381e49e50812538"
-	},
-	"ArticleId": {
-		"$oid": "566b2d7079ed1300c8260bd0"
-	},
-	"ParentId": {
-		"$oid": "566b5f2c79ed1300c8260bd2"
-	},
-	"Level": 3,
-	"Priority": 0.8,
-	"Title": "Contact",
-	"Url": "contact-met-ons",
-	"OnClick": "",
-	"Locale": "nl-NL",
-	"Active": true,
-	"PublishDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	},
-	"ExpireDate": null,
-	"CreatedDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	},
-	"ChangedDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	}
-}
-{
-	"_id": {
-		"$oid": "5685204ae0d5826956dc0944"
-	},
-	"UserId": {
-		"$oid": "564c7e8fe381e49e50812538"
-	},
-	"ArticleId": {
-		"$oid": "568521d3e0d5826956dc0945"
-	},
-	"ParentId": {
-		"$oid": "566b5f2c79ed1300c8260bd2"
-	},
-	"Level": 1,
-	"Priority": 0.5,
-	"Title": "Wie zijn wij",
-	"Url": "wie-zijn-wij",
-	"OnClick": "",
-	"Locale": "nl-NL",
-	"Active": true,
-	"PublishDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	},
-	"ExpireDate": null,
-	"CreatedDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	},
-	"ChangedDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	}
-}
-{
-	"_id": {
-		"$oid": "5829c9d8325471fa95c53c23"
-	},
-	"UserId": {
-		"$oid": "564c7e8fe381e49e50812538"
-	},
-	"ArticleId": {
-		"$oid": "5829cb07325471fa95c53c24"
-	},
-	"ParentId": {
-		"$oid": "566b5f2c79ed1300c8260bd2"
-	},
-	"Level": 2,
-	"Priority": 0.8,
-	"Title": "Portfolio",
-	"Url": "portfolio",
-	"OnClick": "",
-	"Locale": "nl-NL",
-	"Active": true,
-	"PublishDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	},
-	"ExpireDate": null,
-	"CreatedDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	},
-	"ChangedDate": {
-		"$date": "2015-10-10T20:10:00.201Z"
-	}
+    "_id": {
+        "$oid": "566b5f2c79ed1300c8260bd2"
+    },
+    "UserId": {
+        "$oid": "564c7e8fe381e49e50812538"
+    },
+    "ArticleId": {
+        "$oid": "566b2d7079ed1300c8260bd0"
+    },
+    "ParentId": null,
+    "Level": 1,
+    "Priority": 1,
+    "Title": "Welkom",
+    "Url": "",
+    "OnClick": "",
+    "Locale": "nl-NL",
+    "Active": true,
+    "PublishDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    },
+    "ExpireDate": null,
+    "CreatedDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    },
+    "ChangedDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    }
+} {
+    "_id": {
+        "$oid": "566b626079ed1300c8260bd3"
+    },
+    "UserId": {
+        "$oid": "564c7e8fe381e49e50812538"
+    },
+    "ArticleId": {
+        "$oid": "566b55d479ed1300c8260bd1"
+    },
+    "ParentId": {
+        "$oid": "566b5f2c79ed1300c8260bd2"
+    },
+    "Level": 3,
+    "Priority": 0.8,
+    "Title": "Contact",
+    "Url": "contact-met-ons",
+    "OnClick": "",
+    "Locale": "nl-NL",
+    "Active": true,
+    "PublishDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    },
+    "ExpireDate": null,
+    "CreatedDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    },
+    "ChangedDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    }
+} {
+    "_id": {
+        "$oid": "5685204ae0d5826956dc0944"
+    },
+    "UserId": {
+        "$oid": "564c7e8fe381e49e50812538"
+    },
+    "ArticleId": {
+        "$oid": "568521d3e0d5826956dc0945"
+    },
+    "ParentId": {
+        "$oid": "566b5f2c79ed1300c8260bd2"
+    },
+    "Level": 1,
+    "Priority": 0.5,
+    "Title": "Wie zijn wij",
+    "Url": "wie-zijn-wij",
+    "OnClick": "",
+    "Locale": "nl-NL",
+    "Active": true,
+    "PublishDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    },
+    "ExpireDate": null,
+    "CreatedDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    },
+    "ChangedDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    }
+} {
+    "_id": {
+        "$oid": "5829c9d8325471fa95c53c23"
+    },
+    "UserId": {
+        "$oid": "564c7e8fe381e49e50812538"
+    },
+    "ArticleId": {
+        "$oid": "5829cb07325471fa95c53c24"
+    },
+    "ParentId": {
+        "$oid": "566b5f2c79ed1300c8260bd2"
+    },
+    "Level": 2,
+    "Priority": 0.8,
+    "Title": "Portfolio",
+    "Url": "portfolio",
+    "OnClick": "",
+    "Locale": "nl-NL",
+    "Active": true,
+    "PublishDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    },
+    "ExpireDate": null,
+    "CreatedDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    },
+    "ChangedDate": {
+        "$date": "2015-10-10T20:10:00.201Z"
+    }
 }
