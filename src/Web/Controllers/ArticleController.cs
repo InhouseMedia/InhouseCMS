@@ -1,13 +1,15 @@
 namespace Web.Controllers
 {
-	using System.Threading.Tasks;
-    
 	using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Localization;
 
-    using Web.Repositories;
+	using System.Threading.Tasks;
 
-    public class ArticleController : Controller
+	using Web.Repositories;
+
+	//Done in startup
+	//[ServiceFilter(typeof(LocalizationActionFilter))]
+	public class ArticleController : Controller
     {
         private readonly IStringLocalizer<ArticleController> _localizer;
         private readonly IArticleRepository _repository;
@@ -30,7 +32,5 @@ namespace Web.Controllers
 
             return View(results);
         }
-
-      
     }
 }
