@@ -6,6 +6,5 @@
 
 @foreach (var item in Model.ArticleContent)
 {
-    <h1>@Html.Raw(item.Title)</h1><br>
+	@await Component.InvokeAsync(item.Action , new {item})
 }
-Test
