@@ -1,12 +1,15 @@
 namespace Web.ViewComponents
 {
 	using Microsoft.AspNetCore.Mvc;
+	using System.Threading.Tasks;
+
+	using Library.Models;
 
 	public class CarouselViewComponent : ViewComponent
 	{
-		public IViewComponentResult Invoke()
+		public async Task<IViewComponentResult> InvokeAsync(ArticleContent item)
 		{
-			return View();
+			return View(item);
 		}
 	}
 }

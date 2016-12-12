@@ -5,7 +5,7 @@ namespace Web.ViewComponents
 
 	using Library.Models;
 
-	public class TextViewComponent : ViewComponent
+	public class FormViewComponent : ViewComponent
 	{
 		public async Task<IViewComponentResult> InvokeAsync(ArticleContent item)
 		{
