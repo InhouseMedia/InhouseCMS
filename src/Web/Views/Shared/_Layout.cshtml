@@ -1,4 +1,5 @@
-﻿@using System.Globalization 
+﻿@using System
+@using System.Globalization 
 @using System.Threading.Tasks 
 @using Library.Models
 @using Web.Controllers 
@@ -7,15 +8,17 @@
 @inject IBoxRepository Boxes
 @{ 
 	var config = Config.GetConfig();
-	var articleId = "";//(string)ViewBag.ArticleId; 
+	var controller = ((string) ViewContext.RouteData.Values["controller"]).ToLower();
+	var action = ((string) ViewContext.RouteData.Values["action"]).ToLower();
+	var articleId = (string) ViewContext.RouteData.Values["id"]; 
 	var locale = CultureInfo.DefaultThreadCurrentUICulture.ToString();
 	var language = locale.Split('-').First(); 
-	var boxesHeader = Boxes.BoxList((int)BoxPlacement.Header, articleId, "Article"); 
-	var boxesFooter = Boxes.BoxList((int)BoxPlacement.Footer, articleId, "Article");
-    var boxesTop = Boxes.BoxList((int)BoxPlacement.Top, articleId, "Article"); 
-	var boxesBottom = Boxes.BoxList((int)BoxPlacement.Bottom, articleId, "Article");
-    var boxesLeft = Boxes.BoxList((int)BoxPlacement.Left, articleId, "Article"); 
-	var boxesRIght = Boxes.BoxList((int)BoxPlacement.Right, articleId, "Article");
+	var boxesHeader = Boxes.BoxList((int)BoxPlacement.Header, articleId, controller); 
+	var boxesFooter = Boxes.BoxList((int)BoxPlacement.Footer, articleId, controller);
+    var boxesTop = Boxes.BoxList((int)BoxPlacement.Top, articleId, controller); 
+	var boxesBottom = Boxes.BoxList((int)BoxPlacement.Bottom, articleId, controller);
+    var boxesLeft = Boxes.BoxList((int)BoxPlacement.Left, articleId, controller); 
+	var boxesRIght = Boxes.BoxList((int)BoxPlacement.Right, articleId, controller);
 }
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="@language" xml:lang="@language">
@@ -76,7 +79,7 @@
 	</environment>
 </head>
 
-<body class="template-@*Html.Controller().ToLower()*@">
+<body class="template-@controller">
 	<div class="container">
         <header>
             @foreach (var box in boxesHeader)

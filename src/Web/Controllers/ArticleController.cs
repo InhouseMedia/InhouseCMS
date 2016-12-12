@@ -29,8 +29,6 @@ namespace Web.Controllers
 				return new StatusCodeResult(204); // 204 No Content
 
             return View(results);
-        }
-
-      
+        }  
     }
 }
