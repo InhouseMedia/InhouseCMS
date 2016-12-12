@@ -1,9 +1,10 @@
-﻿@using Library.Resources
-@model Library.Models.Company
+﻿@using System.Threading.Tasks
+@using Web.Repositories
+@inject ConfigRepository Config
 @{
 	Layout = null;
+	var config = Config.GetConfig();
 }
-
 
 <div id='gmap_canvas' class="google-maps" style='height: 440px; width: 700px;'></div>
 
@@ -11,7 +12,7 @@
     function initMap() {
         var myOptions = {
             zoom: 16,
-            center: new google.maps.LatLng(@(Model.Geolocation.Latitude), @(Model.Geolocation.Longitude)),
+            center: new google.maps.LatLng(@(config.Company.Geolocation.Latitude), @(config.Company.Geolocation.Longitude)),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
@@ -20,13 +21,13 @@
         var marker = new google.maps.Marker(
             {
                 map: map,
-                position: new google.maps.LatLng(@(Model.Geolocation.Latitude), @(Model.Geolocation.Longitude))
+                position: new google.maps.LatLng(@(config.Company.Geolocation.Latitude), @(config.Company.Geolocation.Longitude))
             }
         );
 
         var infowindow = new google.maps.InfoWindow(
             {
-                content: '<strong>@(Model.Name)</strong><br>@(Model.Address.Street) @(Model.Address.Number), @(Model.Address.City)'
+                content: '<strong>@(config.Name)</strong><br>@(config.Company.Address.Street) @(config.Company.Address.Number), @(config.Company.Address.City)'
             }
         );
 
