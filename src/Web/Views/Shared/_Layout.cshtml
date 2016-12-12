@@ -59,10 +59,10 @@
 	<!-- Windows 8 tiles -->
 	<meta name="application-name" content="@config.Name" />
 	<meta name="msapplication-TileColor" content="@config.Color" />
-	<meta name="msapplication-TileImage" content="~/Content/@config.Path/myicon-inverse.png" />
+	<meta name="msapplication-TileImage" content="~/@config.Path/myicon-inverse.png" />
 
 	<!-- Favicon 195x195 -->
-	<link rel="icon" type="image/png" href="~/Content/@config.Path/myicon.png" />
+	<link rel="icon" type="image/png" href="~/@config.Path/myicon.png" />
 
 	<link rel="canonical" href="@ViewBag.NavigationUrl" />
 
@@ -117,15 +117,19 @@
 	<environment names="Development">
 		<script src="~/lib/jquery/dist/jquery.js"></script>
 		<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="~/js/polyfill.js" asp-append-version="true"></script>
 		<script src="~/js/site.js" asp-append-version="true"></script>
+		<script src="~/js/backtotop.js" asp-append-version="true"></script>
+		<script src="~/js/carousel.js" asp-append-version="true"></script>
+		<script src="~/js/formvalidate.js" asp-append-version="true"></script>
 	</environment>
 	<environment names="Staging,Production">
 		<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.3.min.js" asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
 			asp-fallback-test="window.jQuery">
-	</script>
+		</script>
 		<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js" asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
 			asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-	</script>
+		</script>
 		<script src="~/js/site.min.js" asp-append-version="true"></script>
 	</environment>
 	
