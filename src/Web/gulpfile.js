@@ -54,7 +54,7 @@ gulp.task("min:css", function() {
 });
 
 gulp.task('less', function() {
-    return gulp.src(webroot + 'tempaltes/**/site.bootstrap.less')
+    return gulp.src(webroot + 'templates/**/site.bootstrap.less')
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')],
             sourceMap: {
