@@ -8,7 +8,10 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     less = require("gulp-less"),
     path = require("path"),
-    rename = require("gulp-rename");
+    rename = require("gulp-rename"),
+    wrap = require("gulp-wrap"),
+    insert = require("gulp-insert"),
+    less = require('gulp-less-sourcemap');
 
 var webroot = "./wwwroot/";
 
@@ -39,26 +42,37 @@ gulp.task("min:js", function() {
 });
 
 gulp.task("min:css", function() {
-    return gulp.src(["./Content/**/css/*.css", "!" + paths.minCss])
-        .pipe(concat(paths.concatCssDest))
+    return gulp.src(['./Content/**/css/*.css', '!./Content/**/css/*.min.css'])
+        //.pipe(concat('site.bootstrap.min.css'))
         .pipe(cssmin())
-        .pipe(gulp.dest("."));
+        .pipe(insert.transform(function(contents, file) {
+            var comment = '/* local file: ' + file.path + '*/\n';
+            return comment + contents;
+        }))
+        .pipe(rename({ dirname: '/', suffix: '.min' }))
+        .pipe(gulp.dest(webroot + 'css', { base: '.' }))
 });
 
 gulp.task('less', function() {
-    return gulp.src('./Content/**/site.bootstrap.less')
+    return gulp.src(webroot + 'tempaltes/**/site.bootstrap.less')
         .pipe(less({
-            paths: [path.join(__dirname, 'less', 'includes')]
+            paths: [path.join(__dirname, 'less', 'includes')],
+            sourceMap: {
+                // sourceMapURL: './Content/',
+                sourceMapBasepath: 'maps',
+                //sourceMapRootpath: '/Content', // Optional absolute or relative path to your LESS files
+                sourceMapFileInline: false,
+
+            }
         }))
         .pipe(rename(function(path) {
-            var filename = path.dirname.replace('/less', '');
-            path.dirname = path.dirname.replace('/less', '/css');
-            //path.dirname = webroot + '/css';
+            var filename = path.dirname.replace('/less', '').toLowerCase();
+            //path.dirname = path.dirname.replace('/less', '/css');
+            path.dirname = webroot + '/css';
             path.basename = filename + '.bootstrap';
             path.extname = '.css';
         }))
         .pipe(gulp.dest(function(file) {
-            //var filename = file.base.replace('/less', '/css');
             return file.base;
         }));
 });

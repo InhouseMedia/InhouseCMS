@@ -1,0 +1,104 @@
+﻿// Path
+@icon-font-path: '/Content/fonts/';
+@image-path:  '/Content/Inhouse/Images/';
+
+// Inhouse specific
+@company-contact : ~"@{image-path}binck_phonenumber.png";
+@company-contact-width: 255px;
+@company-contact-height: 19px;
+
+@company-logo : ~"@{image-path}logo-empty.svg";
+@company-logo-width: 50px;
+@company-logo-height: 50px;
+
+@company-action-color: #e84e1b;
+@company-highlight-color: #468ccb;
+@company-success: #8cd600;
+
+// Color
+@body-bg: #000;
+@link-color: #fff; //#468ccb;
+@font-color: #fff;
+
+// Font styling
+@font-family: "open_sansregular", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+@font-size: 16px;
+@line-height: 1.6em;
+@line-height-base: @line-height;
+@font-size-h1: 2em;
+@font-size-h2: 1.5em;
+@font-size-h3: 1.2em;
+
+// Link styling
+@link-underline: none; 
+
+// Styling
+@padding-base: 1.6em;
+@padding-base-vertical: 0.5em;
+@padding-base-horizontal: 0.5em;
+
+// Panels
+@panel-bg: #000;
+@panel-body-padding: 40px 30px;
+@panel-body-padding-small: 20px 30px;
+
+
+
+
+
+@brand-primary: @company-action-color;
+
+
+
+
+
+@navbar-height: 35px;
+@navbar-padding: 0;
+@navbar-margin-bottom: 20px;
+@navbar-default-bg: rgba(30,30,30,0.9);
+
+@border-radius-base: 0px;
+@border-radius-large: 0px;
+
+// Progress
+@progress-height: 5px;
+@progress-bg: transparent;
+
+
+// Button
+@btn-border-radius: 4px;
+@btn-font-weight: 'bold';
+
+// Button Action
+//@btn-action-color: #fff;
+//@btn-action-bg: @company-action-color;
+//@btn-action-border: transparent;
+
+
+// Button Disabled
+@btn-disabled-bg: #fff;
+@btn-disabled-border: #808080;
+@btn-disabled-color: #505050;
+
+// Input
+@input-bg: @body-bg;
+@input-bg-focus: lighten(@body-bg, 10%);
+@input-border: @body-bg;
+@input-border-required: transparent transparent transparent @company-action-color; 
+@input-border-width: 0 0 2px 0;
+@input-border-width-required: 0 0 2px 2px;
+@input-border-focus: @company-action-color;
+@input-color: @font-color;
+@input-color-placeholder: darken(@font-color, 50%);
+
+// Alert Info
+@state-info-text: #002a5f;
+@state-info-bg: #ecf3fa;
+@state-info-border: #468ccb;
+
+@close-color: @state-info-text;
+
+@alert-padding: 30px;
+
+@forgot-password-close: #808080;
+

@@ -5,6 +5,7 @@
 */Api/mongodb.json
 */Web/api.json
 */Web/Content/**/css/
+*/Web/wwwroot/templates/**/css/
 */Web/wwwroot/css/*.bootstrap.css
 */Web/wwwroot/css/*.min.css
 */Web/wwwroot/js/*.min.js
