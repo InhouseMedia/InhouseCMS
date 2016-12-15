@@ -11,7 +11,7 @@ var gulp = require("gulp"),
     rename = require("gulp-rename"),
     wrap = require("gulp-wrap"),
     insert = require("gulp-insert"),
-    less = require('gulp-less-sourcemap');
+    sourcemaps = require('gulp-sourcemaps');
 
 var webroot = "./wwwroot/";
 
@@ -42,39 +42,33 @@ gulp.task("min:js", function() {
 });
 
 gulp.task("min:css", function() {
-    return gulp.src(['./Content/**/css/*.css', '!./Content/**/css/*.min.css'])
+    return gulp.src([webroot + 'css/*.css', '!' + webroot + 'css/*.min.css'], { base: '.' })
         //.pipe(concat('site.bootstrap.min.css'))
+        .pipe(sourcemaps.init())
         .pipe(cssmin())
         .pipe(insert.transform(function(contents, file) {
             var comment = '/* local file: ' + file.path + '*/\n';
             return comment + contents;
         }))
-        .pipe(rename({ dirname: '/', suffix: '.min' }))
-        .pipe(gulp.dest(webroot + 'css', { base: '.' }))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('.'))
 });
 
 gulp.task('less', function() {
     return gulp.src(webroot + 'templates/**/site.bootstrap.less')
-        .pipe(less({
-            paths: [path.join(__dirname, 'less', 'includes')],
-            sourceMap: {
-                // sourceMapURL: './Content/',
-                sourceMapBasepath: 'maps',
-                //sourceMapRootpath: '/Content', // Optional absolute or relative path to your LESS files
-                sourceMapFileInline: false,
-
-            }
-        }))
+        .pipe(sourcemaps.init())
+        .pipe(less())
         .pipe(rename(function(path) {
             var filename = path.dirname.replace('/less', '').toLowerCase();
-            //path.dirname = path.dirname.replace('/less', '/css');
-            path.dirname = webroot + '/css';
+
+            path.dirname = webroot + 'css';
             path.basename = filename + '.bootstrap';
             path.extname = '.css';
         }))
-        .pipe(gulp.dest(function(file) {
-            return file.base;
-        }));
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('.'));
+
 });
 
 gulp.task("min", ["less", "min:js", "min:css"]);
