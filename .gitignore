@@ -7,7 +7,7 @@
 */Web/Content/**/css/
 */Web/wwwroot/templates/**/css/
 */Web/wwwroot/css/*.bootstrap.css
-*/Web/wwwroot/css/*.min.css
+*/Web/wwwroot/css/
 */Web/wwwroot/js/*.min.js
 *.DS_Store
 */Library/Init_Database/User.json
