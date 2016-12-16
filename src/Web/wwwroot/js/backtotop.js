@@ -1,4 +1,4 @@
-﻿var backToTop = (function () {
+﻿var backToTop = (function() {
     'use strict';
 
     var _element = $('#backToTop');
@@ -22,7 +22,7 @@
     var _triggerButton = function() {
         var viewportHeight = $(window).height();
 
-       _win.scroll(function() {
+        _win.scroll(function() {
             var scrollTop = _win.scrollTop();
             var isActive = _element.hasClass('active');
 
@@ -35,12 +35,12 @@
     };
 
     return {
-        init: function () {
+        init: function() {
             _init();
-        }   
+        }
     }
 })();
 
-$(document).ready(function () {
+$(document).ready(function() {
     backToTop.init();
 });

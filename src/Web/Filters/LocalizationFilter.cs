@@ -18,7 +18,7 @@
 		private readonly ILogger _logger;
 
         public LocalizationActionFilter(
-			ILoggerFactory loggerFactory, 
+			ILoggerFactory loggerFactory,
 			IOptions<RequestLocalizationOptions> options,
 			ConfigRepository config)
         {

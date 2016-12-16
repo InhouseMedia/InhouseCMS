@@ -5,7 +5,7 @@ namespace Web.Repositories
     using Library.Config;
     using Web.Connections;
 
-    public class ConfigRepository 
+    public class ConfigRepository
     {
         private readonly ApiConnection _api;
         private readonly SiteConfig _config;

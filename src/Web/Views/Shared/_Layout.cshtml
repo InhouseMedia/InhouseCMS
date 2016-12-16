@@ -1,23 +1,23 @@
 ﻿@using System
-@using System.Globalization 
-@using System.Threading.Tasks 
+@using System.Globalization
+@using System.Threading.Tasks
 @using Library.Models
-@using Web.Controllers 
-@using Web.Repositories 
+@using Web.Controllers
+@using Web.Repositories
 @inject ConfigRepository Config
 @inject IBoxRepository Boxes
-@{ 
+@{
 	var config = Config.GetConfig();
 	var controller = ((string) ViewContext.RouteData.Values["controller"]).ToLower();
 	var action = ((string) ViewContext.RouteData.Values["action"]).ToLower();
-	var articleId = (string) ViewContext.RouteData.Values["id"]; 
+	var articleId = (string) ViewContext.RouteData.Values["id"];
 	var locale = CultureInfo.DefaultThreadCurrentUICulture.ToString();
-	var language = locale.Split('-').First(); 
-	var boxesHeader = Boxes.BoxList((int)BoxPlacement.Header, articleId, controller); 
+	var language = locale.Split('-').First();
+	var boxesHeader = Boxes.BoxList((int)BoxPlacement.Header, articleId, controller);
 	var boxesFooter = Boxes.BoxList((int)BoxPlacement.Footer, articleId, controller);
-    var boxesTop = Boxes.BoxList((int)BoxPlacement.Top, articleId, controller); 
+    var boxesTop = Boxes.BoxList((int)BoxPlacement.Top, articleId, controller);
 	var boxesBottom = Boxes.BoxList((int)BoxPlacement.Bottom, articleId, controller);
-    var boxesLeft = Boxes.BoxList((int)BoxPlacement.Left, articleId, controller); 
+    var boxesLeft = Boxes.BoxList((int)BoxPlacement.Left, articleId, controller);
 	var boxesRIght = Boxes.BoxList((int)BoxPlacement.Right, articleId, controller);
 }
 <!DOCTYPE html>
@@ -34,26 +34,26 @@
 	<meta name="description" content="@ViewBag.MetaDescription" />
 	<meta name="robots" content="all" />
 	<meta name="googlebot" content="all" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> 
-	@if (ViewBag.Refresh > 0) 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	@if (ViewBag.Refresh > 0)
 	{
-	<meta http-equiv="refresh" content="@ViewBag.Refresh"> 
-	} 
-	@if (!config.SearchEngines.GoogleTranslation) 
-	{
-	<meta name="google" content="notranslate"> 
+	<meta http-equiv="refresh" content="@ViewBag.Refresh">
 	}
-	@if (config.SearchEngines.GoogleVerification != "") 
+	@if (!config.SearchEngines.GoogleTranslation)
 	{
-	<meta name="google-site-verification" content="@config.SearchEngines.GoogleVerification" /> 
+	<meta name="google" content="notranslate">
 	}
-	@if (config.SocialMedia.SocialMediaTags) 
+	@if (config.SearchEngines.GoogleVerification != "")
+	{
+	<meta name="google-site-verification" content="@config.SearchEngines.GoogleVerification" />
+	}
+	@if (config.SocialMedia.SocialMediaTags)
 	{
 	<meta property="og:title" content="@ViewBag.MetaTitle" />
 	<meta property="og:type" content="@config.SearchEngines" />
 	<meta property="og:site_name" content="@config.SearchEngines.Author" />
 	<meta property="og:url" content="@ViewBag.NavigationUrl" />
-	<meta property="og:description" content="@ViewBag.MetaDescription" /> 
+	<meta property="og:description" content="@ViewBag.MetaDescription" />
 	}
 
 	<!-- Windows 8 tiles -->
@@ -94,7 +94,7 @@
             </header>
 
             @RenderBody()
-            
+
             <footer>
                 @foreach (var box in boxesBottom)
                 {
@@ -129,7 +129,7 @@
 		</script>
 		<script src="~/js/site.min.js" asp-append-version="true"></script>
 	</environment>
-	
+
 	@RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿var common = (function () {
+﻿var common = (function() {
     'use strict';
 
     var _header = $('header');
@@ -7,7 +7,7 @@
     var _win = $(window);
     var _prev = 0;
 
-    var _init = function () {
+    var _init = function() {
         _win.resize(_pageFill);
         _win.scroll(_fixedHeader);
         _pageFill();
@@ -44,12 +44,12 @@
     };
 
     return {
-        init: function () {
+        init: function() {
             _init();
         }
     }
 })();
 
-$(document).ready(function () {
+$(document).ready(function() {
     common.init();
 });

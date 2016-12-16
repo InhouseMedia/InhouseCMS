@@ -64,7 +64,7 @@ namespace Web
                     options.DefaultRequestCulture = new RequestCulture("en-US");
                     options.SupportedCultures = supportedCultures;
                     options.SupportedUICultures = supportedCultures;
-					
+
 					// Set Current Culture for views
 					options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async context =>
 					{
@@ -122,7 +122,7 @@ namespace Web
             {
 				//routes.Routes.Add(routes.ServiceProvider.GetService<IRouteConnection>());
                 routes.Routes.Add( new RouteConnection(
-                    routes.ServiceProvider.GetRequiredService<IMemoryCache>(), 
+                    routes.ServiceProvider.GetRequiredService<IMemoryCache>(),
                        routes.DefaultHandler));
 
                 routes.MapRoute( name: "default", template: "{controller=Home}/{action=Index}/{id?}");

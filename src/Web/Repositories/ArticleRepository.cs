@@ -2,7 +2,7 @@ namespace Web.Repositories
 {
 	using System.Net.Http;
 	using System.Threading.Tasks;
-	
+
 	using Library.Models;
     using Web.Connections;
 

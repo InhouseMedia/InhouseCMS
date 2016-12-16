@@ -1,11 +1,11 @@
-﻿var formValidate = (function () {
+﻿var formValidate = (function() {
     'use strict';
 
     var _forms = $('form:not([novalidate])');
     var _body = $('body');
     var _win = $(window);
 
-    var _init = function () {
+    var _init = function() {
         _setValidation();
     };
 
@@ -14,7 +14,7 @@
             _setFormElements(form);
             _setValidityTrigger(form);
             //_setCustomError(form);
-           // _changeSubmit();
+            // _changeSubmit();
             _onSubmit(form);
         });
     };
@@ -24,10 +24,10 @@
 
         form._validate.inputs = $(form)
             .find('input:not([type=hidden]),textarea,select')
-                .map(function (key, element) {
-                    _setDefaultPattern(element);
-                    return (!element.formNoValidate && element.required && element.willValidate) ? element : null;
-                });
+            .map(function(key, element) {
+                _setDefaultPattern(element);
+                return (!element.formNoValidate && element.required && element.willValidate) ? element : null;
+            });
 
         console.log(form._validate.inputs);
     };
@@ -37,7 +37,7 @@
         if (element.type === 'url' && !element.pattern) element.pattern = '[a-z][\-\.+a-z]*';
     };
 
-    var _setValidityTrigger = function (form) {
+    var _setValidityTrigger = function(form) {
         $(form._validate.inputs).on('blur', _checkCustomError).on('keyup', _checkCustomError);
     };
 
@@ -70,13 +70,13 @@
         return text;
     };
 
-    var _checkCustomError = function (e) {
+    var _checkCustomError = function(e) {
         var errorMessage = '';
         var lngt = 0;
         var element = e.target || e.srcElement;
         var title = element.title.capitalize();
         var type = _getTypeTranslation(element.type);
-        
+
         if (!element.validity.valid) {
             if (element.validity.badInput) {
                 errorMessage += "\r\n" + Translate.FormInputErrorBadInput.format(title);
@@ -121,38 +121,37 @@
         }
     };
 
-    var _checkFormSubmit = function (e) {
+    var _checkFormSubmit = function(e) {
         if (!this.checkValidity()) {
             $(this._validate.inputs)
-                .each(function(index, item){
-                       if(!item.validity.valid) _checkCustomError({target:item});
-                    }
-                );
+                .each(function(index, item) {
+                    if (!item.validity.valid) _checkCustomError({ target: item });
+                });
         }
     };
 
-    var _onSubmit = function (form) {
+    var _onSubmit = function(form) {
         var button = $(form).offsetParent().find("button[type=submit]:not([disabled])");
 
         // trigger ajax sumbit when we use a script (bookmark) to login
-        form.submit = function () { $(this).trigger('submit'); };
-       
+        form.submit = function() { $(this).trigger('submit'); };
+
         button.on('click', _checkFormSubmit.bind(form));
 
         // Change submit button style
-        $(form).submit(function (e) {
+        $(form).submit(function(e) {
             // Use parent for standard modal buttons that are outside the form.
-            if(form.checkValidity()) button.addClass("submit").attr("disabled", "true");
+            if (form.checkValidity()) button.addClass("submit").attr("disabled", "true");
         });
     };
 
     return {
-        init: function () {
+        init: function() {
             _init();
         }
     }
 })();
 
-$(document).ready(function () {
+$(document).ready(function() {
     formValidate.init();
 });
