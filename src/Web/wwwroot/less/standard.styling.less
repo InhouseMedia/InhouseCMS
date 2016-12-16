@@ -11,7 +11,7 @@ html{
 
 body{
 	overflow:auto;
-	background-image: url("/Content/Images/spacer.gif");  //Only needed for the transition to the loader icon	
+	background-image: url("@image-path/spacer.gif");  //Only needed for the transition to the loader icon	
 	background-color: @body-bg;
 	.transition(~"background-image 0.3s ease-in 1.3s");
 }
@@ -213,7 +213,7 @@ footer{
 .action{ color: @company-action-color; }
 
 .loading{
-	background-image: url("/Content/Images/loader2.svg");
+	background-image: url("@image-path/loader2.svg");
 	background-repeat:no-repeat; 
 	background-position: center center;
 }
@@ -221,11 +221,9 @@ footer{
 .modal-open{ padding-right:0!important; }
 
 .content-wrapper{ 
-	display: flex;
-	display: -ms-flexbox;
-	align-items: center;
-	-ms-flex-align: center;
-	justify-content: space-between;
+	.flex-display();
+	.align-items();
+	.justify-content(space-between);
 	width: 55%; 
 	margin: auto;
 }
@@ -248,9 +246,9 @@ footer{
 
 .template-maintenance{
 	.container{
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		.flex-display();
+		.align-items(center);
+		.justify-content(center);
 		min-height:100%;
 
 		.panel{
