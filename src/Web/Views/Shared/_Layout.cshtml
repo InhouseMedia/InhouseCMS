@@ -59,10 +59,10 @@
 	<!-- Windows 8 tiles -->
 	<meta name="application-name" content="@config.Name" />
 	<meta name="msapplication-TileColor" content="@config.Color" />
-	<meta name="msapplication-TileImage" content="~/@config.Path/myicon-inverse.png" />
+	<meta name="msapplication-TileImage" content="~/templates/@config.Path/myicon-inverse.png" />
 
 	<!-- Favicon 195x195 -->
-	<link rel="icon" type="image/png" href="~/@config.Path/myicon.png" />
+	<link rel="icon" type="image/png" href="~/templates/@config.Path/myicon.png" />
 
 	<link rel="canonical" href="@ViewBag.NavigationUrl" />
 
@@ -78,37 +78,43 @@
 
 <body class="template-@controller">
 	<div class="container">
-        <header>
-            @foreach (var box in boxesHeader)
-            {
-                @await Component.InvokeAsync(box.Action)
-            }
-        </header>
+		<header>
+			<div class="content-wrapper">
+				@foreach (var box in boxesHeader)
+				{
+					@await Component.InvokeAsync(box.Action)
+				}
+			</div>
+		</header>
 
-        <section>
-            <header>
-                @foreach (var box in boxesTop)
-                {
-                    @await Component.InvokeAsync(box.Action)
-                }
-            </header>
+		<section>
+			<div class="content-wrapper">
+				<header>
+					@foreach (var box in boxesTop)
+					{
+						@await Component.InvokeAsync(box.Action)
+					}
+				</header>
 
-            @RenderBody()
-            
-            <footer>
-                @foreach (var box in boxesBottom)
-                {
-                    @await Component.InvokeAsync(box.Action)
-                }
-            </footer>
-        </section>
+				@RenderBody()
 
-        <footer>
-            @foreach (var box in boxesFooter)
-            {
-                @await Component.InvokeAsync(box.Action)
-            }
-        </footer>
+				<footer>
+					@foreach (var box in boxesBottom)
+					{
+						@await Component.InvokeAsync(box.Action)
+					}
+				</footer>
+			</div>
+		</section>
+
+		<footer>
+			<div class="content-wrapper">
+				@foreach (var box in boxesFooter)
+				{
+					@await Component.InvokeAsync(box.Action)
+				}
+			</div>
+		</footer>
     </div>
 
 	<environment names="Development">
