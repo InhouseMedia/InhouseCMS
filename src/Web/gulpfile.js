@@ -42,17 +42,17 @@ gulp.task("min:js", function() {
 });
 
 gulp.task("min:css", function() {
-    return gulp.src([webroot + 'css/*.css', '!' + webroot + 'css/*.min.css'], { base: '.' })
-        //.pipe(concat('site.bootstrap.min.css'))
-        .pipe(sourcemaps.init())
-        .pipe(cssmin())
-        .pipe(insert.transform(function(contents, file) {
-            var comment = '/* local file: ' + file.path + '*/\n';
-            return comment + contents;
-        }))
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('.'))
+	return gulp.src([webroot + 'css/*.css', '!' + webroot + 'css/*.min.css'], { base: '.' })
+		//.pipe(concat('site.bootstrap.min.css'))
+		.pipe(sourcemaps.init())
+		.pipe(cssmin())
+		.pipe(insert.transform(function(contents, file) {
+			var comment = '/* local file: ' + file.path + '*/\n';
+			return comment + contents;
+		}))
+		.pipe(rename({ suffix: '.min' }))
+		.pipe(sourcemaps.write('.'))
+		.pipe(gulp.dest('.'));
 });
 
 gulp.task('less', function() {
@@ -60,8 +60,7 @@ gulp.task('less', function() {
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(rename(function(path) {
-            var filename = path.dirname.replace('/less', '').toLowerCase();
-
+            var filename = path.dirname.replace('/less', '').replace('\\less', '').toLowerCase();
             path.dirname = webroot + 'css';
             path.basename = filename + '.bootstrap';
             path.extname = '.css';
