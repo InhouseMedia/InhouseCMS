@@ -21,8 +21,8 @@ namespace Web.Repositories
 	    {
 			var locale = CultureInfo.DefaultThreadCurrentUICulture.Name;
 			var conn = _api.Connect(locale + "/navigation/list");
-			var test = conn.Content.ReadAsAsync<IEnumerable<NavigationSitemap>>();
-		    _navigation = test.Result;
+			var result = conn.Content.ReadAsAsync<IEnumerable<NavigationSitemap>>();
+		    _navigation = result.Result;
 	    }
 
 		public NavigationSitemap GetNavigationItem(string path)

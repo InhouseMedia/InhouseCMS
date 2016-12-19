@@ -32,8 +32,8 @@ namespace Api.Repositories
         public async Task<IEnumerable<NavigationItem>> NavigationItems()
         {
             var conn = _database.GetCollection<NavigationItem>("Navigation");
-            var temp = await conn.Find(_=>true).ToListAsync();
-            return temp.ToArray();
+            var result = await conn.Find(_=>true).ToListAsync();
+            return result.ToArray();
         }
 		
         public async Task<NavigationItem> GetById(ObjectId id)
@@ -42,8 +42,8 @@ namespace Api.Repositories
             var filter = builder.Eq("Id", id) &
 						builder.Eq("Locale", CultureInfo.CurrentUICulture.Name);
 			var conn = _database.GetCollection<NavigationItem>("Navigation");
-			var temp = await conn.Find(filter).FirstOrDefaultAsync();
-			return temp;
+			var result = await conn.Find(filter).FirstOrDefaultAsync();
+			return result;
         }
 
         public async Task<IEnumerable<NavigationSitemap>> NavigationSitemap()

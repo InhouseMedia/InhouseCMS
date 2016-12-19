@@ -28,12 +28,12 @@
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-			var results = await _repository.Users();
+			var result = await _repository.Users();
 
-			if (results == null)
+			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 			
-			return new ObjectResult(results);
+			return new ObjectResult(result);
         }
 
         [HttpGet("{id:length(24)}")]
@@ -44,12 +44,12 @@
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var results = await _repository.GetById(new ObjectId(id));
+            var result = await _repository.GetById(new ObjectId(id));
 			
-            if (results == null)
+            if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 
-            return new ObjectResult(results);
+            return new ObjectResult(result);
         }
         [HttpPost]
         //[AllowAnonymous]

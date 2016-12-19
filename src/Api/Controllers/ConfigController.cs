@@ -23,12 +23,12 @@ namespace Api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-			var results = await _repository.Config();
+			var result = await _repository.Config();
 
-			if (results == null)
+			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 			
-			return new ObjectResult(results);
+			return new ObjectResult(result);
         }
 	}
 }

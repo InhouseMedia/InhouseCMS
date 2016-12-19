@@ -19,8 +19,8 @@
 	    public BoxRepository(ApiConnection api) : base(api)
 	    {
 			var conn = _api.Connect("box/list");
-			var test = conn.Content.ReadAsAsync<IEnumerable<Box>>();
-		    _boxes = test.Result;
+			var result = conn.Content.ReadAsAsync<IEnumerable<Box>>();
+		    _boxes = result.Result;
 	    }
 
 		public IEnumerable<Box> BoxList(int placement, string articleId, string template)
