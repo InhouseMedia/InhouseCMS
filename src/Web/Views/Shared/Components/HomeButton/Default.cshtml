@@ -1,6 +1,8 @@
 ﻿﻿@using System.Threading.Tasks
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Web.Controllers
 @inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<ResourceController> SharedLocalizer
 @model bool
 @{
 	Layout = null;
@@ -11,5 +13,5 @@
 }
 else
 {
-	<a href="/" id="company-logo" title="@Localizer["Back to homepage"]"></a>
+	<a href="/" id="company-logo" title="@SharedLocalizer["Back to homepage"]"></a>
 }
