@@ -1,5 +1,5 @@
 ﻿
-namespace Web.Helpers
+namespace XWeb.Helpers
 {
 	using System;
 	using System.Collections.Generic;
