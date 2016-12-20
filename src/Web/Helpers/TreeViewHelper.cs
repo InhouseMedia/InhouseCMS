@@ -7,8 +7,11 @@ namespace Web.Helpers
 	using Microsoft.AspNetCore.Mvc.Razor;
 	using Microsoft.AspNetCore.Mvc.ViewFeatures;
 	using Microsoft.AspNetCore.Html;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using System.IO;
+    using System.Text;
 
-	public static class TreeViewHelper
+    public static class TreeViewHelper
 	{
 		/// <summary>
 		/// Create an HTML tree from a recursive collection of items
@@ -22,7 +25,7 @@ namespace Web.Helpers
 	/// <summary>
 	/// Create an HTML tree from a resursive collection of items
 	/// </summary>
-	public class TreeView<T> : IHtmlString
+	public class TreeView<T> : HtmlString
 	{
 		private readonly HtmlHelper _html;
 		private readonly IEnumerable<T> _items = Enumerable.Empty<T>();
@@ -129,11 +132,20 @@ namespace Web.Helpers
 
 		public void Render()
 		{
-			var writer = _html.ViewContext.Writer;
-			using (var textWriter = new HtmlTextWriter(writer))
+			var result = new StringBuilder();
+				result.Append(_html.ViewContext.Writer);
+			//var result = _html.ViewContext.Writer;
+
+			using (var writer = new StringWriter())
+			{
+				//tag.WriteTo(writer, HtmlEncoder.Default);
+				result.Append(ToString());
+			}
+			/*
+			using (var textWriter = new TextWriter(writer))
 			{
 				textWriter.Write(ToString());
-			}
+			}*/
 		}
 
 		private void ValidateSettings()
@@ -156,11 +168,10 @@ namespace Web.Helpers
 
 			if (listItems.Count == 0)
 			{
-				var li = new TagBuilder("li")
-				{
-					InnerHtml = _emptyContent
-				};
-				ul.InnerHtml += li.ToString();
+				var li = new TagBuilder("li");
+					li.InnerHtml.AppendHtml(_emptyContent);
+
+				ul.InnerHtml.AppendHtml(li.ToString());
 			}
 
 			foreach (var item in listItems)
@@ -187,23 +198,30 @@ namespace Web.Helpers
 				BuildNestedTag(innerUl, item, childrenProperty);
 			}
 
-			parentTag.InnerHtml += innerUl.ToString();
+			parentTag.InnerHtml.AppendHtml(innerUl.ToString());
 		}
 
 		private void BuildNestedTag(TagBuilder parentTag, T parentItem, Func<T, IEnumerable<T>> childrenProperty)
 		{
+			var start = new TagBuilder("li"){
+				TagRenderMode = TagRenderMode.StartTag
+			};
+
+			var end = new TagBuilder("li"){
+				TagRenderMode = TagRenderMode.EndTag
+			};
+
 			var li = GetLi(parentItem);
-			parentTag.InnerHtml += li.ToString(TagRenderMode.StartTag);
+			parentTag.InnerHtml.AppendHtml(start);
 			AppendChildren(li, parentItem, childrenProperty);
-			parentTag.InnerHtml += li.InnerHtml + li.ToString(TagRenderMode.EndTag);
+			parentTag.InnerHtml.AppendHtml(li.InnerHtml);
+			parentTag.InnerHtml.AppendHtml(end);
 		}
 
 		private TagBuilder GetLi(T item)
 		{
-			var li = new TagBuilder("li")
-			{
-				InnerHtml = _itemTemplate(item).ToHtmlString()
-			};
+			var li = new TagBuilder("li");
+				li.InnerHtml.AppendHtml(_itemTemplate(item).ToString());
 
 			return li;
 		}
