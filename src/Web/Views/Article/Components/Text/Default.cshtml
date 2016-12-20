@@ -5,4 +5,18 @@
 @{
 	Layout = null;
 }
-<h1>@Html.Raw(Model.Title)</h1>
+
+<div class="content-@Model.Action.ToLower()">
+    <hgroup class="title">
+        <h1>@Html.DisplayFor(m => m.Title)</h1>
+    </hgroup>
+
+    @Html.Raw(Model.Text)
+
+    @if (Model.Code != null)
+    {
+        <script type="text/javascript">
+            @Html.Raw(Model.Code)
+        </script>
+    }
+</div>
