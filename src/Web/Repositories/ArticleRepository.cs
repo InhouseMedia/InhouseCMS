@@ -21,15 +21,15 @@ namespace Web.Repositories
 		public async Task<Article> GetById(string articleId)
 		{
 			var conn = await _api.ConnectAsync("/article/" + articleId);
-			var test = conn.Content.ReadAsAsync<Article>();
-			return await test;
+			var result = conn.Content.ReadAsAsync<Article>();
+			return await result;
 		}
 
 		public async Task<ArticlePage> GetPage(string articleId)
 		{
 			var conn = await _api.ConnectAsync("/article/" + articleId + "/content");
-			var test = conn.Content.ReadAsAsync<ArticlePage>();
-			return await test;
+			var result = conn.Content.ReadAsAsync<ArticlePage>();
+			return await result;
 		}
 	}
 }

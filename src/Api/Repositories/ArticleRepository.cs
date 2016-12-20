@@ -26,8 +26,8 @@ namespace Api.Repositories
         public async Task<IEnumerable<Article>> Articles()
         {
             var conn = _database.GetCollection<Article>("Article");
-            var temp = await conn.Find(_ => true).ToListAsync();
-            return temp.ToArray();
+            var result = await conn.Find(_ => true).ToListAsync();
+            return result.ToArray();
         }
 
         public async Task<Article> GetById(ObjectId id)
@@ -35,8 +35,8 @@ namespace Api.Repositories
             var builder = Builders<Article>.Filter;
             var filter = builder.Eq("Id", id);
             var conn = _database.GetCollection<Article>("Article");
-            var temp = await conn.Find(filter).FirstOrDefaultAsync();
-            return temp;
+            var result = await conn.Find(filter).FirstOrDefaultAsync();
+            return result;
         }
 
         public async Task<ArticlePage> GetPage(ObjectId id)
@@ -59,9 +59,9 @@ namespace Api.Repositories
             var contentFilter = Builders<ArticleContent>.Filter.Eq("ArticleId", content.Id);
             var connect = _database.GetCollection<ArticleContent>("Article_Content");
 
-            var tempContent = await connect.Find(contentFilter).Sort(contentSort).ToListAsync();
+            var result = await connect.Find(contentFilter).Sort(contentSort).ToListAsync();
 
-            content.ArticleContent = tempContent.ToArray();
+            content.ArticleContent = result.ToArray();
             return content;
         }
 

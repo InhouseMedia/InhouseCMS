@@ -32,12 +32,12 @@ namespace Api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-			var results = await _repository.NavigationItems();
+			var result = await _repository.NavigationItems();
 
-			if (results == null)
+			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 			
-			return new ObjectResult(results);
+			return new ObjectResult(result);
         }
 
         [HttpGet("{id:length(24)}")]
@@ -48,12 +48,12 @@ namespace Api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var results = await _repository.GetById(new ObjectId(id));
+            var result = await _repository.GetById(new ObjectId(id));
 			
-            if (results == null)
+            if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 
-            return new ObjectResult(results);
+            return new ObjectResult(result);
         }
 
         // GET api/navigation/sitemap

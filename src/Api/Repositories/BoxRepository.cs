@@ -26,8 +26,8 @@ namespace Api.Repositories
         public async Task<IEnumerable<Box>> Boxes()
         {
             var conn = _database.GetCollection<Box>("Box");
-            var temp = await conn.Find(_ => true).ToListAsync();
-            return temp.ToArray();
+            var result = await conn.Find(_ => true).ToListAsync();
+            return result.ToArray();
         }
 
         public async Task<Box> GetById(ObjectId id)
@@ -35,8 +35,8 @@ namespace Api.Repositories
             var builder = Builders<Box>.Filter;
             var filter = builder.Eq("Id", id);
             var conn = _database.GetCollection<Box>("Box");
-            var temp = await conn.Find(filter).FirstOrDefaultAsync();
-            return temp;
+            var result = await conn.Find(filter).FirstOrDefaultAsync();
+            return result;
         }
 
         public async Task<IEnumerable<Box>> BoxList()
@@ -51,8 +51,8 @@ namespace Api.Repositories
                         (builderFilter.Gte("ExpireDate", DateTime.UtcNow) |
                         builderFilter.Eq(e => e.ExpireDate, null));
             var conn = _database.GetCollection<Box>("Box");
-            var temp = await conn.Find(filter).Sort(sort).ToListAsync();
-            return temp.ToArray();
+            var result = await conn.Find(filter).Sort(sort).ToListAsync();
+            return result.ToArray();
         }
     }
 }

@@ -25,8 +25,8 @@
         public async Task<IEnumerable<User>> Users()
         {
             var test = _database.GetCollection<User>("User");
-            var temp = await test.Find(_ => true).ToListAsync();
-            return temp.ToArray();
+            var result = await test.Find(_ => true).ToListAsync();
+            return result.ToArray();
         }
 
         public async Task<User> GetById(ObjectId id)
@@ -34,8 +34,8 @@
             var builder = Builders<User>.Filter;
             var filter = builder.Eq("Id", id);
             var conn = _database.GetCollection<User>("User");
-            var temp = await conn.Find(filter).FirstOrDefaultAsync();
-            return temp;
+            var result = await conn.Find(filter).FirstOrDefaultAsync();
+            return result;
         }
 
         public async Task<User> Login(string username, string password)
@@ -48,8 +48,8 @@
             //var filter = Builders<User>.Filter.Where(x => x.UserName.Equals(username) && x.Password.Equals(password));
             var filter = Builders<User>.Filter.Where(x => x.UserName.Equals(username));
             var test = _database.GetCollection<User>("User");
-            var temp = await test.Find(filter).SingleOrDefaultAsync();
-            return temp;
+            var result = await test.Find(filter).SingleOrDefaultAsync();
+            return result;
         }
 
         /*

@@ -28,10 +28,10 @@ namespace Api.Repositories
         public async Task<SiteConfig> Config()
         {
             var conn = _database.GetCollection<SiteConfig>("Config");
-            var temp = await conn.Find(_ => true).FirstOrDefaultAsync();
+            var result = await conn.Find(_ => true).FirstOrDefaultAsync();
 
             //return the modified copy of Target			
-            Merge(_config, temp);
+            Merge(_config, result);
 
             return _config;
         }

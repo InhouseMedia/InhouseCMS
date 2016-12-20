@@ -25,12 +25,12 @@ namespace Web.Controllers
             if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-            var results = await _repository.GetPage(id);
+            var result = await _repository.GetPage(id);
 
-            if (results == null)
+            if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 
-            return View(results);
+            return View(result);
         }
     }
 }
