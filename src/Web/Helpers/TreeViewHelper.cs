@@ -1,5 +1,5 @@
 ﻿
-namespace XWeb.Helpers
+namespace Web.Helpers
 {
 	using System;
 	using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace XWeb.Helpers
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System.IO;
     using System.Text;
-
+/*
     public static class TreeViewHelper
 	{
 		/// <summary>
@@ -141,11 +141,7 @@ namespace XWeb.Helpers
 				//tag.WriteTo(writer, HtmlEncoder.Default);
 				result.Append(ToString());
 			}
-			/*
-			using (var textWriter = new TextWriter(writer))
-			{
-				textWriter.Write(ToString());
-			}*/
+
 		}
 
 		private void ValidateSettings()
@@ -225,5 +221,5 @@ namespace XWeb.Helpers
 
 			return li;
 		}
-	}
+	}*/
 }
