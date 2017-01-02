@@ -1,225 +1,57 @@
-﻿
-namespace Web.Helpers
+﻿namespace Web.Helpers
 {
-	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using Microsoft.AspNetCore.Mvc.Razor;
-	using Microsoft.AspNetCore.Mvc.ViewFeatures;
+	using System.Text.Encodings.Web;
+	using Library.Models;
 	using Microsoft.AspNetCore.Html;
-    using Microsoft.AspNetCore.Mvc.Rendering;
-    using System.IO;
-    using System.Text;
-/*
-    public static class TreeViewHelper
+	using Microsoft.AspNetCore.Mvc.Rendering;
+	using Microsoft.AspNetCore.Razor.TagHelpers;
+
+	[HtmlTargetElement("treeview", Attributes = "tree-list")]
+	public class TreeViewTagHelper : TagHelper
 	{
-		/// <summary>
-		/// Create an HTML tree from a recursive collection of items
-		/// </summary>
-		public static TreeView<T> TreeView<T>(this HtmlHelper html, IEnumerable<T> items)
-		{
-			return new TreeView<T>(html, items);
-		}
-	}
+		[HtmlAttributeName("tree-list")]
+		public IEnumerable<NavigationSitemap> Sitemap { get; set; }
 
-	/// <summary>
-	/// Create an HTML tree from a resursive collection of items
-	/// </summary>
-	public class TreeView<T> : HtmlString
-	{
-		private readonly HtmlHelper _html;
-		private readonly IEnumerable<T> _items = Enumerable.Empty<T>();
-		private Func<T, string> _displayProperty = item => item.ToString();
-		private Func<T, IEnumerable<T>> _childrenProperty;
-		private string _emptyContent = "No children";
-		private IDictionary<string, object> _htmlAttributes = new Dictionary<string, object>();
-		private IDictionary<string, object> _childHtmlAttributes = new Dictionary<string, object>();
-		private Func<T, HelperResult> _itemTemplate;
-
-		public TreeView(HtmlHelper html, IEnumerable<T> items)
+		public override void Process(TagHelperContext context, TagHelperOutput output)
 		{
-			if (html == null) throw new ArgumentNullException("html");
-			_html = html;
-			_items = items;
-			// The ItemTemplate will default to rendering the DisplayProperty
-			_itemTemplate = item => new HelperResult(writer => writer.Write(_displayProperty(item)));
+			output.TagName = "nav";
+			output.Content.SetHtmlContent(CreateSitemap(Sitemap, true));
 		}
 
-		/// <summary>
-		/// The property which will display the text rendered for each item
-		/// </summary>
-		public TreeView<T> ItemText(Func<T, string> selector)
+		private static TagBuilder CreateSitemap(IEnumerable<NavigationSitemap> sitemap , bool isRoot = false)
 		{
-			if (selector == null) throw new ArgumentNullException("selector");
-			_displayProperty = selector;
-			return this;
-		}
-
-
-		/// <summary>
-		/// The template used to render each item in the tree view
-		/// </summary>
-		public TreeView<T> ItemTemplate(Func<T, HelperResult> itemTemplate)
-		{
-			if (itemTemplate == null) throw new ArgumentNullException("itemTemplate");
-			_itemTemplate = itemTemplate;
-			return this;
-		}
-
-
-		/// <summary>
-		/// The property which returns the children items
-		/// </summary>
-		public TreeView<T> Children(Func<T, IEnumerable<T>> selector)
-		{
-			if (selector == null) throw new ArgumentNullException("selector");
-			_childrenProperty = selector;
-			return this;
-		}
-
-		/// <summary>
-		/// Content displayed if the list is empty
-		/// </summary>
-		public TreeView<T> EmptyContent(string emptyContent)
-		{
-			if (emptyContent == null) throw new ArgumentNullException("emptyContent");
-			_emptyContent = emptyContent;
-			return this;
-		}
-
-		/// <summary>
-		/// HTML attributes appended to the root ul node
-		/// </summary>
-		public TreeView<T> HtmlAttributes(object htmlAttributes)
-		{
-			HtmlAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
-			return this;
-		}
-
-		/// <summary>
-		/// HTML attributes appended to the root ul node
-		/// </summary>
-		public TreeView<T> HtmlAttributes(IDictionary<string, object> htmlAttributes)
-		{
-			if (htmlAttributes == null) throw new ArgumentNullException("htmlAttributes");
-			_htmlAttributes = htmlAttributes;
-			return this;
-		}
-
-		/// <summary>
-		/// HTML attributes appended to the children items
-		/// </summary>
-		public TreeView<T> ChildrenHtmlAttributes(object htmlAttributes)
-		{
-			ChildrenHtmlAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
-			return this;
-		}
-
-		/// <summary>
-		/// HTML attributes appended to the children items
-		/// </summary>
-		public TreeView<T> ChildrenHtmlAttributes(IDictionary<string, object> htmlAttributes)
-		{
-			if (htmlAttributes == null) throw new ArgumentNullException("htmlAttributes");
-			_childHtmlAttributes = htmlAttributes;
-			return this;
-		}
-
-		public string ToHtmlString()
-		{
-			return ToString();
-		}
-
-		public void Render()
-		{
-			var result = new StringBuilder();
-				result.Append(_html.ViewContext.Writer);
-			//var result = _html.ViewContext.Writer;
-
-			using (var writer = new StringWriter())
-			{
-				//tag.WriteTo(writer, HtmlEncoder.Default);
-				result.Append(ToString());
-			}
-
-		}
-
-		private void ValidateSettings()
-		{
-			if (_childrenProperty == null)
-			{
-				throw new InvalidOperationException("You must call the Children() method to tell the tree view how to find child items");
-			}
-		}
-
-
-		public override string ToString()
-		{
-			ValidateSettings();
-
-			var listItems = _items.ToList();
-
 			var ul = new TagBuilder("ul");
-			ul.MergeAttributes(_htmlAttributes);
+				ul.AddCssClass(isRoot ? "menu":"subItem");
 
-			if (listItems.Count == 0)
+			foreach (var item in sitemap)
 			{
 				var li = new TagBuilder("li");
-					li.InnerHtml.AppendHtml(_emptyContent);
+				var a = new TagBuilder("a");
 
-				ul.InnerHtml.AppendHtml(li.ToString());
+				a.Attributes["href"] = item.Url ?? "#";
+				a.InnerHtml.SetHtmlContent(item.Title);
+				li.InnerHtml.AppendHtml(a);
+
+				if (item.ChildLocations.Any())
+				{
+					var map = CreateSitemap(item.ChildLocations);
+					var content = GetString(map);
+					li.InnerHtml.AppendHtml(content);
+				}
+
+				ul.InnerHtml.AppendHtml(li);
 			}
-
-			foreach (var item in listItems)
-			{
-				BuildNestedTag(ul, item, _childrenProperty);
-			}
-
-			return ul.ToString();
+			
+			return ul;
 		}
 
-		private void AppendChildren(TagBuilder parentTag, T parentItem, Func<T, IEnumerable<T>> childrenProperty)
+		public static string GetString(TagBuilder content)
 		{
-			var children = childrenProperty(parentItem).ToList();
-			if (!children.Any())
-			{
-				return;
-			}
-
-			var innerUl = new TagBuilder("ul");
-			innerUl.MergeAttributes(_childHtmlAttributes);
-
-			foreach (var item in children)
-			{
-				BuildNestedTag(innerUl, item, childrenProperty);
-			}
-
-			parentTag.InnerHtml.AppendHtml(innerUl.ToString());
+			var writer = new System.IO.StringWriter();
+			content.WriteTo(writer, HtmlEncoder.Default);
+			return writer.ToString();
 		}
-
-		private void BuildNestedTag(TagBuilder parentTag, T parentItem, Func<T, IEnumerable<T>> childrenProperty)
-		{
-			var start = new TagBuilder("li"){
-				TagRenderMode = TagRenderMode.StartTag
-			};
-
-			var end = new TagBuilder("li"){
-				TagRenderMode = TagRenderMode.EndTag
-			};
-
-			var li = GetLi(parentItem);
-			parentTag.InnerHtml.AppendHtml(start);
-			AppendChildren(li, parentItem, childrenProperty);
-			parentTag.InnerHtml.AppendHtml(li.InnerHtml);
-			parentTag.InnerHtml.AppendHtml(end);
-		}
-
-		private TagBuilder GetLi(T item)
-		{
-			var li = new TagBuilder("li");
-				li.InnerHtml.AppendHtml(_itemTemplate(item).ToString());
-
-			return li;
-		}
-	}*/
+	}
 }
