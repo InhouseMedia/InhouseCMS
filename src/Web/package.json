@@ -17,6 +17,7 @@
     "gulp-less-sourcemap": "^1.4.3",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.9.1",
+    "gulp-watch": "^4.3.11",
     "gulp-wrap": "^0.13.0"
   }
 }

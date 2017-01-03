@@ -1,4 +1,4 @@
-/// <binding Clean='clean' />
+/// <binding BeforeBuild='min' Clean='clean' ProjectOpened='watch' />
 "use strict";
 
 var gulp = require("gulp"),
@@ -11,7 +11,8 @@ var gulp = require("gulp"),
     rename = require("gulp-rename"),
     wrap = require("gulp-wrap"),
     insert = require("gulp-insert"),
-    sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps'),
+    watch = require('gulp-watch');
 
 var webroot = "./wwwroot/";
 
@@ -68,6 +69,14 @@ gulp.task('less', function() {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('.'));
 
+});
+
+gulp.task("style:watch", ["less", "min:css"]);
+gulp.task("script:watch", ["min:js"]);
+
+gulp.task("watch", function() {
+	gulp.watch(webroot + "js/*.js", ["script:watch"]);
+	gulp.watch(webroot + "**/*.less", ["style:watch"]);	
 });
 
 gulp.task("min", ["less", "min:js", "min:css"]);

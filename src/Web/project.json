@@ -25,7 +25,7 @@
 		"Library": "1.0.0.0",
 		"System.Runtime.Serialization.Xml": "4.3.0",
 		"Microsoft.AspNetCore.Html.Abstractions": "1.1.0",
-		"Microsoft.AspNetCore.Mvc.TagHelpers" :  "1.1.0" 
+		"Microsoft.AspNetCore.Mvc.TagHelpers": "1.1.0"
 	},
 
     "tools": {
@@ -68,8 +68,8 @@
     },
 
     "scripts": {
-        "precompile": ["npm install", "bower install", "gulp clean", "gulp min"],
-        "prepublish": ["npm install", "bower install", "gulp clean", "gulp min"],
+				"precompile": ["npm install", "bower install", "gulp clean", "gulp min"],
+				"prepublish": ["npm install", "bower install", "gulp clean", "gulp min"],
         "postpublish": ["dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"]
     },
 
