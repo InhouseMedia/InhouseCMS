@@ -19,11 +19,11 @@ namespace Api.Controllers
 		private readonly IStringLocalizer<NavigationController> _localizer;
 
         public NavigationController(INavigationRepository repository, IStringLocalizer<NavigationController> localizer)
-        {   
+        {
             _repository = repository;
 			_localizer = localizer;
         }
-     
+
         [HttpGet]
 		//[ValidateAntiForgeryToken]
         //[Authorize]
@@ -36,7 +36,7 @@ namespace Api.Controllers
 
 			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
-			
+
 			return new ObjectResult(result);
         }
 
@@ -47,9 +47,9 @@ namespace Api.Controllers
         {
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
-				
+
             var result = await _repository.GetById(new ObjectId(id));
-			
+
             if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 
@@ -73,15 +73,15 @@ namespace Api.Controllers
 
 			return new ObjectResult(result);
 		}
-		
+
 		[HttpGet("List")]
-		public async Task<IActionResult> List()	
+		public async Task<IActionResult> List()
 		{
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
-				
+
             var result = await _repository.NavigationList();
-			
+
             if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 

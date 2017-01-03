@@ -11,7 +11,7 @@ html{
 
 body{
 	overflow:auto;
-	background-image: url("@image-path/spacer.gif");  //Only needed for the transition to the loader icon	
+	background-image: url("@image-path/spacer.gif");  //Only needed for the transition to the loader icon
 	background-color: @body-bg;
 	.transition(~"background-image 0.3s ease-in 1.3s");
 }
@@ -95,7 +95,7 @@ header{
 
                 > a,
                 > a:visited,
-                >a:active{
+                > a:active{
                     position:relative;
                     display:none;
                     padding: 0 round(@line-height /2);
@@ -203,8 +203,11 @@ footer{
 }
 
 #body{
+    margin-top: @line-height * 2.5;
     overflow:hidden;
-    height:100%;
+    height:calc(~"100% - (@{line-height} * 2.5)");
+
+    footer{ background-color: transparent;}
 }
 
 .bold,
@@ -214,17 +217,17 @@ footer{
 
 .loading{
 	background-image: url("@image-path/loader2.svg");
-	background-repeat:no-repeat; 
+	background-repeat:no-repeat;
 	background-position: center center;
 }
 
 .modal-open{ padding-right:0!important; }
 
-.content-wrapper{ 
+.content-wrapper{
 	.flex-display();
 	.align-items();
 	.justify-content(space-between);
-	width: 55%; 
+	width: 55%;
 	margin: auto;
 }
 
@@ -258,12 +261,12 @@ footer{
 		}
 	}
 }
-
+/*
 article{
     margin-top: @line-height * 2.5;
     overflow:hidden;
 }
-
+*/
 .content-text,
 .content-form,
 .content-image{

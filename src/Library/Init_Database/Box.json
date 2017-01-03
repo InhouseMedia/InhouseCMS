@@ -10,7 +10,7 @@
 	"Placement": 1,
 	"Template": null,
 	"ArticleId": null,
-	"Level": 1,
+	"Level": 2,
 	"Active": true,
 	"PublishDate": {
 		"$date": "2016-03-03T16:29:12.000Z"
@@ -30,8 +30,8 @@
 	"UserId": {
 		"$oid": "564c7e8fe381e49e50812538"
 	},
-	"Controller": "Navigation",
-	"Action": "Index",
+	"Controller": "Box",
+	"Action": "Navigation",
 	"Placement": 1,
 	"Template": null,
 	"ArticleId": null,
@@ -134,7 +134,9 @@
 	"Action": "Maps",
 	"Placement": 6,
 	"Template": null,
-	"ArticleId": null,
+	"ArticleId": {
+		"$oid": "566b55d479ed1300c8260bd1"
+	},
 	"Level": 1,
 	"Active": true,
 	"PublishDate": {

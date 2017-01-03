@@ -28,17 +28,17 @@
 
     var _fixedHeader = function() {
         var scrollTop = _win.scrollTop();
-        var isFixedHeader = _header.hasClass('fixed');
+        //var isFixedHeader = _header.hasClass('fixed');
         var current = parseInt(_header.css('top'));
         var delta = scrollTop - _prev;
 
         _prev = scrollTop;
 
         if (delta > 0) { // Scroll down
-            if (isFixedHeader) _header.removeClass('fixed');
+            //if (isFixedHeader) _header.removeClass('fixed');
             if (current > -_headerHeight) _header.css('top', Math.max(current - delta, -_headerHeight) + 'px');
         } else { // Scroll up
-            if (!isFixedHeader) _header.addClass('fixed');
+            //if (!isFixedHeader) _header.addClass('fixed');
             if (current < 0) _header.css('top', Math.min(current - delta, 0) + 'px');
         }
     };

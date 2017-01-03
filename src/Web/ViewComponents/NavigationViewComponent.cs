@@ -16,7 +16,7 @@
 
 		public async Task<IViewComponentResult> InvokeAsync(string id)
 		{
-			if (!ModelState.IsValid) 
+			if (!ModelState.IsValid)
 				return View(); //return new StatusCodeResult(500); // 500 Internal Server Error
 
             var result = await _repository.GetNavigation();
