@@ -89,19 +89,23 @@
 
 		<section id="body">
 			<header>
+				<div class="content-wrapper">
 				@foreach (var box in boxesTop)
-				{
-					@await Component.InvokeAsync(box.Action)
-				}
+					{
+						@await Component.InvokeAsync(box.Action)
+					}
+				</div>
 			</header>
 
 			@RenderBody()
 
 			<footer>
-				@foreach (var box in boxesBottom)
-				{
-					@await Component.InvokeAsync(box.Action)
-				}
+				<div class="content-wrapper">
+					@foreach (var box in boxesBottom)
+					{
+						@await Component.InvokeAsync(box.Action)
+					}
+				</div>
 			</footer>
 		</section>
 

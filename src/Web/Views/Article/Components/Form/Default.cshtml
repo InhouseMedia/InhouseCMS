@@ -5,4 +5,6 @@
 @{
 	Layout = null;
 }
-<h2>@Html.Raw(Model.Title)</h2>
+<div class="content-@Model.Action.ToLower()">
+	<h2>@Html.Raw(Model.Title)</h2>
+</div>
