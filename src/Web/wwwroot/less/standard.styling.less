@@ -225,7 +225,7 @@ footer{
 
 .content-wrapper{
 	.flex-display();
-	.align-items();
+	.align-items(center);
 	.justify-content(space-between);
 	width: 55%;
 	margin: auto;
@@ -306,7 +306,7 @@ article{
             text-decoration: none;
             background-color: fade(@body-bg, 20%);
             color: fade(@font-color, 30%);
-             .transition(~"background-color .4s ease-in-out 1.5s");
+            .transition(~"background-color .4s ease-in-out 1.5s");
         }
 
         &:focus{
@@ -438,7 +438,6 @@ label{
 	from { }
 	to { opacity: 0; -webkit-transform: scale(.7); -moz-transform: scale(.7); -o-transform: scale(.7); -ms-transform: scale(.7); transform: scale(.7); }
 }
-
 @-moz-keyframes scaleUpCenter {
 	from { opacity: 0; -webkit-transform: scale(.7); -moz-transform: scale(.7); -o-transform: scale(.7); -ms-transform: scale(.7); transform: scale(.7); }
 }
