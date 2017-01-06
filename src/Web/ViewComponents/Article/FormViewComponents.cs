@@ -1,15 +1,23 @@
 namespace Web.ViewComponents
 {
+	using Newtonsoft.Json;
 	using Microsoft.AspNetCore.Mvc;
-	using System.Threading.Tasks;
 
 	using Library.Models;
 
 	public class FormViewComponent : ViewComponent
 	{
-		public async Task<IViewComponentResult> InvokeAsync(ArticleContent item)
-		{
-			return View(item);
-		}
-	}
+        public IViewComponentResult Invoke(ArticleContent model)
+        {
+            if (!ModelState.IsValid)
+                return View(); //return new StatusCodeResult(500); // 500 Internal Server Error
+
+            var formFields = JsonConvert.DeserializeObject<FormModel>(model.Code);
+
+           	ViewBag.ContentId = model.Id;
+        	ViewBag.Action = model.Action;
+
+            return View(formFields);
+        }
+    }
 }

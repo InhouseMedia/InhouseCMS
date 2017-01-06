@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
+	using Library.Models;
     using Web.Repositories;
 
     public class NavigationViewComponent : ViewComponent
@@ -14,7 +15,7 @@
             _repository = repository;
         }
 
-		public async Task<IViewComponentResult> InvokeAsync(string id)
+		public async Task<IViewComponentResult> InvokeAsync(ArticleContent model)
 		{
 			if (!ModelState.IsValid)
 				return View(); //return new StatusCodeResult(500); // 500 Internal Server Error
