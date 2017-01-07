@@ -16,9 +16,9 @@
 		@foreach (var item in Model.Fields)
         {
             item.TabIndex = tabindex;
+            var type = (item.Type == "textarea")? "Textarea" : "Input";
+            @await Component.InvokeAsync(type , new {model = item})
 
-            @*Html.Action("Input" + item.Type, "Article", item)*@
-			@Html.Raw(item.Type)
             tabindex++;
         }
 
