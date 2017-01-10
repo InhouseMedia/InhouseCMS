@@ -33,15 +33,31 @@ namespace Api.Controllers
 			return new ObjectResult(result);
         }
 
-        [HttpGet("{id:length(24)}")]
+		[HttpGet("{id:length(24)}")]
 		//[ValidateAntiForgeryToken]
 		//[Authorize]
-        public async Task<IActionResult> Get(string id)
+		public async Task<IActionResult> Get(string id)
+		{
+			if (!ModelState.IsValid)
+				return new StatusCodeResult(500); // 500 Internal Server Error
+
+			var result = await _repository.GetById(new ObjectId(id));
+
+			if (result == null)
+				return new StatusCodeResult(204); // 204 No Content
+
+			return new ObjectResult(result);
+		}
+
+		[HttpGet("content/{id:length(24)}")]
+		//[ValidateAntiForgeryToken]
+		//[Authorize]
+        public async Task<IActionResult> GetContent(string id)
         {
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 				
-            var result = await _repository.GetById(new ObjectId(id));
+            var result = await _repository.GetContent(new ObjectId(id));
 			
             if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -64,5 +80,21 @@ namespace Api.Controllers
 
             return new ObjectResult(result);
 		}
-    }
+
+		[HttpGet("{aid:length(24)}/content/{id:length(24)}")]
+		//[ValidateAntiForgeryToken]
+		//[Authorize]
+		public async Task<IActionResult> GetPageContent(string id, string aid)
+		{
+			if (!ModelState.IsValid)
+				return new StatusCodeResult(500); // 500 Internal Server Error
+
+			var result = await _repository.GetPageContent(new ObjectId(id), new ObjectId(aid));
+
+			if (result == null)
+				return new StatusCodeResult(204); // 204 No Content
+
+			return new ObjectResult(result);
+		}
+	}
 }
