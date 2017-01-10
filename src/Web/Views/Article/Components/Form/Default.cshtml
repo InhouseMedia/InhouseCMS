@@ -9,9 +9,10 @@
 	var tabindex = 1;
 }
 <div class="content-form">
-    <form method="post" action="/Module/Article/@ViewBag.Action" autocomplete="off">
+    <form method="post" action="/Article/@ViewBag.Action" autocomplete="off">
         @Html.AntiForgeryToken()
 		@Html.Hidden("ContentId", (string) ViewBag.ContentId)
+		@Html.Hidden("ArticleId", (string)ViewBag.ArticleId)
 
 		@foreach (var item in Model.Fields)
         {

@@ -14,6 +14,7 @@ namespace Web.ViewComponents
 
             var formFields = JsonConvert.DeserializeObject<FormModel>(model.Code);
 
+			ViewBag.ArticleId = model.ArticleId;
            	ViewBag.ContentId = model.Id;
         	ViewBag.Action = model.Action;
 
