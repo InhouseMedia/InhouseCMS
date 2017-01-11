@@ -62,7 +62,7 @@
 	},
 	"mailserver": {
 		"smtp": "smtp.gmail.com",
-		"port": "587",
+		"port": 587,
 		"oauth2": false,
 		"UseSsl": false,
 		"account": "example.gmail.com",
