@@ -11,6 +11,7 @@
 */Web/wwwroot/js/*.min.js
 *.DS_Store
 */Library/Init_Database/User.json
+*/Library/Init_Database/Config.json
 
 # User-specific files
 *.suo
