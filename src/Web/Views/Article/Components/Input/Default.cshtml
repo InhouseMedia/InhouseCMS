@@ -2,11 +2,11 @@
 @using System.Text.RegularExpressions
 @model FieldsModel
 @{
-    Layout = null;
-	    var name = new Regex("[\\s_-]").Replace(Model.Label, "");
+	Layout = null;
+	var name = new Regex("[\\s_-]").Replace(Model.Label, "");
 }
 
 <div class="form-group">
-    <label for="input_@(name)">@Model.Label</label>
-    <input type="@Model.Type" name="@name" id="input_@(name)" title="@Model.Label" placeholder="@Model.PlaceHolder" value="@Model.Value" pattern="@Model.Pattern" tabindex="@Model.TabIndex" autocomplete="off" class="form-control" @(Model.AutoFocus ? "autofocus" : "") @(Model.Required ? "required" : "") />
+	<label for="input_@(name)">@Model.Label</label>
+	@Html.TextBox(name, Model.Value, new { id = "input_" + name, type = Model.Type, title = Model.Label, placeholder = Model.PlaceHolder, tabindex = Model.TabIndex, autocomplete = "off", @class = "form-control", autofocus = Model.AutoFocus.ToString().ToLower(), required = Model.Required.ToString().ToLower() })
 </div>

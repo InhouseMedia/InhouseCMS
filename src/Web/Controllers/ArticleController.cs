@@ -54,7 +54,7 @@ namespace Web.Controllers
 			var articleId = Request.Form["ArticleId"];
 			var contentId = Request.Form["ContentId"];
 
-			var response = await _repository.GetContent(articleId, contentId);
+			var response = await _repository.GetPageContent(articleId, contentId);
 			
 			// Error
 			if (response == null)
@@ -65,7 +65,7 @@ namespace Web.Controllers
 			foreach (var field in formOptions.Fields)
 			{
 				var name = new Regex("[\\s_-]").Replace(field.Label, "");
-				body.HtmlBody += "<p><b>" + field.Label + ":</b> " + Request.Form[name];
+				body.HtmlBody += "<p><b>" + field.Label + ":</b> " + Request.Form[name] + "</p>";
 			}
 			
 			var message = new MimeMessage();
