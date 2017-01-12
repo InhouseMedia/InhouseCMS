@@ -46,7 +46,7 @@ namespace Library.Config
 	public class Mailserver
 	{
 		public string Smtp { get; set; }
-		public int Port { get; set; }
+		public int? Port { get; set; }
 		public bool UseSsl { get; set; }
 		public bool Oauth2 { get; set; }
 		public string Account { get; set; }

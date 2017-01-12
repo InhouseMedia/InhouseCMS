@@ -80,7 +80,7 @@ namespace Web.Controllers
 				{
 					if (!_config.Mailserver.Oauth2) client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-					client.Connect(_config.Mailserver.Smtp, _config.Mailserver.Port, _config.Mailserver.UseSsl);
+					client.Connect(_config.Mailserver.Smtp, _config.Mailserver.Port ?? 25, _config.Mailserver.UseSsl);
 					client.Authenticate(_config.Mailserver.Account, _config.Mailserver.Password);
 					client.Send(message);
 					client.Disconnect(true);
