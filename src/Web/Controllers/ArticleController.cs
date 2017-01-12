@@ -55,7 +55,7 @@ namespace Web.Controllers
 			var contentId = Request.Form["ContentId"];
 
 			var response = await _repository.GetPageContent(articleId, contentId);
-			
+
 			// Error
 			if (response == null)
 				return new StatusCodeResult(204); // 204 No Content
@@ -67,26 +67,29 @@ namespace Web.Controllers
 				var name = new Regex("[\\s_-]").Replace(field.Label, "");
 				body.HtmlBody += "<p><b>" + field.Label + ":</b> " + Request.Form[name] + "</p>";
 			}
-			
+
 			var message = new MimeMessage();
 			message.From.Add(new MailboxAddress(_config.Company.Contact.Email));
 			message.To.Add(new MailboxAddress(formOptions.Mail.To)); //Should be from code (json object)
 			message.Subject = formOptions.Mail.Subject;
 			message.Body = body.ToMessageBody();
 
+
 			using (var client = new SmtpClient())
 			{
 				try
 				{
+					await client.ConnectAsync(_config.Mailserver.Smtp, _config.Mailserver.Port ?? 25, _config.Mailserver.UseSsl);
+
 					if (!_config.Mailserver.Oauth2) client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-					client.Connect(_config.Mailserver.Smtp, _config.Mailserver.Port ?? 25, _config.Mailserver.UseSsl);
-					client.Authenticate(_config.Mailserver.Account, _config.Mailserver.Password);
-					client.Send(message);
-					client.Disconnect(true);
+					await client.AuthenticateAsync(_config.Mailserver.Account, _config.Mailserver.Password);
+					await client.SendAsync(message);
+					await client.DisconnectAsync(true);
 				}
 				catch (Exception ex)
 				{
+					var x = ex.Message;
 					return new StatusCodeResult(450);
 				}
 			}
