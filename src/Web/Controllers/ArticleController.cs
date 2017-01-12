@@ -103,8 +103,7 @@ namespace Web.Controllers
 					return new StatusCodeResult(450);
 				}
 			}
-
-			return View();
+			return Redirect(formOptions.Mail.ReturnUrl);
 		}
 	}
 }
