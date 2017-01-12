@@ -3,22 +3,27 @@ namespace Web.Controllers
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Localization;
 
+	using MailKit;
+	using MailKit.Search;
+	using MailKit.Security;
 	using MailKit.Net.Smtp;
 	using MimeKit;
 
 	using Newtonsoft.Json;
 
 	using System;
+	using System.Net;
 	using System.Text.RegularExpressions;
 	using System.Threading.Tasks;
 
 	using Library.Config;
 	using Library.Models;
 	using Web.Repositories;
+    using System.Threading;
 
-	//Done in startup
-	//[ServiceFilter(typeof(LocalizationActionFilter))]
-	public class ArticleController : Controller
+    //Done in startup
+    //[ServiceFilter(typeof(LocalizationActionFilter))]
+    public class ArticleController : Controller
 	{
 		private readonly SiteConfig _config;
 		private readonly IStringLocalizer<ArticleController> _localizer;
@@ -74,18 +79,23 @@ namespace Web.Controllers
 			message.Subject = formOptions.Mail.Subject;
 			message.Body = body.ToMessageBody();
 
-
-			using (var client = new SmtpClient())
+			using (var client = new SmtpClient(new ProtocolLogger ("smtp.log")))
 			{
 				try
 				{
-					await client.ConnectAsync(_config.Mailserver.Smtp, _config.Mailserver.Port ?? 25, _config.Mailserver.UseSsl);
+					using (var cancel = new CancellationTokenSource ()) {
+						client.ServerCertificateValidationCallback = (s,c,h,e) => true;
 
-					if (!_config.Mailserver.Oauth2) client.AuthenticationMechanisms.Remove("XOAUTH2");
+						var credentials = new NetworkCredential(_config.Mailserver.Account, _config.Mailserver.Password);
 
-					await client.AuthenticateAsync(_config.Mailserver.Account, _config.Mailserver.Password);
-					await client.SendAsync(message);
-					await client.DisconnectAsync(true);
+						await client.ConnectAsync(_config.Mailserver.Smtp, _config.Mailserver.Port ?? 25, _config.Mailserver.UseSsl, cancel.Token);
+
+						if (!_config.Mailserver.Oauth2) client.AuthenticationMechanisms.Remove("XOAUTH2");
+
+						await client.AuthenticateAsync(credentials, cancel.Token);
+						await client.SendAsync(message, cancel.Token);
+						await client.DisconnectAsync(true, cancel.Token);
+					}
 				}
 				catch (Exception ex)
 				{
