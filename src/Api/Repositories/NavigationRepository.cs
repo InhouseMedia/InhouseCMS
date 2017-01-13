@@ -48,7 +48,6 @@ namespace Api.Repositories
 
         public async Task<IEnumerable<NavigationSitemap>> NavigationSitemap()
 		{
-
 			ActiveNavigationItemsFlat = new List<NavigationSitemap>();
 
 			var builderSort = Builders<NavigationItem>.Sort;
@@ -56,6 +55,7 @@ namespace Api.Repositories
 
 			var builderFilter = Builders<NavigationItem>.Filter;
 			var filter = builderFilter.Eq("Active", true) &
+						builderFilter.Eq("Visible", true) &
 						builderFilter.Lte("CreatedDate", DateTime.UtcNow) &
 						builderFilter.Eq("Locale", CultureInfo.CurrentUICulture.Name);
 			var conn = _database.GetCollection<NavigationItem>("Navigation");

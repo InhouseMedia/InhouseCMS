@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Caching.Memory;
 	using Microsoft.Extensions.DependencyInjection;
-	
+
 	using System.Threading.Tasks;
 
 	using Web.Repositories;
@@ -18,7 +18,7 @@
 		private readonly IRouter _defaultRouter;
 		private object _synclock = new object();
 
-		public RouteConnection(IMemoryCache cache, IRouter defaultRouter) 
+		public RouteConnection(IMemoryCache cache, IRouter defaultRouter)
 		{
 			_cache = cache;
 			_defaultRouter = defaultRouter;
@@ -28,7 +28,7 @@
 		{
 			var navigation = context.HttpContext.RequestServices.GetRequiredService<INavigationRepository>();
 			var article = context.HttpContext.RequestServices.GetRequiredService<IArticleRepository>();
-			
+
 			var path = context.HttpContext.Request.Path.Value ?? "/";
 			var navItem = navigation.GetNavigationItem(path);
 			var articleId = navItem?.ArticleId ?? "012345678901234567890123"; // fake articleId needs to be 24 chars long
@@ -40,7 +40,7 @@
 			routeData.Values["controller"] = articleItem.Result.Controller;
 			routeData.Values["action"] = articleItem.Result.Action;
 			routeData.Values["id"] = articleItem.Result.Id;
-			
+
 			context.RouteData = routeData;
 			await _defaultRouter.RouteAsync(context);
 		}
@@ -50,7 +50,7 @@
 			//TODO: Probably not correct. should be something like: Article/Index/xxx
 			var requestPath = context.HttpContext.Request.Path.Value;
 			var result = new VirtualPathData(this, requestPath);
-           
+
 			return result;
 		}
 	}
