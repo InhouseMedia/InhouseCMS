@@ -25,9 +25,10 @@ namespace Web.Controllers
     //[ServiceFilter(typeof(LocalizationActionFilter))]
     public class ArticleController : Controller
 	{
-		private readonly SiteConfig _config;
-		private readonly IStringLocalizer<ArticleController> _localizer;
-		private readonly IArticleRepository _repository;
+		protected readonly SiteConfig _config;
+		protected readonly IStringLocalizer<ArticleController> _localizer;
+
+		protected readonly IArticleRepository _repository;
 
 		public ArticleController(IArticleRepository repository, IStringLocalizer<ArticleController> localizer, ConfigRepository config)
 		{

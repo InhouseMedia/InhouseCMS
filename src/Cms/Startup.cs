@@ -1,8 +1,9 @@
 namespace Cms
 {
-    using Cms.Connections;
+   // using Cms.Connections;
    // using Cms.Filters;
-    using Cms.Repositories;
+    using Web.Connections;
+    using Web.Repositories;
 
 	using Library.Models;
 
@@ -83,7 +84,7 @@ namespace Cms
 				}
             );
 
-//			services.AddSingleton<IArticleRepository, ArticleRepository>();
+			services.AddSingleton<IArticleRepository, ArticleRepository>();
 //			services.AddSingleton<IBoxRepository, BoxRepository>();
   //          services.AddSingleton<INavigationRepository, NavigationRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

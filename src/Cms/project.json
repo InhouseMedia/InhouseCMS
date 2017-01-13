@@ -24,6 +24,7 @@
         "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
         "Library": "1.0.0.0",
+        "Web": "1.0.0.0",
         "System.Runtime.Serialization.Xml": "4.3.0",
         "Microsoft.AspNetCore.Html.Abstractions": "1.1.0",
         "Microsoft.AspNetCore.Mvc.TagHelpers": "1.1.0",

@@ -17,7 +17,7 @@ namespace Cms.Controllers
     public class LoginController : Controller
 	{
 		public LoginController(){
-			var x= "";
+
 		}
 
 		public async Task<IActionResult> Index()
