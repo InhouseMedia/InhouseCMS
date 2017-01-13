@@ -7,9 +7,9 @@ namespace Web.ViewComponents
 
 	public class CarouselViewComponent : ViewComponent
 	{
-		public async Task<IViewComponentResult> InvokeAsync(ArticleContent item)
+		public async Task<IViewComponentResult> InvokeAsync(ArticleContent model)
 		{
-			return View(item);
+			return View(model);
 		}
 	}
 }

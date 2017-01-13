@@ -2,7 +2,7 @@ namespace Library.Config
 {
 	using MongoDB.Bson;
 	using MongoDB.Bson.Serialization.Attributes;
-	
+
 	public class SiteConfig
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
@@ -18,7 +18,9 @@ namespace Library.Config
 		[BsonElement("Language")]
 		public Language Language { get; set; }
 		[BsonElement("Company")]
-        public Company Company { get; set; }
+		public Company Company { get; set; }
+		[BsonElement("Mailserver")]
+		public Mailserver Mailserver { get; set; }
 		[BsonElement("SearchEngines")]
 		public Searchengines SearchEngines { get; set; }
 		[BsonElement("Socialmedia")]
@@ -26,46 +28,56 @@ namespace Library.Config
 		[BsonElement("Controllers")]
 		public Controllers Controllers { get; set; }
 	}
-	
+
 	public class Language
 	{
 		public string[] Locale { get; set; }
 	}
 
-    public class Company
-    {
-        public string Name { get; set; }
-        public Address Address { get; set; }
-        public Contact Contact { get; set; }
-        public Contact Service { get; set; }
-        public Geolocation Geolocation { get; set; }
-    }
+	public class Company
+	{
+		public string Name { get; set; }
+		public Address Address { get; set; }
+		public Contact Contact { get; set; }
+		public Contact Service { get; set; }
+		public Geolocation Geolocation { get; set; }
+	}
 
-    public class Address
-    {
-        public string Street { get; set; }
-        public string Number { get; set; }
-        public string Extra { get; set; }
-        public string Zipcode { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-    }
+	public class Mailserver
+	{
+		public string Smtp { get; set; }
+		public int? Port { get; set; }
+		public bool UseSsl { get; set; }
+		public bool Oauth2 { get; set; }
+		public string Account { get; set; }
+		public string Password { get; set; }
+	}
 
-    public class Contact
-    {
-        public string Name { get; set; }
-        public string Function { get; set; }
-        public string Phonenumber { get; set; }
-        public string Mobilenumber { get; set; }
-        public string Fax { get; set; }
-        public string Email { get; set; }
-    }
+	public class Address
+	{
+		public string Street { get; set; }
+		public string Number { get; set; }
+		public string Extra { get; set; }
+		public string Zipcode { get; set; }
+		public string City { get; set; }
+		public string Country { get; set; }
+	}
 
-    public class Geolocation
-    {
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }    
-    }
+	public class Contact
+	{
+		public string Name { get; set; }
+		public string Function { get; set; }
+		public string Phonenumber { get; set; }
+		public string Mobilenumber { get; set; }
+		public string Fax { get; set; }
+		public string Email { get; set; }
+	}
+
+	public class Geolocation
+	{
+		public string Latitude { get; set; }
+		public string Longitude { get; set; }
+	}
 
 	public class Searchengines
 	{

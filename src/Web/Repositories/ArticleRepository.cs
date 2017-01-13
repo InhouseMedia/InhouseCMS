@@ -10,6 +10,7 @@ namespace Web.Repositories
 	{
 		Task<Article> GetById(string articleId);
 		Task<ArticlePage> GetPage(string articleId);
+		Task<ArticleContent> GetPageContent(string articleId, string contentId);
 	}
 
 	public class ArticleRepository : ConnectionRepository, IArticleRepository
@@ -29,6 +30,13 @@ namespace Web.Repositories
 		{
 			var conn = await _api.ConnectAsync("/article/" + articleId + "/content");
 			var result = conn.Content.ReadAsAsync<ArticlePage>();
+			return await result;
+		}
+
+		public async Task<ArticleContent> GetPageContent(string articleId, string contentId)
+		{
+			var conn = await _api.ConnectAsync("/article/" + articleId + "/content/" + contentId);
+			var result = conn.Content.ReadAsAsync<ArticleContent>();
 			return await result;
 		}
 	}

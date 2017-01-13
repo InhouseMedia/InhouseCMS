@@ -5,9 +5,9 @@ namespace Web.ViewComponents
 
 	using Library.Models;
 
-	public class TextViewComponent : ViewComponent
+	public class TextareaViewComponent : ViewComponent
 	{
-		public async Task<IViewComponentResult> InvokeAsync(ArticleContent model)
+		public async Task<IViewComponentResult> InvokeAsync(FieldsModel model)
 		{
 			return View(model);
 		}

@@ -3,40 +3,40 @@
 	"name": "Binck",
 	"color": "#8CD600",
 	"path": "binck",
-  "language": {
-    "locale": [ "nl-NL" ]
-  },
-  "company": {
-    "name": "BinckBank N.V.",
-    "address": {
-      "street": "Barbara Strozzilaan",
-      "number": "310",
-      "extra": "",
-      "zipcode": "1083HN",
-      "city": "Amsterdam",
-      "county": "Nederland"
-    },
-    "contact": {
-      "name": "Informatiedesk",
-      "function":  "(als u nog geen klant bent)",  
-      "phonenumber": "020 - 522 03 30",
-      "mobilenumber": "",
-      "fax": "020 - 320 41 76",
-      "email": "info@binck.nl"
-    },
-    "service": {
-      "name": "Klantenservice",
-      "function": "(als u al wel klant bent)", 
-      "phonenumber": "0800 - 235 24 62",
-      "mobilenumber": "",
-      "fax": "",
-      "email": "klantenservice@binck.nl"
-    },
-    "geolocation": {
-      "latitude": "52.3357375",
-      "longitude": "4.8854777"
-    } 
-  },
+	"language": {
+		"locale": [ "nl-NL" ]
+	},
+	"company": {
+		"name": "BinckBank N.V.",
+		"address": {
+			"street": "Barbara Strozzilaan",
+			"number": "310",
+			"extra": "",
+			"zipcode": "1083HN",
+			"city": "Amsterdam",
+			"county": "Nederland"
+		},
+		"contact": {
+			"name": "Informatiedesk",
+			"function": "(als u nog geen klant bent)",
+			"phonenumber": "020 - 522 03 30",
+			"mobilenumber": "",
+			"fax": "020 - 320 41 76",
+			"email": "info@binck.nl"
+		},
+		"service": {
+			"name": "Klantenservice",
+			"function": "(als u al wel klant bent)",
+			"phonenumber": "0800 - 235 24 62",
+			"mobilenumber": "",
+			"fax": "",
+			"email": "klantenservice@binck.nl"
+		},
+		"geolocation": {
+			"latitude": "52.3357375",
+			"longitude": "4.8854777"
+		}
+	},
 	"searchEngines": {
 		"googleVerification": "",
 		"googleTranslation": false,
@@ -59,6 +59,14 @@
 			"youtube": "",
 			"pinterest": ""
 		}
+	},
+	"mailserver": {
+		"smtp": "smtp.gmail.com",
+		"port": 587,
+		"oauth2": false,
+		"UseSsl": false,
+		"account": "example.gmail.com",
+		"password": ""
 	},
 	"controllers": {
 		"standard": {

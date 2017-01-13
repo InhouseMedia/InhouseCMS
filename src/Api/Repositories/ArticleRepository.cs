@@ -15,9 +15,11 @@ namespace Api.Repositories
         Task<IEnumerable<Article>> Articles();
         Task<Article> GetById(ObjectId id);
         Task<ArticlePage> GetPage(ObjectId id);
-    }
+		Task<ArticleContent> GetContent(ObjectId id);
+		Task<ArticleContent> GetPageContent(ObjectId id, ObjectId articleId);
+	}
 
-    public class ArticleRepository : ConnectionRepository, IArticleRepository
+	public class ArticleRepository : ConnectionRepository, IArticleRepository
     {
         public ArticleRepository(DatabaseConnection database) : base(database)
         {
@@ -39,7 +41,16 @@ namespace Api.Repositories
             return result;
         }
 
-        public async Task<ArticlePage> GetPage(ObjectId id)
+	    public async Task<ArticleContent> GetContent(ObjectId id)
+	    {
+		    var builder = Builders<ArticleContent>.Filter;
+		    var filter = builder.Eq("Id", id);
+		    var conn = _database.GetCollection<ArticleContent>("Article_Content");
+		    var result = await conn.Find(filter).FirstOrDefaultAsync();
+		    return result;
+	    }
+
+	    public async Task<ArticlePage> GetPage(ObjectId id)
         {
             var builderSort = Builders<Article>.Sort;
             var sort = builderSort.Ascending("CreatedDate").Ascending("PublishDate");
@@ -65,7 +76,16 @@ namespace Api.Repositories
             return content;
         }
 
-        private static ArticlePage ToArticlePage(Article item)
+		public async Task<ArticleContent> GetPageContent(ObjectId id, ObjectId articleId)
+		{
+			var builder = Builders<ArticleContent>.Filter;
+			var filter = builder.Eq("Id", id) & builder.Eq("ArticleId", articleId);
+			var conn = _database.GetCollection<ArticleContent>("Article_Content");
+			var result = await conn.Find(filter).FirstOrDefaultAsync();
+			return result;
+		}
+
+		private static ArticlePage ToArticlePage(Article item)
         {
             return new ArticlePage()
             {
