@@ -68,10 +68,21 @@ namespace Api.Repositories
 
 		public async Task<IEnumerable<NavigationSitemap>> NavigationList()
 		{
-			if (ActiveNavigationItemsFlat != null && ActiveNavigationItems.Any()) return ActiveNavigationItemsFlat.ToArray();
-
 			ActiveNavigationItemsFlat = new List<NavigationSitemap>();
-			await NavigationSitemap();
+
+			var builderSort = Builders<NavigationItem>.Sort;
+			var sort = builderSort.Ascending("ParentId").Ascending("Level");
+
+			var builderFilter = Builders<NavigationItem>.Filter;
+			var filter = builderFilter.Eq("Active", true) &
+						builderFilter.Lte("CreatedDate", DateTime.UtcNow) &
+						builderFilter.Eq("Locale", CultureInfo.CurrentUICulture.Name);
+			var conn = _database.GetCollection<NavigationItem>("Navigation");
+			ActiveNavigationItems = await conn.Find(filter).Sort(sort).ToListAsync();
+
+			var baseUrls = ActiveNavigationItems.Where(b => b.ParentId == null).OrderBy(x => x.Level).ToList();
+
+			var dummy = SitemapItems(baseUrls).ToArray();
 
 			return ActiveNavigationItemsFlat.ToArray();
 		}
