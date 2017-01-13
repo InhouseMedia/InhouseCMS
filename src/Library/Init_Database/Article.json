@@ -181,3 +181,30 @@
 		"$date": "2015-01-01T12:01:00.201Z"
 	}
 }
+{
+	"_id": {
+		"$oid": "587885eb873a31e3958ce728"
+	},
+	"UserId": {
+		"$oid": "564c7e8fe381e49e50812538"
+	},
+	"MetaTitle": "Bedankt",
+	"MetaDescription": "Bedankt voor het contact opnemen met Inhouse Media",
+	"MetaKeywords": "Inhouse Media, Contact",
+	"Controller": "Article",
+	"Action": "Index",
+	"Locale": "nl-NL",
+	"Active": true,
+	"PublishDate": {
+		"$date": "2015-12-01T22:01:00.201Z"
+	},
+	"ExpireDate": {
+		"$date": "2017-12-01T22:12:00.201Z"
+	},
+	"ChangedDate": {
+		"$date": "2015-11-12T03:11:00.201Z"
+	},
+	"CreatedDate": {
+		"$date": "2014-01-01T12:01:00.201Z"
+	}
+}

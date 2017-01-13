@@ -10,7 +10,7 @@
 	"Placement": 1,
 	"Template": null,
 	"ArticleId": null,
-	"Level": 2,
+	"Level": 1,
 	"Active": true,
 	"PublishDate": {
 		"$date": "2016-03-03T16:29:12.000Z"
