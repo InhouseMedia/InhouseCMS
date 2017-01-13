@@ -2,7 +2,7 @@ namespace Library.Models
 {
 	using System;
 	using System.Collections.Generic;
-    
+
 	using MongoDB.Bson;
 	using MongoDB.Bson.Serialization.Attributes;
 
@@ -30,9 +30,11 @@ namespace Library.Models
         [BsonElement("OnClick")]
         public string OnClick { get; set; }
         [BsonElement("Locale")]
-        public string Locale { get; set; } 
+        public string Locale { get; set; }
         [BsonElement("Active")]
         public bool Active { get; set; }
+        [BsonElement("Visible")]
+        public bool Visible { get; set; }
         [BsonElement("PublishDate")]
         public DateTime PublishDate { get; set; }
         [BsonElement("ExpireDate")]
@@ -49,13 +51,13 @@ namespace Library.Models
 		{
 			ChildLocations = new HashSet<NavigationSitemap>();
 		}
-        public string ArticleId { get; set; }   
+        public string ArticleId { get; set; }
 		public string Title { get; set; }
 		public string Url { get; set; }
-		public string OnClick { get; set; } 
+		public string OnClick { get; set; }
 		public double Priority { get; set; }
 		public IEnumerable<NavigationSitemap> ChildLocations { get; set; }
-		
+
 		public NavigationSitemap Clone()
 		{
 			return (NavigationSitemap) this.MemberwiseClone();
