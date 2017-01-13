@@ -1,15 +1,15 @@
 namespace Web.Connections
 {
+    using Library.Models;
+
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Options;
 
     using System;
+    using System.Linq;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
-
-    using Library.Models;
-    using System.Linq;
 
     public class ApiConnection
     {
