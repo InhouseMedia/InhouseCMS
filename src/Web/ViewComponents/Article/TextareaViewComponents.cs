@@ -1,4 +1,4 @@
-namespace Web.ViewComponents
+namespace Web.ViewComponents.Article
 {
 	using Microsoft.AspNetCore.Mvc;
 	using System.Threading.Tasks;

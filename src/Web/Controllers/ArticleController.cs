@@ -4,8 +4,6 @@ namespace Web.Controllers
 	using Microsoft.Extensions.Localization;
 
 	using MailKit;
-	using MailKit.Search;
-	using MailKit.Security;
 	using MailKit.Net.Smtp;
 	using MimeKit;
 
@@ -14,16 +12,16 @@ namespace Web.Controllers
 	using System;
 	using System.Net;
 	using System.Text.RegularExpressions;
+	using System.Threading;
 	using System.Threading.Tasks;
 
 	using Library.Config;
 	using Library.Models;
 	using Web.Repositories;
-    using System.Threading;
 
-    //Done in startup
-    //[ServiceFilter(typeof(LocalizationActionFilter))]
-    public class ArticleController : Controller
+	//Done in startup
+	//[ServiceFilter(typeof(LocalizationActionFilter))]
+	public class ArticleController : Controller
 	{
 		protected readonly SiteConfig _config;
 		protected readonly IStringLocalizer<ArticleController> _localizer;
@@ -37,7 +35,7 @@ namespace Web.Controllers
 			_config = config.GetConfig();
 		}
 
-		public async Task<IActionResult> Index(string id)
+		public virtual async Task<IActionResult> Index(string id)
 		{
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
@@ -80,12 +78,13 @@ namespace Web.Controllers
 			message.Subject = formOptions.Mail.Subject;
 			message.Body = body.ToMessageBody();
 
-			using (var client = new SmtpClient(new ProtocolLogger ("smtp.log")))
+			using (var client = new SmtpClient(new ProtocolLogger("smtp.log")))
 			{
 				try
 				{
-					using (var cancel = new CancellationTokenSource ()) {
-						client.ServerCertificateValidationCallback = (s,c,h,e) => true;
+					using (var cancel = new CancellationTokenSource())
+					{
+						client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
 						var credentials = new NetworkCredential(_config.Mailserver.Account, _config.Mailserver.Password);
 

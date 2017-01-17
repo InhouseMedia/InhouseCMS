@@ -1,4 +1,4 @@
-namespace Web.ViewComponents
+namespace Web.ViewComponents.Article
 {
 	using Newtonsoft.Json;
 	using Microsoft.AspNetCore.Mvc;

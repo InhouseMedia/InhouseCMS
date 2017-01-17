@@ -7,14 +7,14 @@
 }
 
 <div class="content-@Model.Action.ToLower()" id="content-@Model.Action.ToLower()-@Model.Id">
-    <div class="wrapper"></div>
+	<div class="wrapper"></div>
 
-    @Html.Raw(Model.Text)
+	@Html.Raw(Model.Text)
 
-    @if (Model.Code != null)
-    {
-        <script type="text/javascript">
-            document.getElementById('content-@Model.Action.ToLower()-@Model.Id').settings = @Html.Raw(@Model.Code) || {};
-        </script>
-    }
+	@if (Model.Code != null)
+	{
+		<script type="text/javascript">
+			document.getElementById('content-@Model.Action.ToLower()-@Model.Id').settings = @Html.Raw(@Model.Code) || {};
+		</script>
+	}
 </div>
