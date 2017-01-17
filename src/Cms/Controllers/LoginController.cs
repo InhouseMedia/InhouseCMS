@@ -6,24 +6,26 @@ namespace Cms.Controllers
 	using System;
 	using System.Net;
 	using System.Text.RegularExpressions;
-    using System.Threading;
+	using System.Threading;
 	using System.Threading.Tasks;
 
 	using Library.Config;
 	using Library.Models;
 
-    //Done in startup
-    //[ServiceFilter(typeof(LocalizationActionFilter))]
-    public class LoginController : Controller
+	[Area("Cms")]
+	//Done in startup
+	//[ServiceFilter(typeof(LocalizationActionFilter))]
+	public class LoginController : Controller
 	{
-		public LoginController(){
+		public LoginController()
+		{
 
 		}
 
 		public async Task<IActionResult> Index()
 		{
 
-			return View();
+			return View("~/Views/Login/Index.cshtml", null);
 		}
 	}
 }

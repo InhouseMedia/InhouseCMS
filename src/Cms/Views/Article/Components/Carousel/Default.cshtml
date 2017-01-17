@@ -1,0 +1,8 @@
+@using Library.Models;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model ArticleContent
+@{
+	Layout = null;
+}
+<h1>@Html.TextBoxFor(m => m.Title, new { @class = "form-control" })</h1>
