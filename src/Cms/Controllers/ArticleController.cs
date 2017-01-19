@@ -1,3 +1,5 @@
+using Library.Config;
+
 namespace Cms.Controllers
 {
 	using Microsoft.AspNetCore.Mvc;
@@ -6,15 +8,22 @@ namespace Cms.Controllers
 	using System.Threading.Tasks;
 
 	using Web.Repositories;
-	
-	[Area("Cms")]
-	public class ArticleController : Web.Controllers.ArticleController
+
+	public class ArticleController: Controller
 	{
-		public ArticleController(IArticleRepository repository, IStringLocalizer<Web.Controllers.ArticleController> localizer, ConfigRepository config) : base(repository, localizer, config)
+		private readonly SiteConfig _config;
+		private readonly IStringLocalizer<Web.Controllers.ArticleController> _localizer;
+
+		private readonly IArticleRepository _repository;
+
+		public ArticleController(IArticleRepository repository, IStringLocalizer<Web.Controllers.ArticleController> localizer, ConfigRepository config)
 		{
+			_localizer = localizer;
+			_repository = repository;
+			_config = config.GetConfig();
 		}
 
-		public override async Task<IActionResult> Index(string id)
+		public async Task<IActionResult> Index(string id)
 		{
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
@@ -26,7 +35,7 @@ namespace Cms.Controllers
 
 			ViewBag.boxes = _config.Controllers.Article.Tools;
 
-			return View("~/Views/Article/Index.cshtml", result);
+			return View(result);
 		}
 	}
 }

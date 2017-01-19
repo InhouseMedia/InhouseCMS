@@ -2,8 +2,8 @@ namespace Cms
 {
 	// using Cms.Connections;
 	// using Cms.Filters;
-	using Web.Connections;
-	using Web.Repositories;
+	//using Web.Connections;
+	//using Web.Repositories;
 
 	using Library.Models;
 
@@ -120,8 +120,8 @@ namespace Cms
 			{
 				routes.MapRoute(
 					name: "default",
-					template: "{controller=Login}/{action=Index}/{id?}",
-					defaults: new { area = "Cms" }
+					template: "{controller=Login}/{action=Index}/{id?}"
+					//,defaults: new { area = "Cms" }
 				);
 			});
 		}

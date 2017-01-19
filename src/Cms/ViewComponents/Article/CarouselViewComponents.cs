@@ -10,7 +10,7 @@ namespace Cms.ViewComponents.Article
 	{
 		public async Task<IViewComponentResult> InvokeAsync(ArticleContent model)
 		{
-			return View("~/Views/Article/Components/Carousel/Default.cshtml", model);
+			return View(model);
 		}
 	}
 }
