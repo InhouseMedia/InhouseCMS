@@ -1,11 +1,11 @@
-﻿namespace Web.Repositories
+﻿namespace Library.Repositories
 {
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Net.Http;
 
 	using Library.Models;
-	using Web.Connections;
+	using Library.Connections;
 
 	public interface IBoxRepository
 	{

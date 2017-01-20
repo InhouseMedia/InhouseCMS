@@ -1,10 +1,10 @@
-namespace Web.Repositories
+namespace Library.Repositories
 {
+	using Library.Models;
+    using Library.Connections;
+
 	using System.Net.Http;
 	using System.Threading.Tasks;
-
-	using Library.Models;
-    using Web.Connections;
 
     public interface IArticleRepository
 	{

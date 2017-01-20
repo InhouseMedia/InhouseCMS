@@ -1,9 +1,9 @@
-namespace Web.Repositories
+namespace Library.Repositories
 {
-    using System.Net.Http;
-
     using Library.Config;
-    using Web.Connections;
+    using Library.Connections;
+
+    using System.Net.Http;
 
     public class ConfigRepository
     {

@@ -1,4 +1,4 @@
-namespace Web.Connections
+namespace Library.Connections
 {
     using Library.Models;
 

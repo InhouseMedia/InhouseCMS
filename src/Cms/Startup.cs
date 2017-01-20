@@ -1,9 +1,7 @@
 namespace Cms
 {
-	// using Cms.Connections;
-	// using Cms.Filters;
-	//using Web.Connections;
-	//using Web.Repositories;
+	using Library.Connections;
+	using Library.Repositories;
 
 	using Library.Models;
 

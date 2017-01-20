@@ -1,13 +1,13 @@
-namespace Web.Repositories
+namespace Library.Repositories
 {
+	using Library.Models;
+    using Library.Connections;
+
 	using System.Collections.Generic;
+	using System.Globalization;
 	using System.Linq;
 	using System.Net.Http;
-
-	using Library.Models;
-    using Web.Connections;
-    using System.Globalization;
-    using System.Threading.Tasks;
+	using System.Threading.Tasks;
 
     public interface INavigationRepository
 	{

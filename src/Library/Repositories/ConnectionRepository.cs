@@ -1,6 +1,6 @@
-namespace Web.Repositories
+namespace Library.Repositories
 {
-    using Web.Connections;
+    using Library.Connections;
 
     public class ConnectionRepository
     {

@@ -12,7 +12,6 @@ namespace Cms.Controllers
 	using Library.Config;
 	using Library.Models;
 
-	[Area("Cms")]
 	//Done in startup
 	//[ServiceFilter(typeof(LocalizationActionFilter))]
 	public class LoginController : Controller
@@ -25,7 +24,7 @@ namespace Cms.Controllers
 		public async Task<IActionResult> Index()
 		{
 
-			return View("~/Views/Login/Index.cshtml", null);
+			return View(null);
 		}
 	}
 }

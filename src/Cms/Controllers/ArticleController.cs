@@ -1,22 +1,22 @@
-using Library.Config;
-
 namespace Cms.Controllers
 {
+	using Library.Config;
+
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Localization;
 
 	using System.Threading.Tasks;
 
-	using Web.Repositories;
+	using Library.Repositories;
 
 	public class ArticleController: Controller
 	{
 		private readonly SiteConfig _config;
-		private readonly IStringLocalizer<Web.Controllers.ArticleController> _localizer;
+		private readonly IStringLocalizer<ArticleController> _localizer;
 
 		private readonly IArticleRepository _repository;
 
-		public ArticleController(IArticleRepository repository, IStringLocalizer<Web.Controllers.ArticleController> localizer, ConfigRepository config)
+		public ArticleController(IArticleRepository repository, IStringLocalizer<ArticleController> localizer, ConfigRepository config)
 		{
 			_localizer = localizer;
 			_repository = repository;
