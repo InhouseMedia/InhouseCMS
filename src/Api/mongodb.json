@@ -1,4 +1,0 @@
-{
-    "mongoconnection": "mongodb://localhost:27017",
-    "databasename": "Inhouse"
-}
