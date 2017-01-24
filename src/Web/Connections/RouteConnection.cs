@@ -1,14 +1,14 @@
 ﻿namespace Web.Connections
 {
-    using Microsoft.AspNetCore.Routing;
-    using Microsoft.Extensions.Caching.Memory;
+	using Microsoft.AspNetCore.Routing;
+	using Microsoft.Extensions.Caching.Memory;
 	using Microsoft.Extensions.DependencyInjection;
 
 	using System.Threading.Tasks;
 
 	using Library.Repositories;
 
-    public interface IRouteConnection : IRouter
+	public interface IRouteConnection : IRouter
 	{
 	}
 
