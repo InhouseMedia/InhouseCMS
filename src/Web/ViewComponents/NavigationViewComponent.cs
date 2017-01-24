@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
 	using Library.Models;
-    using Web.Repositories;
+    using Library.Repositories;
 
     public class NavigationViewComponent : ViewComponent
 	{

@@ -9,7 +9,7 @@
     using Microsoft.Extensions.Options;
 
 	using Library.Config;
-    using Web.Repositories;
+    using Library.Repositories;
 
     public class LocalizationActionFilter : ActionFilterAttribute
     {

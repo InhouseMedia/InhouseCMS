@@ -17,7 +17,7 @@ namespace Web.Controllers
 
 	using Library.Config;
 	using Library.Models;
-	using Web.Repositories;
+	using Library.Repositories;
 
 	//Done in startup
 	//[ServiceFilter(typeof(LocalizationActionFilter))]
