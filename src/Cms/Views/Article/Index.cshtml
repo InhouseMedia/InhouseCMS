@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 @model ArticlePage
 @{
-	Layout = "~/Views/Shared/_Clean.cshtml";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 	var countContent = (!Model.ArticleContent.Any()) ? "highlight empty" : "";
 }
 <h1>Article</h1>
