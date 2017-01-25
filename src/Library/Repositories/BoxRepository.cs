@@ -16,12 +16,12 @@
 	{
 		private readonly IEnumerable<Box> _boxes;
 
-	    public BoxRepository(ApiConnection api) : base(api)
-	    {
+		public BoxRepository(ApiConnection api) : base(api)
+		{
 			var conn = _api.Connect("box/list");
 			var result = conn.Content.ReadAsAsync<IEnumerable<Box>>();
-		    _boxes = result.Result;
-	    }
+			_boxes = result.Result;
+		}
 
 		public IEnumerable<Box> BoxList(int placement, string articleId, string template)
 		{

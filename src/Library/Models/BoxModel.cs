@@ -1,7 +1,7 @@
 ﻿namespace Library.Models
 {
 	using System;
-    
+
 	using MongoDB.Bson;
 	using MongoDB.Bson.Serialization.Attributes;
 
@@ -28,14 +28,14 @@
 		[BsonElement("Active")]
 		public bool Active { get; set; }
 		[BsonElement("PublishDate")]
-        public DateTime PublishDate { get; set; }
+		public DateTime PublishDate { get; set; }
 		[BsonElement("ExpireDate")]
 		public DateTime? ExpireDate { get; set; }
 		[BsonElement("CreatedDate")]
 		public DateTime CreatedDate { get; set; }
 		[BsonElement("ChangedDate")]
 		public DateTime? ChangedDate { get; set; }
-    }
+	}
 
 
 	public enum BoxPlacement

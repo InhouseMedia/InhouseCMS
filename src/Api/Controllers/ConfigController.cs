@@ -6,20 +6,20 @@ namespace Api.Controllers
 	using Api.Repositories;
 
 	[Route("[controller]")]
-    public class ConfigController : Controller
-    {
+	public class ConfigController : Controller
+	{
 		private readonly IConfigRepository _repository;
 
-        public ConfigController(IConfigRepository repository)
-        {   
-            _repository = repository;
-        }
-     
-        [HttpGet]
+		public ConfigController(IConfigRepository repository)
+		{
+			_repository = repository;
+		}
+
+		[HttpGet]
 		//[ValidateAntiForgeryToken]
-        //[Authorize]
-        public async Task<IActionResult> Get()
-        {
+		//[Authorize]
+		public async Task<IActionResult> Get()
+		{
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
@@ -27,8 +27,8 @@ namespace Api.Controllers
 
 			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
-			
+
 			return new ObjectResult(result);
-        }
+		}
 	}
 }

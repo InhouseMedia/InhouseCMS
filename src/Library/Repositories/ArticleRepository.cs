@@ -1,12 +1,12 @@
 namespace Library.Repositories
 {
 	using Library.Models;
-    using Library.Connections;
+	using Library.Connections;
 
 	using System.Net.Http;
 	using System.Threading.Tasks;
 
-    public interface IArticleRepository
+	public interface IArticleRepository
 	{
 		Task<Article> GetById(string articleId);
 		Task<ArticlePage> GetPage(string articleId);
@@ -15,8 +15,8 @@ namespace Library.Repositories
 
 	public class ArticleRepository : ConnectionRepository, IArticleRepository
 	{
-	    public ArticleRepository(ApiConnection api) : base(api)
-	    {
+		public ArticleRepository(ApiConnection api) : base(api)
+		{
 		}
 
 		public async Task<Article> GetById(string articleId)

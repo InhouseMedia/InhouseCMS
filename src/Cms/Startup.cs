@@ -83,8 +83,8 @@ namespace Cms
 			);
 
 			services.AddSingleton<IArticleRepository, ArticleRepository>();
-			//			services.AddSingleton<IBoxRepository, BoxRepository>();
-			//          services.AddSingleton<INavigationRepository, NavigationRepository>();
+			//services.AddSingleton<IBoxRepository, BoxRepository>();
+			//services.AddSingleton<INavigationRepository, NavigationRepository>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			//services.AddScoped<LocalizationActionFilter>();

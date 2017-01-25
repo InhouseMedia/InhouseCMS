@@ -1,4 +1,4 @@
 ﻿{
-    "apiconnection": "http://localhost:5000",
-    "databasename": "xxx"
+	"apiconnection": "http://localhost:5000",
+	"databasename": "xxx"
 }

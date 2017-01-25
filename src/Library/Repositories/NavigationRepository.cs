@@ -1,7 +1,7 @@
 namespace Library.Repositories
 {
 	using Library.Models;
-    using Library.Connections;
+	using Library.Connections;
 
 	using System.Collections.Generic;
 	using System.Globalization;
@@ -9,7 +9,7 @@ namespace Library.Repositories
 	using System.Net.Http;
 	using System.Threading.Tasks;
 
-    public interface INavigationRepository
+	public interface INavigationRepository
 	{
 		NavigationSitemap GetNavigationItem(string path);
 		Task<IEnumerable<NavigationSitemap>> GetNavigation();
@@ -19,13 +19,13 @@ namespace Library.Repositories
 	{
 		private readonly IEnumerable<NavigationSitemap> _navigation;
 
-	    public NavigationRepository(ApiConnection api) : base(api)
-	    {
+		public NavigationRepository(ApiConnection api) : base(api)
+		{
 			var locale = CultureInfo.DefaultThreadCurrentUICulture.Name;
 			var conn = _api.Connect(locale + "/navigation/list");
 			var result = conn.Content.ReadAsAsync<IEnumerable<NavigationSitemap>>();
-		    _navigation = result.Result;
-	    }
+			_navigation = result.Result;
+		}
 
 		public NavigationSitemap GetNavigationItem(string path)
 		{

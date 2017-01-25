@@ -1,9 +1,10 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "editor.insertSpaces": false,
-    "editor.formatOnSave": false,
-    "trailing-spaces.trimOnSave": true,
-    "editor.detectIndentation": false,
-    "editor.renderWhitespace": "all",
-    "editor.renderControlCharacters": true
+	"editor.insertSpaces": false,
+	"editor.formatOnSave": false,
+	"trailing-spaces.trimOnSave": true,
+	"editor.detectIndentation": false,
+	"editor.renderWhitespace": "all",
+	"editor.renderControlCharacters": true,
+	"editor.formatOnType": true
 }

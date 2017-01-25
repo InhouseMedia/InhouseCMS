@@ -8,5 +8,16 @@
 
 <div class="form-group">
 	<label for="input_@(name)">@Model.Label</label>
-	@Html.TextArea(name, Model.Value, new { id = "input_" + name, type = Model.Type, title = Model.Label, placeholder = Model.PlaceHolder, tabindex = Model.TabIndex, autocomplete = "off", @class = "form-control", autofocus = Model.AutoFocus.ToString().ToLower(), required = Model.Required.ToString().ToLower() })
+	@Html.TextArea(name, Model.Value, new {
+			id = "input_" + name,
+			type = Model.Type,
+			title = Model.Label,
+			placeholder = Model.PlaceHolder,
+			tabindex = Model.TabIndex,
+			autocomplete = "off",
+			@class = "form-control",
+			autofocus = Model.AutoFocus.ToString().ToLower(),
+			required = Model.Required.ToString().ToLower()
+		}
+	)
 </div>

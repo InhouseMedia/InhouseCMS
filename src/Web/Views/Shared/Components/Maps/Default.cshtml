@@ -9,32 +9,32 @@
 <div id="gmap_canvas" class="google-maps" style="height: 440px; width: 100%;"></div>
 
 <script type="text/javascript">
-    function initMap() {
-        var myOptions = {
-            zoom: 16,
-            center: new google.maps.LatLng(@(config.Company.Geolocation.Latitude), @(config.Company.Geolocation.Longitude)),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+	function initMap() {
+		var myOptions = {
+			zoom: 16,
+			center: new google.maps.LatLng(@(config.Company.Geolocation.Latitude), @(config.Company.Geolocation.Longitude)),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
 
-        var map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+		var map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
 
-        var marker = new google.maps.Marker(
-            {
-                map: map,
-                position: new google.maps.LatLng(@(config.Company.Geolocation.Latitude), @(config.Company.Geolocation.Longitude))
-            }
-        );
+		var marker = new google.maps.Marker(
+			{
+				map: map,
+				position: new google.maps.LatLng(@(config.Company.Geolocation.Latitude), @(config.Company.Geolocation.Longitude))
+			}
+		);
 
-        var infowindow = new google.maps.InfoWindow(
-            {
-                content: '<strong>@(config.Name)</strong><br>@(config.Company.Address.Street) @(config.Company.Address.Number), @(config.Company.Address.City)'
-            }
-        );
+		var infowindow = new google.maps.InfoWindow(
+			{
+				content: '<strong>@(config.Name)</strong><br>@(config.Company.Address.Street) @(config.Company.Address.Number), @(config.Company.Address.City)'
+			}
+		);
 
-        google.maps.event.addListener(marker, 'click', function() { infowindow.open(map, marker); });
+		google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); });
 
-        infowindow.open(map, marker);
-    }
+		infowindow.open(map, marker);
+	}
 </script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyBdP8A2Vgi1ypeKY5-g_rN1UV5RYwFe48w&v=3.exp"></script>

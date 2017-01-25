@@ -7,18 +7,18 @@ namespace Web.ViewComponents.Article
 
 	public class FormViewComponent : ViewComponent
 	{
-        public IViewComponentResult Invoke(ArticleContent model)
-        {
-            if (!ModelState.IsValid)
-                return View(); //return new StatusCodeResult(500); // 500 Internal Server Error
+		public IViewComponentResult Invoke(ArticleContent model)
+		{
+			if (!ModelState.IsValid)
+				return View(); //return new StatusCodeResult(500); // 500 Internal Server Error
 
-            var formFields = JsonConvert.DeserializeObject<FormModel>(model.Code);
+			var formFields = JsonConvert.DeserializeObject<FormModel>(model.Code);
 
 			ViewBag.ArticleId = model.ArticleId;
-           	ViewBag.ContentId = model.Id;
-        	ViewBag.Action = model.Action;
+			ViewBag.ContentId = model.Id;
+			ViewBag.Action = model.Action;
 
-            return View(formFields);
-        }
-    }
+			return View(formFields);
+		}
+	}
 }

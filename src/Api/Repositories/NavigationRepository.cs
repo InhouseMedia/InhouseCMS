@@ -1,52 +1,52 @@
 namespace Api.Repositories
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Threading.Tasks;
+	using System;
+	using System.Collections.Generic;
+	using System.Globalization;
+	using System.Linq;
+	using System.Threading.Tasks;
 
-    using MongoDB.Driver;
-    using MongoDB.Bson;
+	using MongoDB.Driver;
+	using MongoDB.Bson;
 
-    using Api.Connections;
+	using Api.Connections;
 	using Library.Models;
 
-    public interface INavigationRepository
+	public interface INavigationRepository
 	{
 		Task<IEnumerable<NavigationItem>> NavigationItems();
-        Task<NavigationItem> GetById(ObjectId id);
+		Task<NavigationItem> GetById(ObjectId id);
 		Task<IEnumerable<NavigationSitemap>> NavigationSitemap();
-        Task<IEnumerable<NavigationSitemap>> NavigationList();
+		Task<IEnumerable<NavigationSitemap>> NavigationList();
 	}
 
-    public class NavigationRepository : ConnectionRepository, INavigationRepository
-    {
-        public static IEnumerable<NavigationItem> ActiveNavigationItems;
+	public class NavigationRepository : ConnectionRepository, INavigationRepository
+	{
+		public static IEnumerable<NavigationItem> ActiveNavigationItems;
 		public static List<NavigationSitemap> ActiveNavigationItemsFlat;
 
-        public NavigationRepository(DatabaseConnection database) : base(database)
-        {
-        }
+		public NavigationRepository(DatabaseConnection database) : base(database)
+		{
+		}
 
-        public async Task<IEnumerable<NavigationItem>> NavigationItems()
-        {
-            var conn = _database.GetCollection<NavigationItem>("Navigation");
-            var result = await conn.Find(_=>true).ToListAsync();
-            return result.ToArray();
-        }
+		public async Task<IEnumerable<NavigationItem>> NavigationItems()
+		{
+			var conn = _database.GetCollection<NavigationItem>("Navigation");
+			var result = await conn.Find(_ => true).ToListAsync();
+			return result.ToArray();
+		}
 
-        public async Task<NavigationItem> GetById(ObjectId id)
-        {
+		public async Task<NavigationItem> GetById(ObjectId id)
+		{
 			var builder = Builders<NavigationItem>.Filter;
-            var filter = builder.Eq("Id", id) &
+			var filter = builder.Eq("Id", id) &
 						builder.Eq("Locale", CultureInfo.CurrentUICulture.Name);
 			var conn = _database.GetCollection<NavigationItem>("Navigation");
 			var result = await conn.Find(filter).FirstOrDefaultAsync();
 			return result;
-        }
+		}
 
-        public async Task<IEnumerable<NavigationSitemap>> NavigationSitemap()
+		public async Task<IEnumerable<NavigationSitemap>> NavigationSitemap()
 		{
 			ActiveNavigationItemsFlat = new List<NavigationSitemap>();
 
@@ -97,16 +97,16 @@ namespace Api.Repositories
 				var tempSub = ActiveNavigationItems.Where(n => n.ParentId == item.Id).OrderBy(x => x.Level).ToList();
 
 				var siteMapItem = ToSiteMapItem(item);
-					siteMapItem.Url = parentUrl + tempExtra + siteMapItem.Url;
+				siteMapItem.Url = parentUrl + tempExtra + siteMapItem.Url;
 
 				// Flat List of all active menuitems that we can use to search the correct ArticleId to a specific Url
 				var tempItem = siteMapItem.Clone();
-					tempItem.ChildLocations = null;
+				tempItem.ChildLocations = null;
 
-					ActiveNavigationItemsFlat.Add(tempItem);
+				ActiveNavigationItemsFlat.Add(tempItem);
 
-					siteMapItem.ChildLocations = SitemapItems(tempSub, siteMapItem.Url);
-					result.Add(siteMapItem);
+				siteMapItem.ChildLocations = SitemapItems(tempSub, siteMapItem.Url);
+				result.Add(siteMapItem);
 			}
 			return result;
 		}
@@ -124,5 +124,5 @@ namespace Api.Repositories
 				ChildLocations = { }
 			};
 		}
-    }
+	}
 }
