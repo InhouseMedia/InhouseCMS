@@ -4,19 +4,42 @@
 @model ArticleContent
 @{
 	Layout = null;
+	var contentId = @Model.Id;
 }
 
-<div class="content-@Model.Action.ToLower()">
-	<hgroup class="title">
-		<h1>@Html.DisplayFor(m => m.Title)</h1>
-	</hgroup>
+<div class="panel panel-default">
+	<div class="dragHandle">:::</div>
+	<div class="row no-gutter">
+		<div class="col-xs-1 col-md-1">
+			<h4 class="panel-title">@Model.Action</h4>
+		</div>
+		<div class="col-xs-8 col-md-8">
+			<h4 class="panel-title">
+				<a href="#collapseText_@contentId" aria-expanded="true" aria-controls="collapseText_@contentId">
+					@Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+				</a>
+			</h4>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<div class="btn-group pull-right" role="group" aria-label="...">
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						@Localizer["Options"]
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu pull-right" role="menu">
+						<li><a href="#">@Localizer["NotAvailable"]</a></li>
+					</ul>
+				</div>
+				<button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
+			</div>
+		</div>
+	</div>
 
-	@Html.Raw(Model.Text)
-
-	@if (Model.Code != null)
-	{
-		<script type="text/javascript">
-			Html.Raw(Model.Code)
-		</script>
-	}
+	<div id="collapseText_@contentId" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingText_@contentId">
+		<div class="panel-body form-horizontal">
+			@Html.LabelFor(m => m.Text)
+			@Html.TextAreaFor(m => m.Text)
+		</div>
+	</div>
 </div>

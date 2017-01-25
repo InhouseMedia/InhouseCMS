@@ -2,13 +2,45 @@
 @using System.Globalization
 @using System.Threading.Tasks
 @using Library.Models
+@using Cms.Controllers
+@using Library.Repositories
+@inject ConfigRepository Config
 @{
+	var config = Config.GetConfig();
+	//var controller = ((string) ViewContext.RouteData.Values["controller"]).ToLower();
+	//var action = ((string) ViewContext.RouteData.Values["action"]).ToLower();
+	//var articleId = (string) ViewContext.RouteData.Values["id"];
+	var locale = CultureInfo.DefaultThreadCurrentUICulture.ToString();
+	var language = locale.Split('-').First();
 }
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="@language" xml:lang="@language">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="content-language" content="@language" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="generator" content="@config.SearchEngines.Generator" />
+	<meta name="author" content="@config.SearchEngines.Generator" />
+	<meta name="title" content="CMS - @config.SearchEngines.Generator" />
+	<meta name="keywords" content="CMS, @config.SearchEngines.Generator" />
+	<meta name="description" content="CMS made by @config.SearchEngines.Generator" />
+	<meta name="robots" content="noindex,nofollow" />
+	<meta name="googlebot" content="noindex,nofollow" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	@if (!config.SearchEngines.GoogleTranslation)
+	{
+	<meta name="google" content="notranslate">
+	}
+
+	<link rel="Shortcut Icon" href="~/myicon.ico" />
+
+	<title>CMS - @config.SearchEngines.Author</title>
+
+	<script type="text/javascript">
+		var Locale = "@locale";
+		var Language = "@language";
+	</script>
 
 	<environment names="Development">
 		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -19,7 +51,14 @@
 </head>
 
 <body>
-	@RenderBody()
+
+	<div class="container body-content">
+		@RenderBody()
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year - @config.SearchEngines.Generator</p>
+		</footer>
+	</div>
 
 	<environment names="Development">
 		<script src="~/lib/jquery/dist/jquery.js"></script>
