@@ -1,0 +1,20 @@
+/// <reference path="../lib/bootstrap/less/bootstrap.less" />
+
+.border-radius(@radius) {
+	border-radius: @radius;
+}
+
+.circle(@size){
+	width: @size;
+	height: @size;
+	.border-radius(50%);
+}
+
+.form-control-focus(@color: @input-border-focus) {
+	&:focus {
+		background-color: @input-bg-focus;
+		border-color: @color;
+		outline: 0;
+		.box-shadow(~"none");
+	}
+}
