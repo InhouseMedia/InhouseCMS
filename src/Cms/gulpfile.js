@@ -66,6 +66,12 @@ gulp.task('less', function () {
 	return gulp.src(webroot + 'less/cms.bootstrap.less', {base: '.'})
 		.pipe(sourcemaps.init())
 		.pipe(less())
+		.pipe(rename(function (path) {
+			//var filename = path.dirname.replace('/less', '').replace('\\less', '').toLowerCase();
+			path.dirname = webroot + 'css';
+			//path.basename = filename + '.bootstrap';
+			path.extname = '.css';
+		}))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('.'));
 });
