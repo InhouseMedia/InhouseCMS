@@ -3,11 +3,12 @@
 
 #INHOUSE
 */Api/mongodb.json
+*/Cms/api.json
+*/Cms/wwwroot/css/
+*/Cms/wwwroot/js/*.min.js
 */Cms/wwwroot/lib/
 */Web/api.json
-*/Web/Content/**/css/
 */Web/wwwroot/templates/**/css/
-*/Web/wwwroot/css/*.bootstrap.css
 */Web/wwwroot/css/
 */Web/wwwroot/js/*.min.js
 */Web/wwwroot/lib/
