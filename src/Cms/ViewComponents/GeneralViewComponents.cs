@@ -26,7 +26,7 @@ namespace Cms.ViewComponents
 			// ConfigClass for all visibility options
 			var se = _config.SearchEngines;
 			var t = typeof(Visibility);
-			var properties = t.PropertyInfo();
+			var properties = t.GetTypeInfo().DeclaredFields;
 
 			ViewBag.Visibility = new List<BoxVisibility>();
 			//ViewBag.Templates = new List<SelectListItem>();

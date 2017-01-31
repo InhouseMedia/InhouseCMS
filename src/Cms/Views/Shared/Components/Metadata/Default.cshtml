@@ -1,0 +1,27 @@
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Cms.Controllers
+@using Library.Models
+@inject IHtmlLocalizer<ResourceController> SharedLocalizer
+@model ArticlePage
+@{
+	Layout = null;
+}
+
+<div class="panel panel-primary">
+	<div class="panel-heading" role="tab" id="headingMetadata" data-toggle="collapse" data-parent="#accordion" data-target="#collapseMetadata">
+		<h4 class="panel-title">
+			<a href="#collapseMetadata" aria-expanded="true" aria-controls="collapseMetadata">
+				@SharedLocalizer["Search Engine Optimization"]
+			</a>
+		</h4>
+	</div>
+	<div id="collapseMetadata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMetadata">
+		<div class="panel-body form-horizontal">
+			@Html.HiddenFor(m => m.Id)
+			@Html.EditorFor(m => m.MetaTitle, new { Label = true })
+			@Html.EditorFor(m => m.MetaKeywords, new { Label = true })
+			@Html.EditorFor(m => m.MetaDescription, new { Label = true })
+		</div>
+	</div>
+</div>

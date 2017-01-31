@@ -1,0 +1,31 @@
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Cms.Controllers
+@using Library.Models
+@using Library.Repositories
+@inject ConfigRepository Config
+@inject IHtmlLocalizer<ResourceController> SharedLocalizer
+@model ArticlePage
+@{
+    Layout = null;
+}
+<div class="panel panel-primary">
+	<div class="panel-heading" role="tab" id="headingActions" data-toggle="collapse" data-parent="#accordion" data-target="#collapseActions">
+		<h4 class="panel-title">
+			<a href="#collapseActions" aria-expanded="true" aria-controls="collapseActions">
+				@SharedLocalizer["Content items"]
+			</a>
+		</h4>
+	</div>
+	<div id="collapseActions" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingActions">
+		@*if (ViewBag.grid.TotalRowCount > 0)
+		{
+			@ViewBag.grid.GetHtml(
+				tableStyle: "table table-striped table-hover table-drag",
+				headerStyle: "head",
+				alternatingRowStyle: "alt",
+				columns: ViewBag.gridColumns
+			)
+		}*@
+	</div>
+</div>
