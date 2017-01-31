@@ -23,7 +23,7 @@
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			@foreach (string item in ViewBag.Boxes)
 			{
-				@*await Component.InvokeAsync(item, new { model = Model })*@
+				@await Component.InvokeAsync(item, new { model = Model })
 			}
 		</div>
 	</div>

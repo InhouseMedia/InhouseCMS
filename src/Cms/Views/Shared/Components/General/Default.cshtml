@@ -1,0 +1,69 @@
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Cms.Controllers
+@using Library.Models
+@inject IHtmlLocalizer<ResourceController> SharedLocalizer
+@model ArticlePage
+@{
+	Layout = null;
+}
+
+<div id="isolatedGroup">
+	<div class="panel panel-primary">
+		<div class="panel-heading" role="tab" id="headingGeneral" data-toggle="collapse" data-parent="#isolatedGroup" data-target="#collapseGeneral">
+			<h4 class="panel-title">
+				<a href="#collapseGeneral" aria-expanded="true" aria-controls="collapseGeneral">
+				@SharedLocalizer["Information"]
+			</a>
+			</h4>
+		</div>
+		<div id="collapseGeneral" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingGeneral">
+			<div class="panel-body form-horizontal">
+				<div class="row">
+					<div class="col-xs-6 col-md-6">
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" aria-label="...">
+						</span>
+							<button type="submit" class="btn btn-primary btn-block">@SharedLocalizer["Save"]</button>
+						</div>
+					</div>
+					<div class="col-xs-6 col-md-6">
+						<button class="btn btn-general btn-block">@SharedLocalizer["Preview"]</button>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						<label>@SharedLocalizer["Page visibility"]</label>
+						<div class="btn-group btn-group-justified" role="group" data-toggle="buttons">
+							@foreach (var item in ViewBag.Visibility) {
+							<label class="btn btn-default @item.Active">
+								@Html.RadioButton("Active", (int)item.Key, false) @item.Translation
+							</label> }
+						</div>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						@*Html.LabelFor(m => m.Template) @Html.DropDownListFor(m => m.Template, (List<SelectListItem>)ViewBag.Templates, new { @class = "form-control" })*@
+					</div>
+				</div>
+				@if (Model.CreatedDate != null) {
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						@Html.LabelFor(m => m.CreatedDate) @Html.DisplayFor(m => m.CreatedDate)
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						@Html.LabelFor(m => m.UserId) @Html.ValueFor(m => m.UserId)
+					</div>
+				</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>

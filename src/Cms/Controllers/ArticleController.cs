@@ -1,13 +1,12 @@
 namespace Cms.Controllers
 {
 	using Library.Config;
+	using Library.Repositories;
 
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Localization;
 
 	using System.Threading.Tasks;
-
-	using Library.Repositories;
 
 	public class ArticleController: Controller
 	{
