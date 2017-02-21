@@ -1,11 +1,13 @@
 @using System.Threading.Tasks
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Cms.Controllers
+@using Library.Helpers
 @using Library.Models
 @using Library.Repositories
 @inject ConfigRepository Config
 @inject IHtmlLocalizer<ResourceController> SharedLocalizer
-@model ArticlePage
+@addTagHelper "*, Library"
+@model IEnumerable<NavigationSitemap>
 @{
     Layout = null;
 }
@@ -19,6 +21,9 @@
 		</h4>
 	</div>
 	<div id="collapseActions" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingActions">
+
+	<treeview tree-list="@Model"></treeview>
+
 		@*if (ViewBag.grid.TotalRowCount > 0)
 		{
 			@ViewBag.grid.GetHtml(
