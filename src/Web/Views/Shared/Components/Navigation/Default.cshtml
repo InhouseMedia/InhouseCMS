@@ -1,6 +1,7 @@
 @using System.Threading.Tasks
 @using Library.Models
-@addTagHelper "*, Web"
+@using Library.Helpers
+@addTagHelper "*, Library"
 @model IEnumerable<NavigationSitemap>
 
 <treeview tree-list="@Model"></treeview>

@@ -1,4 +1,4 @@
-﻿namespace Web.Helpers
+﻿namespace Library.Helpers
 {
 	using Library.Models;
 
