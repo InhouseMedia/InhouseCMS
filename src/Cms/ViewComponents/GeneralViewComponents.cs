@@ -50,7 +50,7 @@ namespace Cms.ViewComponents
 					Active = (x == active) ? "active" : "",
 					Name = name,
 					Key = x,
-					Translation = _sharedLocalizer["{0}", name]
+					Translation = _sharedLocalizer[name]
 				};
 
 				ViewBag.Visibility.Add(boxObject);
