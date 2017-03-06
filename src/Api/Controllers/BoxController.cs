@@ -5,6 +5,7 @@ namespace Api.Controllers
 
 	using MongoDB.Bson;
 
+	using Api.Connections;
 	using Api.Repositories;
 
 	[Route("[controller]")]
@@ -12,7 +13,7 @@ namespace Api.Controllers
 	{
 		private readonly IBoxRepository _repository;
 
-		public BoxController(IBoxRepository repository)
+		public BoxController(IBoxRepository repository, IDatabaseConnection connection)
 		{
 			_repository = repository;
 		}

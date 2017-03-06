@@ -7,17 +7,34 @@ namespace Api.Connections
 
 	using Library.Models;
 
-	public class DatabaseConnection
+	public interface IDatabaseConnection
 	{
-		private readonly IMongoDatabase _db;
+		void SetDatabase();
+		IMongoDatabase Connect();
+	}
+
+	public class DatabaseConnection : IDatabaseConnection
+	{
+		private readonly IMongoClient _client;
+		private readonly IHttpContextAccessor _context;
+
+		private readonly Database _connection;
+		private IMongoDatabase _db;
+		private string _databaseName;
+
 
 		public DatabaseConnection(IOptions<Database> database, IHttpContextAccessor httpContextAccessor)
 		{
-			var connection = database.Value;
-			var databaseName = (string)httpContextAccessor.HttpContext.Request.Headers["ConnectionKey"] ?? connection.DatabaseName;
+			_context = httpContextAccessor;
+			_connection = database.Value;
+			_client = new MongoClient(_connection.MongoConnection);
+			SetDatabase();
+		}
 
-			var client = new MongoClient(connection.MongoConnection);
-			_db = client.GetDatabase(databaseName);
+		public void SetDatabase()
+		{
+			_databaseName = (string)_context.HttpContext.Request.Headers["ConnectionKey"] ?? _connection.DatabaseName;
+			_db = _client.GetDatabase(_databaseName);
 		}
 
 		public IMongoDatabase Connect()

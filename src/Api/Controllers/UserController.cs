@@ -7,6 +7,7 @@
 
 	using MongoDB.Bson;
 
+	using Api.Connections;
 	using Api.Models;
 	using Api.Repositories;
 
@@ -15,7 +16,7 @@
 	{
 		private readonly IUserRepository _repository;
 
-		public UserController(IUserRepository repository)
+		public UserController(IUserRepository repository, IDatabaseConnection connection)
 		{
 			_repository = repository;
 		}

@@ -8,7 +8,7 @@ namespace Api.Repositories
 	{
 		protected readonly IMongoDatabase _database;
 
-		public ConnectionRepository(DatabaseConnection database)
+		public ConnectionRepository(IDatabaseConnection database)
 		{
 			_database = database.Connect();
 		}

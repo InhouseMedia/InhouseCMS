@@ -21,7 +21,7 @@ namespace Api.Repositories
 
 	public class ArticleRepository : ConnectionRepository, IArticleRepository
 	{
-		public ArticleRepository(DatabaseConnection database) : base(database)
+		public ArticleRepository(IDatabaseConnection database) : base(database)
 		{
 		}
 

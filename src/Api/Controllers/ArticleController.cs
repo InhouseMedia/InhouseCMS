@@ -5,6 +5,7 @@ namespace Api.Controllers
 
 	using MongoDB.Bson;
 
+	using Api.Connections;
 	using Api.Repositories;
 
 	[Route("[controller]")]
@@ -12,7 +13,7 @@ namespace Api.Controllers
 	{
 		private readonly IArticleRepository _repository;
 
-		public ArticleController(IArticleRepository repository)
+		public ArticleController(IArticleRepository repository, IDatabaseConnection connection)
 		{
 			_repository = repository;
 		}
