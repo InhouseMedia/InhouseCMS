@@ -16,6 +16,7 @@ namespace Library.Connections
 		private readonly Api _api;
 		private readonly string _apiConnection;
 		private readonly string _databaseName;
+		private readonly string _hostname;
 
 		public ApiConnection(IOptions<Api> api, IHttpContextAccessor httpContextAccessor)
 		{
@@ -25,14 +26,17 @@ namespace Library.Connections
 			//_apiConnection = httpContextAccessor.HttpContext.Request.Host.ToString() ?? connection.ApiConnection;
 			//_databaseName = httpContextAccessor.HttpContext.Request.Host.Host ?? connection.DatabaseName;
 			_apiConnection = _api.ApiConnection;
-			_databaseName = httpContextAccessor.HttpContext?.Request.Host.Host ?? "";
+			_hostname = httpContextAccessor.HttpContext?.Request.Host.Host ?? "";
 
 			var ssl = httpContextAccessor.HttpContext?.Request.Scheme ?? "http";
-			var domainList = _databaseName.Split('.');
+			var domainList = _hostname.Split('.');
 			var isLocalhost = domainList.Any(x => x.Equals("localhost"));
+			var isTest = domainList.Any(x => x.Equals("test"));
 
-			_databaseName = (domainList.Any() && !isLocalhost && _databaseName != "") ? domainList[1] : _api.DatabaseName;
-			_apiConnection = (!isLocalhost && _databaseName != "") ? ssl + "://api." + _databaseName : _api.ApiConnection;
+			_databaseName = (domainList.Any() && !isLocalhost && _hostname != "") ? domainList[1] : _api.DatabaseName;
+			_databaseName = isTest ? _databaseName + ":5000" : _databaseName;
+			//_apiConnection = (!isLocalhost && _databaseName != "") ? ssl + "://api." + _databaseName : _api.ApiConnection;
+			_apiConnection = (!isLocalhost && _databaseName != "") ? ssl + "://" + _hostname.Replace("www", "api") : _api.ApiConnection;
 		}
 
 		public async Task<HttpResponseMessage> ConnectAsync(string call)
