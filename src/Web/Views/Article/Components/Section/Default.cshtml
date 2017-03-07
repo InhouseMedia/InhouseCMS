@@ -1,0 +1,37 @@
+@using Library.Repositories
+@using Library.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Collections.Generic
+@inject ConfigRepository Config
+@inject IViewLocalizer Localizer
+@model List<SectionModel>
+@{
+	Layout = null;
+	var config = Config.GetConfig();
+}
+
+<div class="content-@ViewBag.Action.ToLower()">
+@foreach(var item in Model)
+{
+	<section>
+		@if(item.Image != null)
+		{
+		<figure>
+			<img src="~/templates/@config.Path/images/@item.Image" alt="@item.Title"/>
+		</figure>
+		}
+		<header>
+			<h3>@item.Title</h3>
+		</header>
+		<p>
+			@item.Text
+		</p>
+		@if(item.Link != null)
+		{
+		<footer>
+			<a href="@item.Link.Url" title="@item.Title" target="@item.Link.Target">@item.Link.Title</a>
+		</footer>
+		}
+	</section>
+}
+</div>
