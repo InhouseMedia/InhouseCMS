@@ -8,7 +8,7 @@
 	Layout = null;
 	var tabindex = 1;
 }
-<div class="content-form">
+<div class="content-@ViewBag.Action.ToLower()">
 	<form method="post" action="/Article/@ViewBag.Action" autocomplete="off">
 		@Html.AntiForgeryToken()
 		@Html.Hidden("ContentId", (string) ViewBag.ContentId)
