@@ -19,7 +19,7 @@ namespace Api.Repositories
 	{
 		private readonly SiteConfig _config;
 
-		public ConfigRepository(DatabaseConnection database, IOptions<SiteConfig> config) : base(database)
+		public ConfigRepository(IDatabaseConnection database, IOptions<SiteConfig> config) : base(database)
 		{
 			_config = config.Value;
 		}

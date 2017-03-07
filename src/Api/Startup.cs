@@ -70,11 +70,11 @@ namespace Api
 				}
 			);
 
-			services.AddSingleton<IArticleRepository, ArticleRepository>();
-			services.AddSingleton<INavigationRepository, NavigationRepository>();
-			services.AddSingleton<IUserRepository, UserRepository>();
-			services.AddSingleton<IBoxRepository, BoxRepository>();
-			services.AddSingleton<IConfigRepository, ConfigRepository>();
+			services.AddTransient<IArticleRepository, ArticleRepository>();
+			services.AddTransient<INavigationRepository, NavigationRepository>();
+			services.AddTransient<IUserRepository, UserRepository>();
+			services.AddTransient<IBoxRepository, BoxRepository>();
+			services.AddTransient<IConfigRepository, ConfigRepository>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddScoped<LanguageActionFilter>();

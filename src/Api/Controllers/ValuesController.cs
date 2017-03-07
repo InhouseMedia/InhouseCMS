@@ -8,7 +8,6 @@ namespace Api.Controllers
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.Extensions.Options;
 
-	using Api.Connections;
 	using Api.Filters;
 
 	[ServiceFilter(typeof(LanguageActionFilter))]
@@ -18,7 +17,7 @@ namespace Api.Controllers
 	{
 		private readonly IStringLocalizer<ValuesController> _localizer;
 
-		public ValuesController(IStringLocalizer<ValuesController> localizer, IOptions<RequestLocalizationOptions> localizationOptions, IDatabaseConnection connection)
+		public ValuesController(IStringLocalizer<ValuesController> localizer, IOptions<RequestLocalizationOptions> localizationOptions)
 		{
 			var test = localizationOptions;
 			_localizer = localizer;

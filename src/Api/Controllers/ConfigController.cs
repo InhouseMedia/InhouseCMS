@@ -3,7 +3,6 @@ namespace Api.Controllers
 	using System.Threading.Tasks;
 	using Microsoft.AspNetCore.Mvc;
 
-	using Api.Connections;
 	using Api.Repositories;
 
 	[Route("[controller]")]
@@ -11,7 +10,7 @@ namespace Api.Controllers
 	{
 		private readonly IConfigRepository _repository;
 
-		public ConfigController(IConfigRepository repository, IDatabaseConnection connection)
+		public ConfigController(IConfigRepository repository)
 		{
 			_repository = repository;
 		}

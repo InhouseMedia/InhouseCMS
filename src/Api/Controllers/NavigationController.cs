@@ -7,7 +7,6 @@ namespace Api.Controllers
 
 	using MongoDB.Bson;
 
-	using Api.Connections;
 	using Api.Filters;
 	using Api.Repositories;
 
@@ -19,7 +18,7 @@ namespace Api.Controllers
 		private readonly INavigationRepository _repository;
 		private readonly IStringLocalizer<NavigationController> _localizer;
 
-		public NavigationController(INavigationRepository repository, IStringLocalizer<NavigationController> localizer, IDatabaseConnection connection)
+		public NavigationController(INavigationRepository repository, IStringLocalizer<NavigationController> localizer)
 		{
 			_repository = repository;
 			_localizer = localizer;

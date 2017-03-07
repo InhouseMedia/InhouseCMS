@@ -34,7 +34,7 @@ namespace Library.Connections
 			var isTest = domainList.Any(x => x.Equals("test"));
 
 			_databaseName = (domainList.Any() && !isLocalhost && _hostname != "") ? domainList[1] : _api.DatabaseName;
-			_databaseName = isTest ? _databaseName + ":5000" : _databaseName;
+			_hostname = isTest ? _hostname + ":5000" : _hostname;
 			//_apiConnection = (!isLocalhost && _databaseName != "") ? ssl + "://api." + _databaseName : _api.ApiConnection;
 			_apiConnection = (!isLocalhost && _databaseName != "") ? ssl + "://" + _hostname.Replace("www", "api") : _api.ApiConnection;
 		}

@@ -25,7 +25,7 @@ namespace Api.Repositories
 		public static IEnumerable<NavigationItem> ActiveNavigationItems;
 		public static List<NavigationSitemap> ActiveNavigationItemsFlat;
 
-		public NavigationRepository(DatabaseConnection database) : base(database)
+		public NavigationRepository(IDatabaseConnection database) : base(database)
 		{
 		}
 

@@ -19,7 +19,7 @@ namespace Api.Repositories
 
 	public class BoxRepository : ConnectionRepository, IBoxRepository
 	{
-		public BoxRepository(DatabaseConnection database) : base(database)
+		public BoxRepository(IDatabaseConnection database) : base(database)
 		{
 		}
 

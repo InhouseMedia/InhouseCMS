@@ -18,7 +18,7 @@
 
 	public class UserRepository : ConnectionRepository, IUserRepository
 	{
-		public UserRepository(DatabaseConnection database) : base(database)
+		public UserRepository(IDatabaseConnection database) : base(database)
 		{
 		}
 

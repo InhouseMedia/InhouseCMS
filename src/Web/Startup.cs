@@ -84,9 +84,9 @@ namespace Web
 				}
 			);
 
-			services.AddSingleton<IArticleRepository, ArticleRepository>();
-			services.AddSingleton<IBoxRepository, BoxRepository>();
-			services.AddSingleton<INavigationRepository, NavigationRepository>();
+			services.AddTransient<IArticleRepository, ArticleRepository>();
+			services.AddTransient<IBoxRepository, BoxRepository>();
+			services.AddTransient<INavigationRepository, NavigationRepository>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddScoped<LocalizationActionFilter>();
