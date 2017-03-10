@@ -22,9 +22,6 @@ namespace Library.Connections
 		{
 			_api = api.Value;
 
-			//TODO: Get api url from hostname, otherwise fallback (connection.ApiConnection) (also when = localhost)
-			//_apiConnection = httpContextAccessor.HttpContext.Request.Host.ToString() ?? connection.ApiConnection;
-			//_databaseName = httpContextAccessor.HttpContext.Request.Host.Host ?? connection.DatabaseName;
 			_apiConnection = _api.ApiConnection;
 			_hostname = httpContextAccessor.HttpContext?.Request.Host.Host ?? "";
 
@@ -35,7 +32,7 @@ namespace Library.Connections
 
 			_databaseName = (domainList.Any() && !isLocalhost && _hostname != "") ? domainList[1] : _api.DatabaseName;
 			_hostname = isTest ? _hostname + ":5000" : _hostname;
-			//_apiConnection = (!isLocalhost && _databaseName != "") ? ssl + "://api." + _databaseName : _api.ApiConnection;
+
 			_apiConnection = (!isLocalhost && _databaseName != "") ? ssl + "://" + _hostname.Replace("www", "api") : _api.ApiConnection;
 		}
 

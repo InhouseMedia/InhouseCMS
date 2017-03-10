@@ -77,7 +77,7 @@ gulp.task('less', function () {
 
 });
 
-gulp.task("style:watch", ["less", "min:css"]);
+gulp.task("style:watch", ["clean:css", "less", "min:css"]);
 gulp.task("script:watch", ["min:js"]);
 
 gulp.task("watch", function () {

@@ -19,10 +19,12 @@
 // Color
 @body-bg: #fff;
 @link-color: #24B7B1;
-@font-color: #3A3A3C;
+@font-color: #616161;
 
 // Heading
+@headings-font-weight: normal;
 @headings-color: @company-action-color;
+@headings-small-color: @company-action-color;
 @headings-font-family: "now-medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Font styling
@@ -60,7 +62,8 @@
 @navbar-height: 35px;
 @navbar-padding: 0;
 @navbar-margin-bottom: 20px;
-@navbar-default-bg: rgba(30,30,30,0.9);
+@navbar-default-bg: @company-action-color;
+@navbar-font-color: @body-bg;
 
 @border-radius-base: 0px;
 @border-radius-large: 0px;
@@ -71,8 +74,8 @@
 
 
 // Button
-@btn-border-radius: 4px;
-@btn-font-weight: 'bold';
+@btn-border-radius-base: @line-height-base;
+@btn-font-weight: normal;
 
 // Button Action
 //@btn-action-color: #fff;

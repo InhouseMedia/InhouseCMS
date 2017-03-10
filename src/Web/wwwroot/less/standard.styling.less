@@ -2,8 +2,8 @@
 
 html{
 	//overflow: hidden;
-	height:100%;
-	display:block;
+	height: 100%;
+	display: block;
 	font-family: @font-family;
 	font-size: @font-size;
 	line-height: @line-height;
@@ -11,7 +11,7 @@ html{
 }
 
 body{
-	overflow:auto;
+	overflow: auto;
 	background-image: url("../images/spacer.gif");  //Only needed for the transition to the loader icon
 	background-color: @body-bg;
 	.transition(~"background-image 0.3s ease-in 1.3s");
@@ -20,14 +20,23 @@ body{
 a,
 a:active,
 a:visited{
-	color:@link-color;
-	text-decoration: @link-underline;
-	outline:none;
+	&:not(.btn){
+		color: @link-color;
+		text-decoration: @link-underline;
+		outline: none;
 
-	&:hover{ text-decoration:underline;	}
+		&:hover{ text-decoration: underline; }
+	}
 }
 
-p{ margin:@padding-base 0; }
+.btn{
+	font-size: @font-size-small;
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: @padding-base-horizontal @padding-large-horizontal;
+}
+
+p{ margin: @padding-base 0; }
 
 h1{ font-size:@font-size-h1; margin:0; }
 h2{ font-size:@font-size-h2; margin:0; }
@@ -46,11 +55,11 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 .align-right{ text-align: right; }
 
 #header{
-	position:fixed;
-	left:0;
-	right:0;
-	top:0;
-	z-index:1000;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 1000;
 	padding: @navbar-padding 0;
 	background-color: @navbar-default-bg;
 
@@ -101,7 +110,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 					display:none;
 					padding: 0 round(@line-height /2);
 
-					color: @font-color;
+					color: @navbar-font-color;
 					white-space: nowrap;
 					line-height: @line-height * 2.5;
 					text-transform: uppercase;
@@ -270,7 +279,8 @@ article{
 */
 .content-text,
 .content-form,
-.content-image{
+.content-image,
+.content-section{
 	width: 55%;
 	margin: 2em auto;
 }
@@ -411,6 +421,23 @@ article{
 	}
 }
 
+.content-section{
+	.flex-display();
+	.justify-content(space-between);
+
+	section{
+		.flex(1 0 0);
+		text-align: center;
+		padding: @padding-base-vertical @padding-large-horizontal;
+		&:not(:last-of-type){
+			border-right: 2px solid @gray-lighter;
+		}
+
+		h2{ text-transform: uppercase; }
+
+		p{ margin: 0.5em; }
+	}
+}
 
 label{
 	margin: 0 0 @padding-base-horizontal @padding-base-horizontal;

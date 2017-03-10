@@ -21,7 +21,9 @@
 		</figure>
 		}
 		<header>
-			<h3>@item.Title</h3>
+			<h2>
+				<small>@item.Title</small>
+			</h2>
 		</header>
 		<p>
 			@item.Text
@@ -29,7 +31,7 @@
 		@if(item.Link != null)
 		{
 		<footer>
-			<a href="@item.Link.Url" title="@item.Title" target="@item.Link.Target">@item.Link.Title</a>
+			<a href="@item.Link.Url" title="@item.Title" target="@item.Link.Target" class="btn btn-primary">@item.Link.Title</a>
 		</footer>
 		}
 	</section>

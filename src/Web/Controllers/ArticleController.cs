@@ -42,6 +42,10 @@ namespace Web.Controllers
 
 			var result = await _repository.GetPage(id);
 
+			ViewBag.MetaTitle = result.MetaTitle;
+			ViewBag.MetaDescription = result.MetaDescription;
+			ViewBag.MetaKeywords = result.MetaKeywords;
+
 			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 
