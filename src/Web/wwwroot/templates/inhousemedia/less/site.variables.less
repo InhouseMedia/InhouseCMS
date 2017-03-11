@@ -57,7 +57,11 @@
 @navbar-padding: 0;
 @navbar-margin-bottom: 20px;
 @navbar-default-bg: rgba(30,30,30,0.9);
+@navbar-font-family: @headings-font-family;
 @navbar-font-color: @font-color;
+@navbar-font-size: inherit;
+@navbar-line-height: 4em;
+@navbar-default-brand-color: @company-action-color;
 
 @border-radius-base: 0px;
 @border-radius-large: 0px;
@@ -68,8 +72,8 @@
 
 
 // Button
-@btn-border-radius-base: 4px;
-@btn-font-weight: bold;
+@btn-border-radius-base: 0;
+@btn-font-weight: normal;
 
 // Button Action
 //@btn-action-color: #fff;
@@ -104,3 +108,14 @@
 
 @forgot-password-close: #808080;
 
+
+// Content Boxes base
+@content-background: @component-active-color;
+@content-padding: @padding-base-horizontal;
+
+// Content Section
+@content-section-background: @content-background;
+@content-section-padding: @content-padding;
+
+// Footer Box
+@footer-background: @company-action-color;

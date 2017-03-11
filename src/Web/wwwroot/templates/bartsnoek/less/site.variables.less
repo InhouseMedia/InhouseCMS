@@ -17,7 +17,7 @@
 @brand-primary: @company-action-color;
 
 // Color
-@body-bg: #fff;
+@body-bg: #EFF0F2;
 @link-color: #24B7B1;
 @font-color: #616161;
 
@@ -25,7 +25,7 @@
 @headings-font-weight: normal;
 @headings-color: @company-action-color;
 @headings-small-color: @company-action-color;
-@headings-font-family: "now-medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@headings-font-family: "bebasneue-regular","now-medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Font styling
 @font-family: "now-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -63,7 +63,11 @@
 @navbar-padding: 0;
 @navbar-margin-bottom: 20px;
 @navbar-default-bg: @company-action-color;
-@navbar-font-color: @body-bg;
+@navbar-font-family: @headings-font-family;
+@navbar-font-color: @component-active-color;
+@navbar-font-size: @font-size-h3;
+@navbar-line-height: 2.1em;
+@navbar-default-brand-color: @component-active-color;
 
 @border-radius-base: 0px;
 @border-radius-large: 0px;
@@ -84,14 +88,14 @@
 
 
 // Button Disabled
-@btn-disabled-bg: #fff;
+@btn-disabled-bg: @component-active-color;
 @btn-disabled-border: #808080;
 @btn-disabled-color: #505050;
 
 // Input
-@input-bg: @body-bg;
-@input-bg-focus: lighten(@body-bg, 10%);
-@input-border: @body-bg;
+@input-bg: @component-active-color;
+@input-bg-focus: lighten(@component-active-color, 10%);
+@input-border: @component-active-color;
 @input-border-required: transparent transparent transparent @company-action-color;
 @input-border-width: 0 0 2px 0;
 @input-border-width-required: 0 0 2px 2px;
@@ -110,3 +114,15 @@
 
 @forgot-password-close: #808080;
 
+
+
+// Content Boxes base
+@content-background: @component-active-color;
+@content-padding: @padding-base 0;
+
+// Content Section
+@content-section-background: @content-background;
+@content-section-padding: @content-padding;
+
+// Footer Box
+@footer-background: @content-background;
