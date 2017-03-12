@@ -166,6 +166,9 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 
 #footer{
 	background: @footer-background;
+	> .content-wrapper{
+		display: block;
+	}
 
 	#backToTop{
 		position: fixed;
@@ -441,6 +444,25 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 
 label{
 	margin: 0 0 @padding-base-horizontal @padding-base-horizontal;
+}
+
+.box-social{
+	width:100%;
+	text-align: right;
+	a{
+		display: inline-block;
+		overflow: hidden;
+		text-indent: 9999px;
+		width: 3em;
+		height: 3em;
+		background: transparent no-repeat center center;
+
+		&.social-linkedin{ background-image: url("@{image-path}icon_linkedin.svg"); }
+		&.social-dribbble{ background-image: url("@{image-path}icon_dribbble.svg"); }
+		&.social-facebook{ background-image: url("@{image-path}icon_facebook.svg"); }
+
+		&:hover{ path{fill:red;}}
+	}
 }
 
 .google-maps{color: black;}

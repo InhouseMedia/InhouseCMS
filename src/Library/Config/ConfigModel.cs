@@ -110,6 +110,7 @@ namespace Library.Config
 		public string Linkedin { get; set; }
 		public string Youtube { get; set; }
 		public string Pinterest { get; set; }
+		public string Dribbble { get; set; }
 	}
 
 	public class Controllers

@@ -1,0 +1,18 @@
+@using Library.Config
+@using Library.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System
+@using System.Collections.Generic
+@using System.Threading.Tasks
+@using Web.Controllers
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<ResourceController> SharedLocalizer
+@model List<TextLink>
+@{
+	Layout = null;
+}
+<div class="box-social">
+@foreach(var item in Model){
+	<a href="@item.Url" target="@item.Target" class="social-@item.Title" title="@item.Title">@item.Title</a>
+}
+</div>
