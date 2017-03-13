@@ -166,6 +166,8 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 
 #footer{
 	background: @footer-background;
+	color: @footer-font-color;
+
 	> .content-wrapper{
 		display: block;
 	}
@@ -279,7 +281,8 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 .content-text,
 .content-form,
 .content-image,
-.content-section{
+.content-section,
+.content-productlist{
 	width: 65%;
 	margin: 2em auto;
 	box-sizing: border-box;
@@ -463,6 +466,30 @@ label{
 
 		&:hover{ path{fill:red;}}
 	}
+}
+
+.content-productlist{
+
+
+	.container{
+		.flex-display();
+		.justify-content(space-between);
+		flex-flow: row wrap;
+
+		margin: 0 -2em 0 0;
+
+		.productinfo{
+			.flex-display();
+			.flex(1 1 calc(~"33% - 2em"));
+			background: #fff;
+			margin: 0 2em 2em 0;
+			border: 1px solid @gray-lighter;
+
+			figure{order:1}
+			header{order:2}
+		}
+	}
+
 }
 
 .google-maps{color: black;}

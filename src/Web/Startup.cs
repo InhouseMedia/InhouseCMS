@@ -87,6 +87,7 @@ namespace Web
 			services.AddTransient<IArticleRepository, ArticleRepository>();
 			services.AddTransient<IBoxRepository, BoxRepository>();
 			services.AddTransient<INavigationRepository, NavigationRepository>();
+			services.AddTransient<IProductRepository, ProductRepository>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddScoped<LocalizationActionFilter>();

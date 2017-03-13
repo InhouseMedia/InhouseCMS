@@ -7,25 +7,16 @@ namespace Library.Config
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; set; }
-		[BsonElement("Domain")]
 		public string Domain { get; set; }
-		[BsonElement("Name")]
 		public string Name { get; set; }
-		[BsonElement("Color")]
 		public string Color { get; set; }
-		[BsonElement("Path")]
 		public string Path { get; set; }
-		[BsonElement("Language")]
 		public Language Language { get; set; }
-		[BsonElement("Company")]
 		public Company Company { get; set; }
-		[BsonElement("Mailserver")]
 		public Mailserver Mailserver { get; set; }
-		[BsonElement("SearchEngines")]
 		public Searchengines SearchEngines { get; set; }
 		[BsonElement("Socialmedia")]
 		public Socialmedia SocialMedia { get; set; }
-		[BsonElement("Controllers")]
 		public Controllers Controllers { get; set; }
 	}
 

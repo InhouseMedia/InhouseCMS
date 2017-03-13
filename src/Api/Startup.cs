@@ -71,10 +71,12 @@ namespace Api
 			);
 
 			services.AddTransient<IArticleRepository, ArticleRepository>();
-			services.AddTransient<INavigationRepository, NavigationRepository>();
-			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<IBoxRepository, BoxRepository>();
 			services.AddTransient<IConfigRepository, ConfigRepository>();
+			services.AddTransient<INavigationRepository, NavigationRepository>();
+			services.AddTransient<IProductRepository, ProductRepository>();
+			services.AddTransient<IUserRepository, UserRepository>();
+
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddScoped<LanguageActionFilter>();
