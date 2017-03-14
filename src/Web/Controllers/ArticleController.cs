@@ -4,8 +4,6 @@ namespace Web.Controllers
 	using Microsoft.Extensions.Localization;
 
 	using MailKit;
-	using MailKit.Search;
-	using MailKit.Security;
 	using MailKit.Net.Smtp;
 	using MimeKit;
 
@@ -14,19 +12,20 @@ namespace Web.Controllers
 	using System;
 	using System.Net;
 	using System.Text.RegularExpressions;
+	using System.Threading;
 	using System.Threading.Tasks;
 
 	using Library.Config;
 	using Library.Models;
-	using Web.Repositories;
-    using System.Threading;
+	using Library.Repositories;
 
-    //Done in startup
-    //[ServiceFilter(typeof(LocalizationActionFilter))]
-    public class ArticleController : Controller
+	//Done in startup
+	//[ServiceFilter(typeof(LocalizationActionFilter))]
+	public class ArticleController : Controller
 	{
 		private readonly SiteConfig _config;
 		private readonly IStringLocalizer<ArticleController> _localizer;
+
 		private readonly IArticleRepository _repository;
 
 		public ArticleController(IArticleRepository repository, IStringLocalizer<ArticleController> localizer, ConfigRepository config)
@@ -45,6 +44,10 @@ namespace Web.Controllers
 
 			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
+
+			ViewBag.MetaTitle = result.MetaTitle;
+			ViewBag.MetaDescription = result.MetaDescription;
+			ViewBag.MetaKeywords = result.MetaKeywords;
 
 			return View(result);
 		}
@@ -79,12 +82,13 @@ namespace Web.Controllers
 			message.Subject = formOptions.Mail.Subject;
 			message.Body = body.ToMessageBody();
 
-			using (var client = new SmtpClient(new ProtocolLogger ("smtp.log")))
+			using (var client = new SmtpClient(new ProtocolLogger("smtp.log")))
 			{
 				try
 				{
-					using (var cancel = new CancellationTokenSource ()) {
-						client.ServerCertificateValidationCallback = (s,c,h,e) => true;
+					using (var cancel = new CancellationTokenSource())
+					{
+						client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
 						var credentials = new NetworkCredential(_config.Mailserver.Account, _config.Mailserver.Password);
 

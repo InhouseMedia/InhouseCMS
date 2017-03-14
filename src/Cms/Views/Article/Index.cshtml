@@ -1,0 +1,30 @@
+@using Library.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model ArticlePage
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	var countContent = (!Model.ArticleContent.Any()) ? "highlight empty" : "";
+}
+<h1>Article</h1>
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(m => m.Id)
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel-group @countContent" id="content" role="tablist" aria-multiselectable="true" title-empty="@Localizer["There is no content in this article Drag a content item from the right box  into this field to add content."]">
+			@foreach (var item in Model.ArticleContent)
+			{
+				@await Component.InvokeAsync(item.Action, new { model = item })
+			}
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			@foreach (string item in ViewBag.Boxes)
+			{
+				@await Component.InvokeAsync(item, new { model = Model })
+			}
+		</div>
+	</div>
+</div>

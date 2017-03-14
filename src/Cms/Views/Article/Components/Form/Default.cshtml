@@ -1,0 +1,19 @@
+@using Library.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model ArticleContent
+@{
+	Layout = null;
+	var contentId = @Model.Id;
+}
+
+<div class="panel panel-default">
+	@await Component.InvokeAsync("PanelHeader", new { model = Model })
+
+	<div id="collapseText_@contentId" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingText_@contentId">
+		<div class="panel-body form-horizontal">
+			@Html.LabelFor(m => m.Text)
+			@Html.TextAreaFor(m => m.Text)
+		</div>
+	</div>
+</div>

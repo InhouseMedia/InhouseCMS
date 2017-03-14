@@ -27,7 +27,7 @@ namespace Api.Filters
 		public override void OnActionExecuting(ActionExecutingContext context)
 		{
 			var culture = context.RouteData.Values["culture"]?.ToString() ?? "en-US";
-			
+
 			switch (culture)
 			{
 				case "nl":

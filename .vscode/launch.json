@@ -1,73 +1,105 @@
 {
-    "version": "0.2.0",
-    "configurations": [{
-            "name": ".NET Core Launch (Api)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceRoot}/src/Api/bin/Debug/netcoreapp1.0/api.dll",
-            "args": [],
-            "cwd": "${workspaceRoot}/src/Api",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart",
-            "launchBrowser": {
-                "enabled": true,
-                "args": "${auto-detect-url}",
-                "windows": {
-                    "command": "cmd.exe",
-                    "args": "/C start ${auto-detect-url}"
-                },
-                "osx": {
-                    "command": "open"
-                },
-                "linux": {
-                    "command": "xdg-open"
-                }
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceRoot}/src/Api/Views"
-            }
-        },
-        {
-            "name": ".NET Core Launch (Web)",
-            "type": "coreclr",
-            "request": "launch",
-            "requireExactSource": false,
-            "preLaunchTask": "build",
-            "program": "${workspaceRoot}/src/Web/bin/Debug/netcoreapp1.0/Web.dll",
-            "args": [],
-            "cwd": "${workspaceRoot}/src/Web",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart",
-            "launchBrowser": {
-                "enabled": true,
-                "args": "${auto-detect-url}",
-                "windows": {
-                    "command": "cmd.exe",
-                    "args": "/C start ${auto-detect-url}"
-                },
-                "osx": {
-                    "command": "open"
-                },
-                "linux": {
-                    "command": "xdg-open"
-                }
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceRoot}/src/Web/Views"
-            }
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command.pickProcess}"
-        }
-    ]
+	"version": "0.2.0",
+	"configurations": [{
+			"name": ".NET Core Launch (Api)",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "build",
+			"program": "${workspaceRoot}/src/Api/bin/Debug/netcoreapp1.0/api.dll",
+			"args": [],
+			"cwd": "${workspaceRoot}/src/Api",
+			"stopAtEntry": false,
+			"internalConsoleOptions": "openOnSessionStart",
+			"launchBrowser": {
+				"enabled": true,
+				"args": "${auto-detect-url}",
+				"windows": {
+					"command": "cmd.exe",
+					"args": "/C start ${auto-detect-url}"
+				},
+				"osx": {
+					"command": "open"
+				},
+				"linux": {
+					"command": "xdg-open"
+				}
+			},
+			"env": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"sourceFileMap": {
+				"/Views": "${workspaceRoot}/src/Api/Views"
+			}
+		},
+		{
+			"name": ".NET Core Launch (Web)",
+			"type": "coreclr",
+			"request": "launch",
+			"requireExactSource": false,
+			"preLaunchTask": "build",
+			"program": "${workspaceRoot}/src/Web/bin/Debug/netcoreapp1.0/Web.dll",
+			"args": [],
+			"cwd": "${workspaceRoot}/src/Web",
+			"stopAtEntry": false,
+			"internalConsoleOptions": "openOnSessionStart",
+			"launchBrowser": {
+				"enabled": true,
+				"args": "${auto-detect-url}",
+				"windows": {
+					"command": "cmd.exe",
+					"args": "/C start ${auto-detect-url}"
+				},
+				"osx": {
+					"command": "open"
+				},
+				"linux": {
+					"command": "xdg-open"
+				}
+			},
+			"env": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"sourceFileMap": {
+				"/Views": "${workspaceRoot}/src/Web/Views"
+			}
+		},
+		{
+			"name": ".NET Core Launch (Cms)",
+			"type": "coreclr",
+			"request": "launch",
+			"requireExactSource": false,
+			"preLaunchTask": "build",
+			"program": "${workspaceRoot}/src/Cms/bin/Debug/netcoreapp1.0/Cms.dll",
+			"args": [],
+			"cwd": "${workspaceRoot}/src/Cms",
+			"stopAtEntry": false,
+			"internalConsoleOptions": "openOnSessionStart",
+			"launchBrowser": {
+				"enabled": true,
+				"args": "${auto-detect-url}",
+				"windows": {
+					"command": "cmd.exe",
+					"args": "/C start ${auto-detect-url}"
+				},
+				"osx": {
+					"command": "open"
+				},
+				"linux": {
+					"command": "xdg-open"
+				}
+			},
+			"env": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"sourceFileMap": {
+				"/Views": "${workspaceRoot}/src/Cms/Views"
+			}
+		},
+		{
+			"name": ".NET Core Attach",
+			"type": "coreclr",
+			"request": "attach",
+			"processId": "${command.pickProcess}"
+		}
+	]
 }

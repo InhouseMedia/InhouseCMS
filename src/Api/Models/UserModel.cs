@@ -5,38 +5,23 @@ namespace Api.Models
 	using MongoDB.Bson.Serialization.Attributes;
 
 	public class User
-    {
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-        [BsonElement("UserName")]
-        public string UserName { get; set; }    
-        [BsonElement("Password")]
-        public string Password { get; set; }
-        [BsonElement("FirstName")]
-        public string FirstName { get; set; }
-        [BsonElement("LastName")]
-        public string LastName { get; set; }
-        [BsonElement("Prefix")]
-        public string Prefix { get; set; }
-        [BsonElement("Email")]
-        public string Email { get; set; }
-        [BsonElement("EmailConfirmed")]
-        public bool EmailConfirmed { get; set; } 
-        [BsonElement("PhoneNumber")]
-        public string PhoneNumber { get; set; }
-        [BsonElement("PhoneNumberConfirmed")]
-        public bool PhoneNumberConfirmed { get; set; }
-        [BsonElement("SessionId")]
-        public string SessionId { get; set; }
-        [BsonElement("Active")]
-        public bool Active { get; set; } 
-        [BsonElement("LockedDate")]
-        public DateTime LockedDate { get; set; }
-        [BsonElement("LastLoginDate")]
-        public DateTime LastLoginDate { get; set; }
-        [BsonElement("CreatedDate")]
-        public DateTime CreatedDate { get; set; }
-        [BsonElement("ChangedDate")]
-        public DateTime ChangedDate { get; set; }
-    }
+	{
+		[BsonRepresentation(BsonType.ObjectId)]
+		public string Id { get; set; }
+		public string UserName { get; set; }
+		public string Password { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string Prefix { get; set; }
+		public string Email { get; set; }
+		public bool EmailConfirmed { get; set; }
+		public string PhoneNumber { get; set; }
+		public bool PhoneNumberConfirmed { get; set; }
+		public string SessionId { get; set; }
+		public bool Active { get; set; }
+		public DateTime LockedDate { get; set; }
+		public DateTime LastLoginDate { get; set; }
+		public DateTime CreatedDate { get; set; }
+		public DateTime ChangedDate { get; set; }
+	}
 }

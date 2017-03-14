@@ -1,0 +1,27 @@
+@using System.Threading.Tasks
+@using Library.Models
+@using System.Collections.Generic
+@model IEnumerable<Product>
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-productlist">
+	<div class="container">
+	@foreach(var item in Model)
+	{
+		<a href="~/@(item.Controller)/@(item.Action)/@(item.Id)" class="productinfo">
+			<header>
+				<h3>@item.Title</h3>
+				<h4>@item.SubTitle</h4>
+			</header>
+			<figure>
+				<img src="" alt="@item.Title"/>
+			</figure>
+			<footer>
+				<span>@item.Price</span>
+			</footer>
+		</a>
+	}
+	</div>
+</div>

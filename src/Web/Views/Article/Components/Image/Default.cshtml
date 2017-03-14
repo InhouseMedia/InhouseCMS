@@ -1,0 +1,14 @@
+@using Library.Repositories
+@using Library.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject ConfigRepository Config
+@inject IViewLocalizer Localizer
+@model ImageModel
+@{
+	Layout = null;
+	var config = Config.GetConfig();
+}
+
+<div class="content-@ViewBag.Action.ToLower() align-center">
+	<img src="~/templates/@config.Path/images/@Model.Image.Url" alt="@Model.Image.Alt"/>
+</div>

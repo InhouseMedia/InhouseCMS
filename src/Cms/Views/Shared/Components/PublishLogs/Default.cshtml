@@ -1,0 +1,43 @@
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Cms.Controllers
+@using Library.Models
+@using Library.Repositories
+@inject ConfigRepository Config
+@inject IHtmlLocalizer<ResourceController> SharedLocalizer
+@model ArticlePage
+@{
+	Layout = null;
+	var config = Config.GetConfig();
+}
+
+<div class="panel panel-primary overflow">
+	<div class="panel-heading" role="tab" id="headingPublishdata" data-toggle="collapse" data-parent="#accordion" data-target="#collapsePublishdata">
+		<h4 class="panel-title">
+			<a href="#collapsePublishdata" aria-expanded="true" aria-controls="collapsePublishdata">
+				@SharedLocalizer["Publish settings"]
+			</a>
+		</h4>
+	</div>
+	<div id="collapsePublishdata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPublishdata">
+		<div class="panel-body">
+			<label>@SharedLocalizer["Publish on"]</label>
+			<div class='input-group date' data-date-option="language:@config.Language.Locale.First().Split('-').First()">
+				<input class="form-control" id="PublishLogs__Published_Date" name="Article_Publishlogs[0].Published_Date" placeholder="@string.Format("{0:g}", DateTime.Now)" type="text" value="">
+				@*Html.TextBox("Published_Date","", new { @class = "form-control", @placeholder = String.Format("{0:g}", DateTime.Now) })*@
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</span>
+			</div>
+		</div>
+		@*if (grid.TotalRowCount > 0)
+		{
+			@grid.GetHtml(
+			tableStyle: "table table-striped table-hover",
+				headerStyle: "head",
+				alternatingRowStyle: "alt",
+				columns: columns
+			)
+		}*@
+	</div>
+</div>

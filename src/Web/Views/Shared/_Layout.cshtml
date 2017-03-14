@@ -1,9 +1,9 @@
-﻿@using System
+﻿@using Library.Models
+@using Library.Repositories
+@using System
 @using System.Globalization
 @using System.Threading.Tasks
-@using Library.Models
 @using Web.Controllers
-@using Web.Repositories
 @inject ConfigRepository Config
 @inject IBoxRepository Boxes
 @{
@@ -15,9 +15,9 @@
 	var language = locale.Split('-').First();
 	var boxesHeader = Boxes.BoxList((int)BoxPlacement.Header, articleId, controller);
 	var boxesFooter = Boxes.BoxList((int)BoxPlacement.Footer, articleId, controller);
-    var boxesTop = Boxes.BoxList((int)BoxPlacement.Top, articleId, controller);
+	var boxesTop = Boxes.BoxList((int)BoxPlacement.Top, articleId, controller);
 	var boxesBottom = Boxes.BoxList((int)BoxPlacement.Bottom, articleId, controller);
-    var boxesLeft = Boxes.BoxList((int)BoxPlacement.Left, articleId, controller);
+	var boxesLeft = Boxes.BoxList((int)BoxPlacement.Left, articleId, controller);
 	var boxesRIght = Boxes.BoxList((int)BoxPlacement.Right, articleId, controller);
 }
 <!DOCTYPE html>
@@ -78,7 +78,7 @@
 
 <body class="template-@controller">
 	<div class="container">
-		<header>
+		<header id="header">
 			<div class="content-wrapper">
 				@foreach (var box in boxesHeader)
 				{
@@ -109,7 +109,7 @@
 			</footer>
 		</section>
 
-		<footer>
+		<footer id="footer">
 			<div class="content-wrapper">
 				@foreach (var box in boxesFooter)
 				{
@@ -117,7 +117,7 @@
 				}
 			</div>
 		</footer>
-    </div>
+	</div>
 
 	<environment names="Development">
 		<script src="~/lib/jquery/dist/jquery.js"></script>

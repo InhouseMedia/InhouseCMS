@@ -1,30 +1,30 @@
 @using Library.Models
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Web.Controllers
-@using Web.Repositories
+@using Library.Repositories
 @inject IViewLocalizer Localizer
 @model Library.Models.FormModel
 @{
 	Layout = null;
 	var tabindex = 1;
 }
-<div class="content-form">
-    <form method="post" action="/Article/@ViewBag.Action" autocomplete="off">
-        @Html.AntiForgeryToken()
+<div class="content-@ViewBag.Action.ToLower()">
+	<form method="post" action="/Article/@ViewBag.Action" autocomplete="off">
+		@Html.AntiForgeryToken()
 		@Html.Hidden("ContentId", (string) ViewBag.ContentId)
 		@Html.Hidden("ArticleId", (string)ViewBag.ArticleId)
 
 		@foreach (var item in Model.Fields)
-        {
-            item.TabIndex = tabindex;
-            var type = (item.Type == "textarea")? "Textarea" : "Input";
-            @await Component.InvokeAsync(type , new {model = item})
+		{
+			item.TabIndex = tabindex;
+			var type = (item.Type == "textarea")? "Textarea" : "Input";
+			@await Component.InvokeAsync(type , new {model = item})
 
-            tabindex++;
-        }
+			tabindex++;
+		}
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">@Localizer["Send"]</button>
-        </div>
-    </form>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary btn-block">@Localizer["Send"]</button>
+		</div>
+	</form>
 </div>

@@ -2,10 +2,10 @@ namespace Api.Controllers
 {
 	using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Mvc;
+	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Localization;
 
- 	using MongoDB.Bson;
+	using MongoDB.Bson;
 
 	using Api.Filters;
 	using Api.Repositories;
@@ -14,21 +14,21 @@ namespace Api.Controllers
 	[Route("{culture:regex(^[[a-z]]{{2}}(?:-[[A-Z]]{{2}})?$)}/[controller]")]
 	[Route("[controller]")]
 	public class NavigationController : Controller
-    {
-        private readonly INavigationRepository _repository;
+	{
+		private readonly INavigationRepository _repository;
 		private readonly IStringLocalizer<NavigationController> _localizer;
 
-        public NavigationController(INavigationRepository repository, IStringLocalizer<NavigationController> localizer)
-        {
-            _repository = repository;
+		public NavigationController(INavigationRepository repository, IStringLocalizer<NavigationController> localizer)
+		{
+			_repository = repository;
 			_localizer = localizer;
-        }
+		}
 
-        [HttpGet]
+		[HttpGet]
 		//[ValidateAntiForgeryToken]
-        //[Authorize]
-        public async Task<IActionResult> Get()
-        {
+		//[Authorize]
+		public async Task<IActionResult> Get()
+		{
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
@@ -38,25 +38,25 @@ namespace Api.Controllers
 				return new StatusCodeResult(204); // 204 No Content
 
 			return new ObjectResult(result);
-        }
+		}
 
-        [HttpGet("{id:length(24)}")]
+		[HttpGet("{id:length(24)}")]
 		//[ValidateAntiForgeryToken]
 		//[Authorize]
-        public async Task<IActionResult> Get(string id)
-        {
+		public async Task<IActionResult> Get(string id)
+		{
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-            var result = await _repository.GetById(new ObjectId(id));
+			var result = await _repository.GetById(new ObjectId(id));
 
-            if (result == null)
+			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 
-            return new ObjectResult(result);
-        }
+			return new ObjectResult(result);
+		}
 
-        // GET api/navigation/sitemap
+		// GET api/navigation/sitemap
 		[HttpGet("Sitemap")]
 		//[ValidateAntiForgeryToken]
 		//[OutputCache(Duration = 3600, VaryByParam = "none")]
@@ -80,12 +80,12 @@ namespace Api.Controllers
 			if (!ModelState.IsValid)
 				return new StatusCodeResult(500); // 500 Internal Server Error
 
-            var result = await _repository.NavigationList();
+			var result = await _repository.NavigationList();
 
-            if (result == null)
+			if (result == null)
 				return new StatusCodeResult(204); // 204 No Content
 
-            return new ObjectResult(result);
+			return new ObjectResult(result);
 		}
-    }
+	}
 }
