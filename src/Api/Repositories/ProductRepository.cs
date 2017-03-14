@@ -25,8 +25,17 @@ namespace Api.Repositories
 
 		public async Task<IEnumerable<Product>> Products()
 		{
+			var builderSort = Builders<Product>.Sort;
+			var sort = builderSort.Descending("PublishDate");
+
+			var builderFilter = Builders<Product>.Filter;
+			var filter = builderFilter.Eq("Active", true) &
+						builderFilter.Lte("PublishDate", DateTime.UtcNow) &
+						(builderFilter.Gt("ExpireDate", DateTime.UtcNow) |
+						builderFilter.Eq(e => e.ExpireDate, null));
+
 			var conn = _database.GetCollection<Product>("Product");
-			var result = await conn.Find(_ => true).ToListAsync();
+			var result = await conn.Find(filter).Sort(sort).ToListAsync();
 			return result.ToArray();
 		}
 
