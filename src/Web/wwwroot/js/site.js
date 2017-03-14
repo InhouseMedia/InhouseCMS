@@ -1,7 +1,7 @@
 ﻿var common = (function () {
 	'use strict';
 
-	var _header = $('header');
+	var _header = $('#header');
 	var _headerHeight = _header.outerHeight();
 	var _body = $('body');
 	var _win = $(window);
