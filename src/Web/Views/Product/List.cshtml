@@ -10,7 +10,7 @@
 	<div class="container">
 	@foreach(var item in Model)
 	{
-		<a href="#" class="productinfo">
+		<a href="~/@(item.Controller)/@(item.Action)/@(item.Id)" class="productinfo">
 			<header>
 				<h3>@item.Title</h3>
 				<h4>@item.SubTitle</h4>

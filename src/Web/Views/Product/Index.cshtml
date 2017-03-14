@@ -1,0 +1,29 @@
+@using Library.Models;
+@model Product
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<article class="content-product">
+	<header>
+		<a href="javascript:history.back()" class="btn btn-sm btn-back"></a>
+		<h1>
+			@Model.Title
+		</h1>
+		<h2>
+			@Model.SubTitle
+		</h2>
+	</header>
+	<section>
+		<p>
+			@Model.Text
+		</p>
+	</section>
+	<figure>
+		<img src="" alt="@Model.Title"/>
+		<img src="" alt="@Model.SubTitle"/>
+	</figure>
+	<footer>
+		<a href="#" class="btn btn-sm btn-prev"></a>
+		<a href="#" class="btn btn-sm btn-next"></a>
+	</footer>
+</article>
