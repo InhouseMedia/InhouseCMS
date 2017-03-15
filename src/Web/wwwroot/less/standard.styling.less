@@ -582,7 +582,9 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 		flex-flow: row wrap;
 		margin: 0 -2em -2em 0;
 
-		.productinfo{
+		.productinfo,
+		.productinfo:active,
+		.productinfo:focus{
 			.flex-display();
 			.flex-direction(column);
 			.flex(1 1 calc(~"33% - 2em"));
@@ -592,9 +594,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 			margin: 0 2em 2em 0;
 			text-decoration: none;
 
-			figure{
-				order: 1;
-			}
+			figure{ order: 1; }
 
 			header{
 				order: 2;
