@@ -1,29 +1,58 @@
-@using Library.Models;
+@using Library.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model Product
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
+	var Categories = Model.Category.Split(',');
 }
+
 <article class="content-product">
 	<header>
-		<a href="javascript:history.back()" class="btn btn-sm btn-back"></a>
+		<a href="javascript:history.back()" class="btn btn-sm btn-default btn-round" title='@Localizer["Back to overview"]'>
+			<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+		</a>
 		<h1>
 			@Model.Title
 		</h1>
+		@if(@Model.SubTitle != null)
+		{
 		<h2>
 			@Model.SubTitle
 		</h2>
+		}
 	</header>
-	<section>
-		<p>
-			@Model.Text
-		</p>
-	</section>
+	<div class="row">
+		<section>
+			<label>
+				@Localizer["Description"]
+			</label>
+			<p>
+				@Model.Text
+			</p>
+		</section>
+		<section>
+			<label>
+				@Localizer["Category"]
+			</label>
+			<p>
+			@foreach(var item in Categories)
+			{
+				<span class="label label-default">@item</span>
+			}
+			</p>
+		</section>
+	</div>
 	<figure>
 		<img src="" alt="@Model.Title"/>
 		<img src="" alt="@Model.SubTitle"/>
 	</figure>
 	<footer>
-		<a href="#" class="btn btn-sm btn-prev"></a>
-		<a href="#" class="btn btn-sm btn-next"></a>
+		<a href="#" class="btn btn-sm btn-default btn-round" title='@Localizer["Previous"]'>
+			<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+		</a>
+		<a href="#" class="btn btn-sm btn-default btn-round" title='@Localizer["Next"]'>
+			<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+		</a>
 	</footer>
 </article>

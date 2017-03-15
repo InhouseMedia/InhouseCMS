@@ -1,5 +1,6 @@
 ﻿// Path
-//@icon-font-path: '../fonts/';
+@icon-font-path: '/lib/bootstrap/fonts/';
+@font-path: '../fonts/';
 @image-path:  '../templates/bartsnoek/images/';
 
 // Bartsnoek specific
@@ -35,6 +36,8 @@
 @font-size: 16px;
 @line-height: 1.6em;
 @line-height-base: @line-height;
+@line-height-large: 2em; // extra decimals for Win 8.1 Chrome
+@line-height-small: 1.25em;
 @font-size-h1: 2em;
 @font-size-h2: 1.5em;
 @font-size-h3: 1.2em;
@@ -55,9 +58,6 @@
 
 
 
-
-
-
 @body-margin: 3.5em;
 
 
@@ -73,7 +73,7 @@
 @navbar-default-brand-color: @component-active-color;
 
 @border-radius-base: 0px;
-@border-radius-large: 0px;
+@border-radius-large: 1em;
 
 // Progress
 @progress-height: 5px;
@@ -84,6 +84,10 @@
 @btn-border-radius-base: @line-height-base;
 @btn-font-weight: normal;
 
+@btn-default-color: @company-action-color;
+@btn-default-bg: transparent;
+@btn-default-border: @company-action-color;
+@btn-default-inverted: @component-active-color;
 // Button Action
 //@btn-action-color: #fff;
 //@btn-action-bg: @company-action-color;
