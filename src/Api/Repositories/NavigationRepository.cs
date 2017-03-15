@@ -93,7 +93,7 @@ namespace Api.Repositories
 
 			foreach (var item in navigation)
 			{
-				var tempExtra = (parentUrl == "/") ? "" : "/";
+				var tempExtra = (parentUrl == "/" || item.Url.StartsWith("#")) ? "" : "/";
 				var tempSub = ActiveNavigationItems.Where(n => n.ParentId == item.Id).OrderBy(x => x.Level).ToList();
 
 				var siteMapItem = ToSiteMapItem(item);
