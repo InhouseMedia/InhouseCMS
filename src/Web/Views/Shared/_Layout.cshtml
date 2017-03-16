@@ -88,6 +88,8 @@
 		</header>
 
 		<section id="body">
+			@if(boxesTop.Count() > 0)
+			{
 			<header id="top">
 				<div class="content-wrapper">
 				@foreach (var box in boxesTop)
@@ -96,9 +98,11 @@
 					}
 				</div>
 			</header>
-
+			}
 			@RenderBody()
 
+			@if(boxesBottom.Count() > 0)
+			{
 			<footer id="bottom">
 				<div class="content-wrapper">
 					@foreach (var box in boxesBottom)
@@ -107,6 +111,7 @@
 					}
 				</div>
 			</footer>
+			}
 		</section>
 
 		<footer id="footer">
