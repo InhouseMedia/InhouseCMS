@@ -18,3 +18,28 @@
 		.box-shadow(~"none");
 	}
 }
+
+.gradient-progress(@barColor: #404040, @backColor: #f4f4f4, @counter: 0) when(@counter < 100){
+		@nextCounter: @counter + 1;
+		@nextDeg: 90deg + (3.6 * @nextCounter);
+		.gradient-progress(@barColor, @backColor, @nextCounter);
+
+		&[aria-valuenow="@{nextCounter}"]{
+			.gradient-progress-half(@barColor, @backColor, @nextCounter, @nextDeg);
+			.gradient-progress-full(@barColor, @backColor, @nextCounter, @nextDeg);
+		}
+}
+
+.gradient-progress-half(@barColor, @backColor, @counter, @nextDeg) when(@counter < 50){
+	.progress-background(90deg, @backColor, transparent, @nextDeg, @barColor, @backColor);
+}
+
+.gradient-progress-full(@barColor, @backColor, @counter, @nextDeg) when(@counter >= 50){
+	.progress-background(90deg, transparent, @barColor, @nextDeg, @barColor, @backColor);
+}
+
+.progress-background(@deg1: 90deg, @leftColor1: transparent, @rightColor1: transparent, @deg2: -90deg, @leftColor2: transparent, @rightColor2: transparent) {
+	background-image: -webkit-linear-gradient(@deg1, @leftColor1 50%, @rightColor1 50%), -webkit-linear-gradient(@deg2, @leftColor2 50%, @rightColor2 50%);
+	background-image: -o-linear-gradient(@deg1, @leftColor1 50%, @rightColor1 50%), -o-linear-gradient(@deg2, @leftColor2 50%, @rightColor2 50%);
+	background-image: linear-gradient(@deg1, @leftColor1 50%, @rightColor1 50%), linear-gradient(@deg2, @leftColor2 50%, @rightColor2 50%);
+}
