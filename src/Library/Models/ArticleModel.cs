@@ -64,7 +64,6 @@ namespace Library.Models
 		public DateTime? ExpireDate { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public DateTime? ChangedDate { get; set; }
-
 		public IEnumerable<ArticleContent> ArticleContent { get; set; }
 	}
 }

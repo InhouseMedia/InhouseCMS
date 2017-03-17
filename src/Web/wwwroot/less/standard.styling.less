@@ -369,6 +369,25 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 	box-sizing: border-box;
 }
 
+.content-image{
+	.box-shadow(0 0 2px 1px rgba(0, 0, 0, 0.2));
+	background-color: @content-background;
+	padding: 0;
+	figure{
+		background-color: @panel-bg;
+		padding: @padding-base;
+		margin: 0;
+	}
+	section{
+		padding: @padding-base;
+
+		p:first-child:not(:last-child){margin-top: 0; }
+		p:last-child:not(:first-child){margin-bottom: 0; }
+
+		.btn{min-width: 12em;}
+	}
+}
+
 .content-product,
 .content-productlist{
 	figure{

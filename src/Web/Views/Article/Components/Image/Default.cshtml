@@ -10,5 +10,19 @@
 }
 
 <div class="content-@ViewBag.Action.ToLower() align-center">
-	<img src="~/templates/@config.Path/images/@Model.Image.Url" alt="@Model.Image.Alt"/>
+	@if(ViewBag.Title != null && ViewBag.Title != "")
+	{
+	<header>
+		@Html.Raw(ViewBag.Title)
+	</header>
+	}
+	<figure>
+		<img src="~/templates/@config.Path/images/@Model.Image.Url" alt="@Model.Image.Alt"/>
+	</figure>
+	@if(ViewBag.Text != null && ViewBag.Text != "")
+	{
+	<section>
+		@Html.Raw(ViewBag.Text)
+	</section>
+	}
 </div>

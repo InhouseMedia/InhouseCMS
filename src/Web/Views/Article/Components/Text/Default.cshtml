@@ -6,17 +6,17 @@
 	Layout = null;
 }
 
-<div class="content-@Model.Action.ToLower()">
-	<hgroup class="title">
+<article class="content-@Model.Action.ToLower()">
+	<header class="title">
 		<h1>@Html.DisplayFor(m => m.Title)</h1>
-	</hgroup>
-
-	@Html.Raw(Model.Text)
-
+	</header>
+	<section>
+		@Html.Raw(Model.Text)
+	</section>
 	@if (Model.Code != null)
 	{
 		<script type="text/javascript">
 			@Html.Raw(Model.Code)
 		</script>
 	}
-</div>
+</article>
