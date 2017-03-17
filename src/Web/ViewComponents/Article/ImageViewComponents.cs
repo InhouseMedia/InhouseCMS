@@ -11,11 +11,14 @@ namespace Web.ViewComponents.Article
 	{
 		public async Task<IViewComponentResult> InvokeAsync(ArticleContent model)
 		{
+			//TODO: Maybe create a ArticleContentImage Model and use that in the view instead of a bunch of ViewBags
 			var imageSetting = JsonConvert.DeserializeObject<ImageModel>(model.Code);
 
 			ViewBag.ArticleId = model.ArticleId;
 			ViewBag.ContentId = model.Id;
 			ViewBag.Action = model.Action;
+			ViewBag.Title = model.Title;
+			ViewBag.Text = model.Text;
 
 			return View(imageSetting);
 		}
