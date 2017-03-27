@@ -21,7 +21,7 @@ namespace Web.ViewComponents
 		public IViewComponentResult Invoke()
 		{
 			var social = _config.SocialMedia.Media;
-
+			//TODO: Needs to be done in an other way
 			var socialList = new List<string>();
 				socialList.Add(social.Linkedin);
 				socialList.Add(social.Dribbble);

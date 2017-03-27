@@ -1,5 +1,16 @@
 ﻿// <reference path="site.bootstrap.less" />
-#header nav ul.menu .subItem li > .subItem{ display: none; }
+#header {
+	.box-locale{
+		margin-left: 1.5em;
+	}
+
+	nav{
+		.flex(1 1 auto);
+		text-align: right;
+
+		ul.menu .subItem li > .subItem{ display: none; }
+	}
+}
 
 .content-text{
 	.box-shadow(0 0 2px 1px rgba(0, 0, 0, 0.2));
@@ -9,4 +20,7 @@
 
 .content-text{
 	text-align: center;
+	h2{
+		text-align:left;
+	}
 }
