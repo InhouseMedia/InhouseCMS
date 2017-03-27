@@ -7,9 +7,9 @@
 	var toggle = Model.Length == 2 ? "toggle": "group";
 }
 
-<form method="post" action="/Resource/Change" autocomplete="off">
-	@Html.AntiForgeryToken()
-	<div class="box-locale">
+<div class="box-locale">
+	<form method="post" action="/Resource/Change" autocomplete="off" novalidate>
+		@Html.AntiForgeryToken()
 		<div class="btn-@(toggle)">
 		@foreach(var locale in Model)
 		{
@@ -20,5 +20,5 @@
 			</label>
 		}
 		</div>
-	</div>
-</forms>
+	</form>
+</div>
