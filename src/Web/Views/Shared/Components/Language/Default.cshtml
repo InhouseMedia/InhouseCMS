@@ -7,15 +7,18 @@
 	var toggle = Model.Length == 2 ? "toggle": "group";
 }
 
-<div class="box-locale">
-	<div class="btn-@(toggle)">
-	@foreach(var locale in Model)
-	{
-		string isChecked = currentLocale == locale? "checked" : "";
-		string name = locale.Split('-').First();
-		<label for="locale-@locale" class="@isChecked">
-			<input type="radio" id="locale-@locale" name="locale" @isChecked value="@locale">@name
-		</label>
-	}
+<form method="post" action="/Resource/Change" autocomplete="off">
+	@Html.AntiForgeryToken()
+	<div class="box-locale">
+		<div class="btn-@(toggle)">
+		@foreach(var locale in Model)
+		{
+			string isChecked = currentLocale == locale? "checked" : "";
+			string name = locale.Split('-').First();
+			<label for="locale-@locale" class="@isChecked">
+				<input type="radio" id="locale-@locale" name="locale" @isChecked value="@locale">@name
+			</label>
+		}
+		</div>
 	</div>
-</div>
+</forms>

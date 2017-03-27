@@ -32,7 +32,7 @@
 		}
 
 		public override void OnActionExecuting(ActionExecutingContext filterContext) {
-			var culture = _config.Language.Locale.First();
+			var culture = Response.Cookies[CookieRequestCultureProvider.DefaultCookieName] || _config.Language.Locale.First();
 
 			CultureInfo.CurrentCulture = new CultureInfo(culture);
 			CultureInfo.CurrentUICulture = new CultureInfo(culture);
