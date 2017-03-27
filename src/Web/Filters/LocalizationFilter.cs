@@ -5,7 +5,8 @@
 
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Mvc.Filters;
-	using Microsoft.Extensions.Logging;
+    using Microsoft.AspNetCore.Localization;
+    using Microsoft.Extensions.Logging;
 	using Microsoft.Extensions.Options;
 
 	using Library.Config;
@@ -18,7 +19,7 @@
 
 		public LocalizationActionFilter(
 			ILoggerFactory loggerFactory,
-			IOptions < RequestLocalizationOptions > options,
+			IOptions <RequestLocalizationOptions> options,
 			ConfigRepository config) {
 			if (loggerFactory == null)
 				throw new ArgumentNullException(nameof(loggerFactory));
@@ -32,7 +33,7 @@
 		}
 
 		public override void OnActionExecuting(ActionExecutingContext filterContext) {
-			var culture = Response.Cookies[CookieRequestCultureProvider.DefaultCookieName] || _config.Language.Locale.First();
+			var culture = _config.Language.Locale.First();
 
 			CultureInfo.CurrentCulture = new CultureInfo(culture);
 			CultureInfo.CurrentUICulture = new CultureInfo(culture);

@@ -1,20 +1,22 @@
 ﻿// Dummy class to group shared resources
 namespace Web.Controllers
 {
-	using System;
-	using System.Globalization;
-	using System.Linq;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Localization;
+    using Microsoft.AspNetCore.Mvc;
 
-	using Microsoft.AspNetCore.Builder;
-	using Microsoft.AspNetCore.Mvc.Filters;
-	using Microsoft.Extensions.Logging;
-	using Microsoft.Extensions.Options;
+    using MimeKit;
+
+    using Org.BouncyCastle.Asn1.Ocsp;
+
+    using System;
+    using System.Threading.Tasks;
 
 	using Library.Config;
 	using Library.Repositories;
 
-	public class ResourceController
-	{
+	public class ResourceController : Controller
+    {
 		private readonly SiteConfig _config;
 
 		public ResourceController(ConfigRepository config)
@@ -24,11 +26,10 @@ namespace Web.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Change()
+		public ActionResult Change()
 		{
-			if (!ModelState.IsValid) return View();
+			if (!ModelState.IsValid) return Redirect("/");
 
-			var body = new BodyBuilder();
 			var culture = Request.Form["locale"];
 
 			Response.Cookies.Append(
@@ -36,8 +37,8 @@ namespace Web.Controllers
 				CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
 				new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
 			);
-			//return LocalRedirect(returnUrl);
-			//return
-		}
+
+            return Redirect(Request.HttpContext.Request.Host.Host);
+        }
 	}
 }
