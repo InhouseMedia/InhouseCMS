@@ -3,10 +3,6 @@
 
 	var _element = $('.box-locale form input[type=radio]');
 
-	var _init = function () {
-		_setEvent();
-	};
-
 	var _setEvent = function () {
 		_element.change(_submitLanguage);
 	};
@@ -18,7 +14,7 @@
 
 	return {
 		init: function () {
-			_init();
+			_setEvent();
 		}
 	}
 })();

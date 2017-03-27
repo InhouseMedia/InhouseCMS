@@ -5,8 +5,8 @@
 
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Mvc.Filters;
-    using Microsoft.AspNetCore.Localization;
-    using Microsoft.Extensions.Logging;
+	using Microsoft.AspNetCore.Localization;
+	using Microsoft.Extensions.Logging;
 	using Microsoft.Extensions.Options;
 
 	using Library.Config;
