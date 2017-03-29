@@ -1,5 +1,9 @@
 
+@using Microsoft.AspNetCore.Mvc.Localization
 @using System.Globalization
+@using Web.Controllers
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<ResourceController> SharedLocalizer
 @model string[]
 @{
 	Layout = null;
@@ -13,9 +17,9 @@
 		<div class="btn-@(toggle)">
 		@foreach(var locale in Model)
 		{
-			string isChecked = currentLocale == locale? "checked" : "";
+			string isChecked = currentLocale == locale ? "checked" : "";
 			string name = locale.Split('-').First();
-			<label for="locale-@locale" class="@isChecked">
+			<label for="locale-@locale" class="@isChecked" title="@SharedLocalizer[@locale]">
 				<input type="radio" id="locale-@locale" name="locale" @isChecked value="@locale">@name
 			</label>
 		}
