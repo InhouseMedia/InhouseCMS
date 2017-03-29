@@ -33,12 +33,12 @@ namespace Web.Controllers
 			var culture = Request.Form["locale"];
 
 			Response.Cookies.Append(
-				CookieRequestCultureProvider.DefaultCookieName,
+				"locale", //CookieRequestCultureProvider.DefaultCookieName,
 				CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
 				new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
 			);
 
-			return Redirect(Request.HttpContext.Request.Host.Host);
+			return Redirect(Request.HttpContext.Request.Headers["referer"]);
 		}
 	}
 }

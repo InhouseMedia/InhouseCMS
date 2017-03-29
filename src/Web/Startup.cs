@@ -69,14 +69,21 @@ namespace Web
 					// Set Current Culture for views
 					options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async context =>
 					{
-						var config = context.RequestServices.GetService<ConfigRepository>();
-						var culture = config.GetConfig().Language.Locale.FirstOrDefault();
+					    var cookie = context.Request.Cookies["locale"]; //context.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
 
-						CultureInfo.CurrentCulture = new CultureInfo(culture);
-						CultureInfo.CurrentUICulture = new CultureInfo(culture);
+                        var config = context.RequestServices.GetService<ConfigRepository>();
+						var tmpCulture = cookie ?? config.GetConfig().Language.Locale.FirstOrDefault();
+
+					    var cultures = CookieRequestCultureProvider.ParseCookieValue(tmpCulture);
+
+                        var culture = cultures.Cultures.FirstOrDefault();
+                        var uICulture = cultures.UICultures.FirstOrDefault();
+                        
+                        CultureInfo.CurrentCulture = new CultureInfo(culture);
+						CultureInfo.CurrentUICulture = new CultureInfo(uICulture);
 
 						CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(culture);
-						CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(culture);
+						CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(uICulture);
 
 						return await Task.FromResult(new ProviderCultureResult(culture));
 					}));

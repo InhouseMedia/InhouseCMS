@@ -33,14 +33,20 @@
 		}
 
 		public override void OnActionExecuting(ActionExecutingContext filterContext) {
-			var culture = _config.Language.Locale.First();
+            var cookie = filterContext.HttpContext.Request.Cookies["locale"]; //context.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
+            
+            var tmpCulture = cookie ?? _config.Language.Locale.FirstOrDefault();
 
-			CultureInfo.CurrentCulture = new CultureInfo(culture);
-			CultureInfo.CurrentUICulture = new CultureInfo(culture);
+            var cultures = CookieRequestCultureProvider.ParseCookieValue(tmpCulture);
 
-			CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(culture);
-			CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(culture);
+            var culture = cultures.Cultures.FirstOrDefault();
+            var uICulture = cultures.UICultures.FirstOrDefault();
 
-		}
+            CultureInfo.CurrentCulture = new CultureInfo(culture);
+            CultureInfo.CurrentUICulture = new CultureInfo(uICulture);
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(culture);
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(uICulture);
+        }
 	}
 }
