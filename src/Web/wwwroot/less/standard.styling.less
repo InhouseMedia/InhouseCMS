@@ -1,5 +1,4 @@
 ﻿/// <reference path="../lib/bootstrap/less/bootstrap.less" />
-
 html{
 	height: 100%;
 	display: block;
@@ -189,9 +188,9 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 
 	.content-wrapper{
 		#company-logo{
-			display:block;
-			color:transparent;
-			text-indent:-9999px;
+			display: block;
+			color: transparent;
+			text-indent: -9999px;
 			background: transparent url(@company-logo) no-repeat 0 0;
 			background-size: auto 100%;
 			width: @company-logo-width;
@@ -394,8 +393,8 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 
 #body{
 	margin-top: @body-margin;
-	overflow:hidden;
-	height:calc(~"100% - (@{line-height} * 2.5)");
+	overflow: hidden;
+	height: calc(~"100% - (@{line-height} * 2.5)");
 
 	footer{ background-color: transparent;}
 }
@@ -407,7 +406,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 
 .loading{
 	background-image: url("@{image-path}loader2.svg");
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-position: center center;
 }
 
@@ -424,7 +423,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 // Panel
 .panel{
 	overflow: hidden;
-	background-color:@panel-bg;
+	background-color: @panel-bg;
 	padding: @panel-body-padding;
 	.box-shadow(0 1px 1px 1px rgba(0,0,0,0.05));
 
@@ -513,7 +512,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 
 	a.arrow{
 		position: absolute;
-		z-index:3;
+		z-index: 3;
 		overflow: hidden;
 		width: 5em;
 		height: 20em;
@@ -591,14 +590,14 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 		text-align: left;
 		width: 100%;
 		overflow: hidden;
-		left:0;
-		top:0;
+		left: 0;
+		top: 0;
 		.transition(~"left 0.5s ease-in-out, top 0.5s ease-in-out");
 
 		.slide{
 			box-sizing: border-box;
 			display: block;
-			float:left;
+			float: left;
 			width: calc(100% - 10em);
 			height: 20em;
 			overflow: hidden;
@@ -609,7 +608,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 			background-position: center center;
 			//background-attachment: fixed;
 
-			color:@font-color;
+			color: @font-color;
 		}
 	}
 }
@@ -700,7 +699,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 		a.btn{ vertical-align: middle; }
 
 		h1 {
-			display:inline-block;
+			display: inline-block;
 			vertical-align: middle;
 		}
 	}
