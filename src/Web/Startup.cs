@@ -72,7 +72,7 @@ namespace Web
 						var cookie = context.Request.Cookies["locale"]; //context.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
 
 						var config = context.RequestServices.GetService<ConfigRepository>();
-						var tmpCulture = cookie ?? config.GetConfig().Language.Locale.FirstOrDefault();
+						var tmpCulture = cookie == null ? new RequestCulture(config.GetConfig().Language.Locale.FirstOrDefault()).ToString() : cookie;
 
 						var cultures = CookieRequestCultureProvider.ParseCookieValue(tmpCulture);
 
