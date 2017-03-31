@@ -62,6 +62,8 @@ h1 + p,
 h2 + p{ margin: @padding-base-vertical 0 @padding-base 0; }
 h3 + p{ margin: calc(@padding-base-vertical * 0.3) 0 @padding-base 0; }
 
+figure{ vertical-align: top; }
+
 img.pull-right{ margin: 0 0 @alert-padding @alert-padding; }
 
 img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
@@ -483,7 +485,7 @@ dl{
 	}
 }
 
-.template-maintenance{
+.controller-maintenance{
 	.container{
 		.flex-display();
 		.align-items(center);
@@ -507,6 +509,13 @@ dl{
 	width: 65%;
 	margin: 2em auto;
 	box-sizing: border-box;
+}
+
+.content-text{
+	figure{
+		display: inline-block;
+		margin: 0 1em;
+	}
 }
 
 .content-image{
