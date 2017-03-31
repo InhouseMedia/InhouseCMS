@@ -19,6 +19,17 @@
 	}
 }
 
+.progress-width(@counter: 0) when(@counter < 100){
+	@nextCounter: @counter + 1;
+	.progress-width(@nextCounter);
+
+	&[aria-valuenow="@{nextCounter}"]{
+		&::before{
+			width: ~"@{nextCounter}%";
+		}
+	}
+}
+
 .gradient-progress(@barColor: #404040, @backColor: #f4f4f4, @counter: 0) when(@counter < 100){
 		@nextCounter: @counter + 1;
 		@nextDeg: 90deg + (3.6 * @nextCounter);

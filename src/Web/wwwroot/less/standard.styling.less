@@ -74,7 +74,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 	.border-radius(@border-radius-large);
 	cursor: default;
 	display: inline-block;
-    line-height: 1.2em;
+	line-height: 1.2em;
 
 	&.label-default{
 		background: transparent;
@@ -83,13 +83,66 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 	}
 }
 
+dl{
+	text-align: left;
+
+	dt{
+		width: 20%;
+		display: inline-block;
+		vertical-align: top;
+		margin-right: 1em;
+		font-size: @font-size-small;
+	}
+	dd{
+		width: 70%;
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+
 [role=progressbar]{
+	position: relative;
+	background-color: @body-bg;
+	height: 1em;
+	width: 50%;
+	margin: 0 auto @line-height auto;
+	.border-radius(1em);
+	.progress-width();
+
+	&::before{
+		content: "";
+		height: 1em;
+		display: block;
+		background-color: @company-action-color;
+		margin: 0;
+		.border-radius(1em);
+	}
+
+	&::after{
+		position: absolute;
+		content: attr(title);
+		display: inline-block;
+	}
+
+	&:not(.circular){
+		text-align: left;
+
+		&::after{
+			width: 50%;
+			top: 0;
+			left: -52%;
+			line-height: 1em;
+			text-align: right;
+		}
+	}
+
 	&.circular{
 		.circle(6em);
 		display: inline-block;
 		line-height: 6em;
-		position: relative;
-		margin: 0 1em @line-height-large 1em;
+
+		&:not(:first-of-type){ margin-left: @line-height; }
+
 		&::before{
 			.circle(4.6em);
 			line-height: 4.6em;
@@ -100,11 +153,8 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 			background-color: @component-active-color;
 		}
 		&::after{
-			content: attr(title);
-			display: inline-block;
 			text-align: center;
 			line-height: @line-height-base;
-			position: absolute;
 			bottom: -@line-height-large;
 			left: 0;
 			right: 0;
@@ -120,10 +170,9 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 		display: inline-block;
 		min-width: 12em;
 		text-align: left;
-		font-size: @font-size-small;
 	}
 	li{
-		.circle(0.5em);
+		.circle(0.7em);
 		display: inline-block;
 		padding: 0;
 		border: 1px solid @company-action-color;
@@ -196,7 +245,6 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 			width: @company-logo-width;
 			height: @company-logo-height;
 			margin: 0.5em 0;
-			//.transition(~"height 0.2s ease-in-out 0s");
 		}
 
 		#company-contact{
@@ -341,9 +389,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 	background: @footer-background;
 	color: @footer-font-color;
 
-	> .content-wrapper{
-		display: block;
-	}
+	> .content-wrapper{	display: block;	}
 
 	#backToTop{
 		position: fixed;
@@ -383,7 +429,7 @@ img.pull-left{ margin: 0 @alert-padding @alert-padding 0; }
 }
 
 .fill{
-	footer{
+	#footer{
 		position: fixed;
 		left: 0;
 		right: 0;
