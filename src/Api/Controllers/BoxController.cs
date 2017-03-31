@@ -1,11 +1,11 @@
 namespace Api.Controllers
 {
+	using Api.Repositories;
+
 	using System.Threading.Tasks;
 	using Microsoft.AspNetCore.Mvc;
 
 	using MongoDB.Bson;
-
-	using Api.Repositories;
 
 	[Route("[controller]")]
 	public class BoxController : Controller

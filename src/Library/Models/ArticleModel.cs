@@ -19,6 +19,7 @@ namespace Library.Models
 		public string Controller { get; set; }
 		public string Action { get; set; }
 		public string Locale { get; set; }
+		public string Template { get; set; }
 		public bool Active { get; set; }
 		public DateTime PublishDate { get; set; }
 		public DateTime? ExpireDate { get; set; }
@@ -59,6 +60,7 @@ namespace Library.Models
 		public string Controller { get; set; }
 		public string Action { get; set; }
 		public string Locale { get; set; }
+		public string Template { get; set; }
 		public bool Active { get; set; }
 		public DateTime PublishDate { get; set; }
 		public DateTime? ExpireDate { get; set; }

@@ -1,4 +1,4 @@
-namespace Api.Models
+namespace Library.Models
 {
 	using System;
 	using MongoDB.Bson;

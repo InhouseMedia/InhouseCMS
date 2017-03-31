@@ -1,14 +1,14 @@
 namespace Api.Controllers
 {
+	using Api.Filters;
+	using Api.Repositories;
+
 	using System.Threading.Tasks;
 
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Localization;
 
 	using MongoDB.Bson;
-
-	using Api.Filters;
-	using Api.Repositories;
 
 	[ServiceFilter(typeof(LanguageActionFilter))]
 	[Route("{culture:regex(^[[a-z]]{{2}}(?:-[[A-Z]]{{2}})?$)}/[controller]")]

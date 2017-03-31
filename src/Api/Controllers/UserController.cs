@@ -1,5 +1,7 @@
 ﻿namespace Api.Controllers
 {
+	using Api.Repositories;
+
 	using System;
 	using System.Threading.Tasks;
 
@@ -7,8 +9,7 @@
 
 	using MongoDB.Bson;
 
-	using Api.Models;
-	using Api.Repositories;
+	using Library.Models;
 
 	[Route("[controller]")]
 	public class UserController : Controller

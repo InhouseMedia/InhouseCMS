@@ -48,6 +48,7 @@ namespace Web.Controllers
 			ViewBag.MetaTitle = result.MetaTitle;
 			ViewBag.MetaDescription = result.MetaDescription;
 			ViewBag.MetaKeywords = result.MetaKeywords;
+			ViewBag.Template = result.Template != null ? "template-" + result.Template : null;
 
 			return View(result);
 		}

@@ -98,6 +98,7 @@ namespace Api.Repositories
 				Controller = item.Controller,
 				Action = item.Action,
 				Locale = item.Locale,
+				Template = item.Template,
 				Active = item.Active,
 				PublishDate = item.PublishDate,
 				ExpireDate = item.ExpireDate,

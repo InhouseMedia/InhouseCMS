@@ -1,13 +1,14 @@
 ﻿namespace Api.Repositories
 {
+	using Api.Connections;
+
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
 	using MongoDB.Driver;
 	using MongoDB.Bson;
 
-	using Api.Models;
-	using Api.Connections;
+	using Library.Models;
 
 	public interface IUserRepository
 	{
