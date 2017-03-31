@@ -17,6 +17,7 @@ namespace Web
 	using Microsoft.Extensions.Logging;
 	using Microsoft.Extensions.Options;
 
+	using System;
 	using System.Globalization;
 	using System.Linq;
 	using System.Threading.Tasks;
@@ -72,7 +73,9 @@ namespace Web
 						var cookie = context.Request.Cookies["locale"]; //context.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
 
 						var config = context.RequestServices.GetService<ConfigRepository>();
-						var tmpCulture = cookie == null ? new RequestCulture(config.GetConfig().Language.Locale.FirstOrDefault()).ToString() : cookie;
+						var defaultCulture = config.GetConfig().Language.Locale.FirstOrDefault();
+						var defaultCookieCulture = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(defaultCulture));
+						var tmpCulture = cookie ?? defaultCookieCulture;
 
 						var cultures = CookieRequestCultureProvider.ParseCookieValue(tmpCulture);
 
