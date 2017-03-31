@@ -16,7 +16,7 @@
 	var _pageFill = function () {
 		var isMaxFill = _body.hasClass('fill');
 		var maxFill = (isMaxFill) ?
-			_win.outerHeight() > (_body.get(0).offsetHeight + _body.find('footer').outerHeight()) :
+			_win.outerHeight() > (_body.get(0).offsetHeight + _body.find('#footer').outerHeight()) :
 			_win.outerHeight() > _body.get(0).offsetHeight;
 
 		if (maxFill) {
