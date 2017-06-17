@@ -9,7 +9,7 @@ namespace Web.ViewComponents.Article
 	{
 		public async Task<IViewComponentResult> InvokeAsync(ArticleContent model)
 		{
-			return View(model);
+			return View("/Views/Article/Components/Text/Default.cshtml",model);
 		}
 	}
 }

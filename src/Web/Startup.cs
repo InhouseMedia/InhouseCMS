@@ -132,12 +132,12 @@ namespace Web
 
 			app.UseMvc(routes =>
 			{
+                routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}");
+
 				//routes.Routes.Add(routes.ServiceProvider.GetService<IRouteConnection>());
 				routes.Routes.Add( new RouteConnection(
 					routes.ServiceProvider.GetRequiredService<IMemoryCache>(),
 					routes.DefaultHandler));
-
-				routes.MapRoute( name: "default", template: "{controller=Home}/{action=Index}/{id?}");
 			});
 		}
 	}

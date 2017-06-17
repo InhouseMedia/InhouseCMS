@@ -19,16 +19,17 @@ namespace Web.Controllers
 	using Library.Models;
 	using Library.Repositories;
 
-	//Done in startup
-	//[ServiceFilter(typeof(LocalizationActionFilter))]
-	public class ArticleController : WebController
-	{
-		
-		public ArticleController(IArticleRepository repository, IStringLocalizer<ArticleController> localizer, ConfigRepository config)
+    //Done in startup
+    //[ServiceFilter(typeof(LocalizationActionFilter))]
+    public class MaintenanceController : WebController
+    {
+
+		public MaintenanceController(IArticleRepository repository, IStringLocalizer<ArticleController> localizer, ConfigRepository config)
 		{
 			_localizer = localizer;
 			_repository = repository;
 			_config = config.GetConfig();
 		}
-	}
+		
+    }
 }
